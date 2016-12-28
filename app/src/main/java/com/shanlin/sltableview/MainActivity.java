@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements SLTableViewDataSo
     }
 
     @Override
-    public void onBindCell(SLTableView tableView, SLTableViewCell cell, SLIndexPath indexPath) {
+    public void onBindCell(SLTableView tableView, SLTableViewCell cell, SLIndexPath indexPath, int type) {
         HistoryCell historyCell = (HistoryCell) cell;
         final int section = indexPath.getSection();
         final int row = indexPath.getRow();

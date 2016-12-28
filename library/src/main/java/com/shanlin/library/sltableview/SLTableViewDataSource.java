@@ -47,7 +47,8 @@ public interface SLTableViewDataSource {
      * @param tableView
      * @param cell
      * @param indexPath
+     * @param type
      */
-    public void onBindCell(SLTableView tableView, SLTableViewCell cell, SLIndexPath indexPath);
+    public void onBindCell(SLTableView tableView, SLTableViewCell cell, SLIndexPath indexPath, int type);
 
 }

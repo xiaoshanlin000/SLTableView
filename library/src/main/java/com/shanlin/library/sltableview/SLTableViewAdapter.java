@@ -6,10 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.shanlin.library.sltableview.SLTableViewCell;
-import com.shanlin.library.sltableview.SLTableViewDataSource;
-import com.shanlin.library.sltableview.SLTableViewDataSourcePlus;
-
 import java.util.ArrayList;
 
 
@@ -92,7 +88,7 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell>{
             }
         }else{
             if (dataSource != null){
-                dataSource.onBindCell(tableView,cell,indexPath);
+                dataSource.onBindCell(tableView,cell,indexPath,type);
             }
         }
 
