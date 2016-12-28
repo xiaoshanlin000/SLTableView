@@ -1,6 +1,25 @@
 # SLTableView
 
 ###使用方式
+
+在根目录build.gradle中加入
+
+```Java
+allprojects {
+    repositories {
+        jcenter()
+        maven(){
+            url 'https://dl.bintray.com/xiaoshanlin000/maven'
+        }
+    }
+}
+```
+在项目build.gradle中加入
+```Java
+compile 'com.shanlin.library.sltableview:library:1.0.0'
+```
+
+###Demo
 ```Java
 public class MainActivity extends AppCompatActivity implements SLTableViewDataSource,SLTableViewDataSourcePlus {
 
