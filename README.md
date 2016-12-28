@@ -16,7 +16,7 @@ allprojects {
 ```
 在Module build.gradle中加入
 ```Java
-compile 'com.shanlin.library.sltableview:library:1.0.0'
+compile 'com.shanlin.library.sltableview:library:1.0.1'
 ```
 
 ###Demo
@@ -96,6 +96,16 @@ public class MainActivity extends AppCompatActivity implements SLTableViewDataSo
     @Override
     public String titleForFooterInSection(SLTableView tableView, int section) {
         return String.format("第%02d组,结尾.",(section+1));
+    }
+
+    @Override
+    public boolean hiddenForHeaderInSection(SLTableView tableView, int section) {
+        return false;
+    }
+
+    @Override
+    public boolean hiddenForFooterInSection(SLTableView tableView, int section) {
+        return false;
     }
 
     private static class HistoryCell extends SLTableViewCell{
