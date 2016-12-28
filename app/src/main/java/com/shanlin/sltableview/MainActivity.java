@@ -41,12 +41,9 @@ public class MainActivity extends AppCompatActivity implements SLTableViewDataSo
     }
     private void initData(){
         dataLists.clear();
-        dataLists.add(Arrays.asList("1"));
-        dataLists.add(Arrays.asList("1","2"));
-        dataLists.add(Arrays.asList("1","2","3"));
-        dataLists.add(Arrays.asList("1","2","3","4"));
-        dataLists.add(Arrays.asList("1","2","3","4","5"));
-        dataLists.add(Arrays.asList("1","2","3","4","5","6"));
+        dataLists.add(Arrays.asList("类型1","类型1"));
+        dataLists.add(Arrays.asList("类型2","类型2"));
+        dataLists.add(Arrays.asList("按钮"));
         tableView.notifyDataSetChanged();
     }
     @Override
@@ -61,29 +58,63 @@ public class MainActivity extends AppCompatActivity implements SLTableViewDataSo
 
     @Override
     public int typeOfIndexPath(SLTableView tableView, SLIndexPath indexPath) {
-        return 0;
+        int section = indexPath.getSection();
+        if (section < dataLists.size() - 1) {
+            return indexPath.getSection() % 2;
+        }
+        return 2;
     }
 
     @Override
     public SLTableViewCell cellForType(SLTableView tableView, ViewGroup parent, int type) {
         SLTableViewCell cell = null;
-        View rootView = inflater.inflate(R.layout.simple_cell,null,false);
-        cell = new HistoryCell(rootView);
+        if (type == 0) {
+            View rootView = inflater.inflate(R.layout.type_one_cell, null, false);
+            cell = new TypeOneCell(rootView);
+        }else if(type == 1){
+            View rootView = inflater.inflate(R.layout.type_two_cell, null, false);
+            cell = new TypeTwoCell(rootView);
+        }else if(type == 2){
+            View rootView = inflater.inflate(R.layout.type_three_cell, null, false);
+            cell = new TypeThreeCell(rootView);
+        }
         return cell;
     }
 
     @Override
     public void onBindCell(SLTableView tableView, SLTableViewCell cell, SLIndexPath indexPath, int type) {
-        HistoryCell historyCell = (HistoryCell) cell;
+
         final int section = indexPath.getSection();
         final int row = indexPath.getRow();
-        historyCell.history_cell_textView.setText(dataLists.get(section).get(row));
-        historyCell.history_cell_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context,String.format("点击,%02d组,%02d行.",(section+1),(row+1)),Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (type == 0){
+            TypeOneCell typeCell = (TypeOneCell) cell;
+            typeCell.cell_textView.setText(dataLists.get(section).get(row));
+            typeCell.cell_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context,String.format("点击,%02d组,%02d行.",(section+1),(row+1)),Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else if (type == 1){
+            TypeTwoCell typeCell = (TypeTwoCell) cell;
+            typeCell.cell_textView.setText(dataLists.get(section).get(row));
+            typeCell.cell_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context,String.format("点击,%02d组,%02d行.",(section+1),(row+1)),Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else if (type == 2){
+            final TypeThreeCell typeCell = (TypeThreeCell) cell;
+            typeCell.cell_textView.setText(dataLists.get(section).get(row));
+            typeCell.cell_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context,String.format("点击,%s.",typeCell.cell_textView.getText().toString()),Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
     }
 
     @Override
@@ -98,23 +129,47 @@ public class MainActivity extends AppCompatActivity implements SLTableViewDataSo
 
     @Override
     public boolean hiddenHeaderInSection(SLTableView tableView, int section) {
+        if (section == dataLists.size() -1) return true;
         return false;
     }
 
     @Override
     public boolean hiddenFooterInSection(SLTableView tableView, int section) {
+        if (section == dataLists.size() -1) return true;
         return false;
     }
 
-    private static class HistoryCell extends SLTableViewCell{
+    private static class TypeOneCell extends SLTableViewCell{
 
-        public TextView history_cell_textView;
-        public LinearLayout history_cell_layout;
+        public TextView cell_textView;
+        public LinearLayout cell_layout;
 
-        public HistoryCell(View itemView) {
+        public TypeOneCell(View itemView) {
             super(itemView);
-            history_cell_textView = (TextView) itemView.findViewById(R.id.cell_textView);
-            history_cell_layout = (LinearLayout) itemView.findViewById(R.id.history_cell_layout);
+            cell_textView = (TextView) itemView.findViewById(R.id.cell_textView);
+            cell_layout = (LinearLayout) itemView.findViewById(R.id.cell_layout);
+        }
+    }
+    private static class TypeTwoCell extends SLTableViewCell{
+
+        public TextView cell_textView;
+        public LinearLayout cell_layout;
+
+        public TypeTwoCell(View itemView) {
+            super(itemView);
+            cell_textView = (TextView) itemView.findViewById(R.id.cell_textView);
+            cell_layout = (LinearLayout) itemView.findViewById(R.id.cell_layout);
+        }
+    }
+    private static class TypeThreeCell extends SLTableViewCell{
+
+        public TextView cell_textView;
+        public LinearLayout cell_layout;
+
+        public TypeThreeCell(View itemView) {
+            super(itemView);
+            cell_textView = (TextView) itemView.findViewById(R.id.cell_textView);
+            cell_layout = (LinearLayout) itemView.findViewById(R.id.cell_layout);
         }
     }
 }

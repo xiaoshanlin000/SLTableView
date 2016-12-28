@@ -25,5 +25,5 @@ lvy
 ```
 
 ###效果图
-![image](https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/1.jpg)
-![image](https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/2.jpg)
+![image](https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/1.png)
+![image](https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/2.png)

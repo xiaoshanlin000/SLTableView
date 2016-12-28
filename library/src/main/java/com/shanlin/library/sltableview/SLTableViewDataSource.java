@@ -24,7 +24,7 @@ public interface SLTableViewDataSource {
     public int numberOfRowsInSection(SLTableView tableView, int section);
 
     /**
-     * 返回当前位置的类型(0,n]
+     * 返回当前位置的类型>=0
      * @param tableView
      * @param indexPath
      * @return 类型
