@@ -97,12 +97,12 @@ public class MainActivity extends AppCompatActivity implements SLTableViewDataSo
     }
 
     @Override
-    public boolean hiddenForHeaderInSection(SLTableView tableView, int section) {
+    public boolean hiddenHeaderInSection(SLTableView tableView, int section) {
         return false;
     }
 
     @Override
-    public boolean hiddenForFooterInSection(SLTableView tableView, int section) {
+    public boolean hiddenFooterInSection(SLTableView tableView, int section) {
         return false;
     }
 

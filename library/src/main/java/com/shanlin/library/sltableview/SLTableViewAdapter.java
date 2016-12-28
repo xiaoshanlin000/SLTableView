@@ -104,7 +104,7 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell>{
         int count = 0;
         int row=0;
         for (int i = 0; i < section; i++) {
-            boolean hidden = dataSourcePlus == null ? false : dataSourcePlus.hiddenForHeaderInSection(tableView,i);
+            boolean hidden = dataSourcePlus == null ? false : dataSourcePlus.hiddenHeaderInSection(tableView,i);
             if (!hidden){
                 typeIndexPaths.add(new SLTypeIndexPath(HEAD,new SLIndexPath(0,i)));
             }else{
@@ -114,7 +114,7 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell>{
             for (int j = 0; j < row; j++) {
                 typeIndexPaths.add(new SLTypeIndexPath(CONTENT,new SLIndexPath(j,i)));
             }
-            hidden = dataSourcePlus == null ? true : dataSourcePlus.hiddenForFooterInSection(tableView,i);
+            hidden = dataSourcePlus == null ? true : dataSourcePlus.hiddenFooterInSection(tableView,i);
             if (!hidden) {
                 typeIndexPaths.add(new SLTypeIndexPath(FLOOR,new SLIndexPath(0,i)));
             }else{

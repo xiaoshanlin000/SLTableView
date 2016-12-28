@@ -28,7 +28,7 @@ public interface SLTableViewDataSourcePlus {
      * @param section
      * @return true 隐藏,false不隐藏
      */
-    public boolean hiddenForHeaderInSection(SLTableView tableView, int section);
+    public boolean hiddenHeaderInSection(SLTableView tableView, int section);
 
     /**
      * section组的floor是否隐藏
@@ -36,7 +36,7 @@ public interface SLTableViewDataSourcePlus {
      * @param section
      * @return true 隐藏,false不隐藏
      */
-    public boolean hiddenForFooterInSection(SLTableView tableView, int section);
+    public boolean hiddenFooterInSection(SLTableView tableView, int section);
 
 //    public boolean canEditRowAtIndexPath(SLTableView tableView, SLIndexPath indexPath);
 //
