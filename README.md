@@ -2,146 +2,94 @@
 
 ###使用方式
 ```Java
-public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell>{
-    private static final int HEAD = -1;
-    private static final int CONTENT = -2;
-    private static final int FLOOR = -3;
+public class MainActivity extends AppCompatActivity implements SLTableViewDataSource,SLTableViewDataSourcePlus {
 
-    private Context context;
+    private AppCompatActivity context;
     private SLTableView tableView;
-    private SLTableViewDataSource dataSource;
-    private SLTableViewDataSourcePlus dataSourcePlus;
-    private LayoutInflater inflater;
+    private LinearLayout tableRootLayout;
 
-    private ArrayList<SLTypeIndexPath> typeIndexPaths = new ArrayList<>();
+    private ArrayList<List<String>> dataLists = new ArrayList<>();
+    private LayoutInflater inflater ;
 
-    public SLTableViewAdapter(Context context,
-                              SLTableView tableView,
-                              SLTableViewDataSource dataSource,
-                              SLTableViewDataSourcePlus dataSourcePlus) {
-        this.context = context;
-        this.tableView = tableView;
-        this.dataSource = dataSource;
-        this.dataSourcePlus = dataSourcePlus;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        context = this;
         inflater = LayoutInflater.from(context);
+        tableRootLayout = (LinearLayout) findViewById(R.id.tableRootLayout);
+        tableView = new SLTableView.Builder(context).setTableViewDataSource(this).setTableViewDataSourcePlus(this).build();
+        tableRootLayout.addView(tableView);
+        initData();
+    }
+    private void initData(){
+        dataLists.clear();
+        dataLists.add(Arrays.asList("1"));
+        dataLists.add(Arrays.asList("1","2"));
+        dataLists.add(Arrays.asList("1","2","3"));
+        dataLists.add(Arrays.asList("1","2","3","4"));
+        dataLists.add(Arrays.asList("1","2","3","4","5"));
+        dataLists.add(Arrays.asList("1","2","3","4","5","6"));
+        tableView.notifyDataSetChanged();
+    }
+    @Override
+    public int numberOfSections(SLTableView tableView) {
+        return dataLists.size();
     }
 
     @Override
-    public int getItemViewType(int position) {
-        SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
-        int type = typeIndexPath.getType();
-        SLIndexPath indexPath = typeIndexPath.getIndexPath();
-        if (type == CONTENT){
-            type =  dataSource.typeOfIndexPath(tableView,indexPath);
-            typeIndexPath.setType(type);
-        }
-        return type;
+    public int numberOfRowsInSection(SLTableView tableView, int section) {
+        return dataLists.get(section).size();
     }
 
     @Override
-    public SLTableViewCell onCreateViewHolder(ViewGroup parent, int viewType) {
-        int type = viewType;
+    public int typeOfIndexPath(SLTableView tableView, SLIndexPath indexPath) {
+        return 0;
+    }
+
+    @Override
+    public SLTableViewCell cellForType(SLTableView tableView, ViewGroup parent, int type) {
         SLTableViewCell cell = null;
-        if (type == HEAD){
-            View rootView = inflater.inflate(R.layout.title_floor_cell,parent,false);
-            rootView.setBackgroundColor(tableView.getBgColor());
-            SLTableViewCell viewCell = new DefaultTitleCell(rootView);
-            cell = viewCell;
-        }else if (type == FLOOR){
-            View rootView = inflater.inflate(R.layout.title_floor_cell,parent,false);
-            rootView.setBackgroundColor(tableView.getBgColor());
-            SLTableViewCell viewCell = new DefaultTitleCell(rootView);
-            cell = viewCell;
-        }else{
-            cell =  dataSource.cellForType(tableView,parent,type);
-        }
+        View rootView = inflater.inflate(R.layout.simple_cell,null,false);
+        cell = new HistoryCell(rootView);
         return cell;
     }
 
     @Override
-    public void onBindViewHolder(SLTableViewCell cell, int position) {
-        SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
-        int type = typeIndexPath.getType();
-        SLIndexPath indexPath = typeIndexPath.getIndexPath();
-        if (type == HEAD) {
-            DefaultTitleCell titleCell = (DefaultTitleCell) cell;
-            if (dataSourcePlus != null){
-                String title = dataSourcePlus.titleForHeaderInSection(tableView,indexPath.getSection());
-                titleCell.title_floor_text.setText(title);
-            }else{
-                titleCell.title_floor_text.setText("");
+    public void onBindCell(SLTableView tableView, SLTableViewCell cell, SLIndexPath indexPath, int type) {
+        HistoryCell historyCell = (HistoryCell) cell;
+        final int section = indexPath.getSection();
+        final int row = indexPath.getRow();
+        historyCell.history_cell_textView.setText(dataLists.get(section).get(row));
+        historyCell.history_cell_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,String.format("点击,%02d组,%02d行.",(section+1),(row+1)),Toast.LENGTH_SHORT).show();
             }
-        }else if (type == FLOOR){
-            DefaultTitleCell titleCell = (DefaultTitleCell) cell;
-            if (dataSourcePlus != null) {
-                String floor = dataSourcePlus.titleForFooterInSection(tableView,indexPath.getSection());
-                titleCell.title_floor_text.setText(floor);
-            }else{
-                titleCell.title_floor_text.setText("");
-            }
-        }else{
-            if (dataSource != null){
-                dataSource.onBindCell(tableView,cell,indexPath,type);
-            }
-        }
-
+        });
     }
 
     @Override
-    public int getItemCount() {
-        typeIndexPaths.clear();
-        if (dataSource == null) return  0;
-        int section = dataSource.numberOfSections(tableView);
-        int count = 0;
-        int row=0;
-        for (int i = 0; i < section; i++) {
-            typeIndexPaths.add(new SLTypeIndexPath(HEAD,new SLIndexPath(0,i)));
-            row = dataSource.numberOfRowsInSection(tableView,i);
-            for (int j = 0; j < row; j++) {
-                typeIndexPaths.add(new SLTypeIndexPath(CONTENT,new SLIndexPath(j,i)));
-            }
-            typeIndexPaths.add(new SLTypeIndexPath(FLOOR,new SLIndexPath(0,i)));
-            count = count + row;
-        }
-        if (count == 0) return  0;
-        return count + section + section;// 内容个数 + cell头尾
+    public String titleForHeaderInSection(SLTableView tableView, int section) {
+        return String.format("第%02d组,标题.",(section+1));
     }
 
-
-    private static class SLTypeIndexPath {
-        private  int type;
-        private SLIndexPath indexPath;
-
-        public SLTypeIndexPath(int type, SLIndexPath indexPath) {
-            this.type = type;
-            this.indexPath = indexPath;
-        }
-
-        public int getType() {
-            return type;
-        }
-
-        public void setType(int type) {
-            this.type = type;
-        }
-
-        public SLIndexPath getIndexPath() {
-            return indexPath;
-        }
-
-        public void setIndexPath(SLIndexPath indexPath) {
-            this.indexPath = indexPath;
-        }
+    @Override
+    public String titleForFooterInSection(SLTableView tableView, int section) {
+        return String.format("第%02d组,结尾.",(section+1));
     }
 
-    private static class DefaultTitleCell extends SLTableViewCell{
-        private TextView title_floor_text;
-        public DefaultTitleCell(View itemView) {
+    private static class HistoryCell extends SLTableViewCell{
+
+        public TextView history_cell_textView;
+        public LinearLayout history_cell_layout;
+
+        public HistoryCell(View itemView) {
             super(itemView);
-            title_floor_text = (TextView) itemView.findViewById(R.id.title_floor_text);
+            history_cell_textView = (TextView) itemView.findViewById(R.id.cell_textView);
+            history_cell_layout = (LinearLayout) itemView.findViewById(R.id.history_cell_layout);
         }
     }
-
 }
 ```
 ###效果图
