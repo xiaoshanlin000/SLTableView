@@ -96,8 +96,6 @@ public class MainActivity extends AppCompatActivity implements SLTableViewDataSo
         return String.format("第%02d组,结尾.",(section+1));
     }
 
-
-
     private static class HistoryCell extends SLTableViewCell{
 
         public TextView history_cell_textView;
