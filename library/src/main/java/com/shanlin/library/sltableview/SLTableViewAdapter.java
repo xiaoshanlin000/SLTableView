@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell>{
         if (type == HEAD) {
             DefaultTitleCell titleCell = (DefaultTitleCell) cell;
             if (dataSourcePlus != null){
-                String title = dataSourcePlus.titleForHeaderInSection(tableView,indexPath.getSection());
+                String title = dataSourcePlus.titleForHeaderInSection(tableView, indexPath.getSection());
                 titleCell.title_floor_text.setText(title);
             }else{
                 titleCell.title_floor_text.setText("");
@@ -99,19 +100,30 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell>{
         typeIndexPaths.clear();
         if (dataSource == null) return  0;
         int section = dataSource.numberOfSections(tableView);
+        int hiddenCount = 0;
         int count = 0;
         int row=0;
         for (int i = 0; i < section; i++) {
-            typeIndexPaths.add(new SLTypeIndexPath(HEAD,new SLIndexPath(0,i)));
+            boolean hidden = dataSourcePlus == null ? false : dataSourcePlus.hiddenForHeaderInSection(tableView,i);
+            if (!hidden){
+                typeIndexPaths.add(new SLTypeIndexPath(HEAD,new SLIndexPath(0,i)));
+            }else{
+                hiddenCount++;
+            }
             row = dataSource.numberOfRowsInSection(tableView,i);
             for (int j = 0; j < row; j++) {
                 typeIndexPaths.add(new SLTypeIndexPath(CONTENT,new SLIndexPath(j,i)));
             }
-            typeIndexPaths.add(new SLTypeIndexPath(FLOOR,new SLIndexPath(0,i)));
+            hidden = dataSourcePlus == null ? true : dataSourcePlus.hiddenForFooterInSection(tableView,i);
+            if (!hidden) {
+                typeIndexPaths.add(new SLTypeIndexPath(FLOOR,new SLIndexPath(0,i)));
+            }else{
+                hiddenCount++;
+            }
             count = count + row;
         }
         if (count == 0) return  0;
-        return count + section + section;// 内容个数 + cell头尾
+        return count + section + section - hiddenCount;// 内容个数 + cell头尾 - 隐藏个数
     }
 
 
@@ -142,9 +154,11 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell>{
     }
 
     private static class DefaultTitleCell extends SLTableViewCell{
-        private TextView title_floor_text;
+        public LinearLayout title_floor_root_layout;
+        public TextView title_floor_text;
         public DefaultTitleCell(View itemView) {
             super(itemView);
+            title_floor_root_layout = (LinearLayout) itemView.findViewById(R.id.title_floor_root_layout);
             title_floor_text = (TextView) itemView.findViewById(R.id.title_floor_text);
         }
     }

@@ -7,7 +7,7 @@ package com.shanlin.library.sltableview;
 public interface SLTableViewDataSourcePlus {
 
     /**
-     * section组的title
+     * section组的title 描述
      * @param tableView
      * @param section
      * @return
@@ -15,12 +15,28 @@ public interface SLTableViewDataSourcePlus {
     public String titleForHeaderInSection(SLTableView tableView, int section);
 
     /**
-     * section组的floor
+     * section组的floor 描述
      * @param tableView
      * @param section
      * @return
      */
     public String titleForFooterInSection(SLTableView tableView, int section);
+
+    /**
+     * section组title是否隐藏
+     * @param tableView
+     * @param section
+     * @return true 隐藏,false不隐藏
+     */
+    public boolean hiddenForHeaderInSection(SLTableView tableView, int section);
+
+    /**
+     * section组的floor是否隐藏
+     * @param tableView
+     * @param section
+     * @return true 隐藏,false不隐藏
+     */
+    public boolean hiddenForFooterInSection(SLTableView tableView, int section);
 
 //    public boolean canEditRowAtIndexPath(SLTableView tableView, SLIndexPath indexPath);
 //

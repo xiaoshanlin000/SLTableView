@@ -96,6 +96,16 @@ public class MainActivity extends AppCompatActivity implements SLTableViewDataSo
         return String.format("第%02d组,结尾.",(section+1));
     }
 
+    @Override
+    public boolean hiddenForHeaderInSection(SLTableView tableView, int section) {
+        return false;
+    }
+
+    @Override
+    public boolean hiddenForFooterInSection(SLTableView tableView, int section) {
+        return false;
+    }
+
     private static class HistoryCell extends SLTableViewCell{
 
         public TextView history_cell_textView;
