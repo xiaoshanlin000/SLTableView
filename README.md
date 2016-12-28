@@ -2,7 +2,7 @@
 
 ###使用方式
 
-在根目录build.gradle中加入
+在项目根目录build.gradle中加入
 
 ```Java
 allprojects {
@@ -14,7 +14,7 @@ allprojects {
     }
 }
 ```
-在项目build.gradle中加入
+在Module build.gradle中加入
 ```Java
 compile 'com.shanlin.library.sltableview:library:1.0.0'
 ```
