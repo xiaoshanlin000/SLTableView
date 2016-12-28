@@ -2,21 +2,26 @@
 
 ###使用方式
 
-在项目根目录build.gradle中加入
-
+maven
 ```Java
-allprojects {
-    repositories {
-        jcenter()
-        maven(){
-            url 'https://dl.bintray.com/xiaoshanlin000/maven'
-        }
-    }
-}
+<dependency>
+  <groupId>com.shanlin.library.sltableview</groupId>
+  <artifactId>library</artifactId>
+  <version>1.0.1</version>
+  <type>pom</type>
+</dependency>
 ```
-在Module build.gradle中加入
+
+gradle
 ```Java
 compile 'com.shanlin.library.sltableview:library:1.0.1'
+```
+
+lvy
+```Java
+<dependency org='com.shanlin.library.sltableview' name='library' rev='1.0.1'>
+  <artifact name='library' ext='pom' ></artifact>
+</dependency>
 ```
 
 ###效果图
