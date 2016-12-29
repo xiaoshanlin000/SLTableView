@@ -8,32 +8,32 @@ public interface SLTableViewDataSourcePlus {
 
     /**
      * section组的title 描述
-     * @param tableView
-     * @param section
-     * @return
+     * @param tableView SLTableView
+     * @param section 组下标
+     * @return header
      */
     public String titleForHeaderInSection(SLTableView tableView, int section);
 
     /**
      * section组的floor 描述
-     * @param tableView
-     * @param section
-     * @return
+     * @param tableView SLTableView
+     * @param section 组下标
+     * @return header
      */
     public String titleForFooterInSection(SLTableView tableView, int section);
 
     /**
      * section组title是否隐藏
-     * @param tableView
-     * @param section
+     * @param tableView SLTableView
+     * @param section 组下标
      * @return true 隐藏,false不隐藏
      */
     public boolean hiddenHeaderInSection(SLTableView tableView, int section);
 
     /**
      * section组的floor是否隐藏
-     * @param tableView
-     * @param section
+     * @param tableView SLTableView
+     * @param section 组下标
      * @return true 隐藏,false不隐藏
      */
     public boolean hiddenFooterInSection(SLTableView tableView, int section);
