@@ -16,6 +16,7 @@ public class SLTableView extends RecyclerView {
 
     private SLTableViewDataSource tableViewDataSource;
     private SLTableViewDataSourcePlus tableViewDataSourcePlus;
+    private SLTableViewAdapter tableViewAdapter;
 
     private int bgColor;
 
@@ -51,6 +52,19 @@ public class SLTableView extends RecyclerView {
         this.getAdapter().notifyDataSetChanged();
     }
 
+    public SLTableViewAdapter getTableViewAdapter() {
+        return tableViewAdapter;
+    }
+
+    public void setTableViewAdapter(SLTableViewAdapter tableViewAdapter) {
+        this.tableViewAdapter = tableViewAdapter;
+        this.setAdapter(tableViewAdapter);
+    }
+
+    public void scrollToRowAtIndexPath(SLIndexPath indexPath){
+        this.tableViewAdapter.scrollToRowAtIndexPath(indexPath);
+    }
+
     public static class Builder{
 
         private Context context;
@@ -60,7 +74,17 @@ public class SLTableView extends RecyclerView {
         private SLTableViewDataSource tableViewDataSource;
         private SLTableViewDataSourcePlus tableViewDataSourcePlus;
 
+        private boolean stickyHeader;
+
         private int bgColor = 0;
+
+        private int headerBgColor;
+        private int headerTextColor;
+        private float headerTextSize;
+
+        private int floorBgColor;
+        private int floorTextColor;
+        private float floorTextSize;
 
         public Builder(Context context) {
             this.context = context;
@@ -86,6 +110,41 @@ public class SLTableView extends RecyclerView {
             return this;
         }
 
+        public Builder showStickyHeader(boolean stickyHeader) {
+            this.stickyHeader = stickyHeader;
+            return this;
+        }
+
+        public Builder setHeaderBgColor(int headerBgColor) {
+            this.headerBgColor = headerBgColor;
+            return this;
+        }
+
+        public Builder setHeaderTextColor(int headerTextColor) {
+            this.headerTextColor = headerTextColor;
+            return this;
+        }
+
+        public Builder setHeaderTextSize(float headerTextSize) {
+            this.headerTextSize = headerTextSize;
+            return this;
+        }
+
+        public Builder setFloorBgColor(int floorBgColor) {
+            this.floorBgColor = floorBgColor;
+            return this;
+        }
+
+        public Builder setFloorTextColor(int floorTextColor) {
+            this.floorTextColor = floorTextColor;
+            return this;
+        }
+
+        public Builder setFloorTextSize(float floorTextSize) {
+            this.floorTextSize = floorTextSize;
+            return this;
+        }
+
         public SLTableView build(){
             if (tableView == null){
                 tableView = new SLTableView(context);
@@ -104,7 +163,28 @@ public class SLTableView extends RecyclerView {
             tableView.setTableViewDataSource(tableViewDataSource);
             tableView.setTableViewDataSourcePlus(tableViewDataSourcePlus);
             tableView.setLayoutManager(new LinearLayoutManager(context));
-            tableView.setAdapter(new SLTableViewAdapter(context,tableView,tableViewDataSource,tableViewDataSourcePlus));
+            SLTableViewAdapter adapter = null;
+            if (!stickyHeader){
+                adapter = new SLTableViewAdapter(context,tableView,tableViewDataSource,tableViewDataSourcePlus);
+                tableView.setTableViewAdapter(adapter);
+            }else{
+                adapter = new SLTableViewStickyAdapter(context,tableView,tableViewDataSource,tableViewDataSourcePlus);
+                SLStickyHeaderDecoration decoration = new SLStickyHeaderDecoration((SLTableViewStickyAdapter)adapter);
+                tableView.setTableViewAdapter(adapter);
+                tableView.addItemDecoration(decoration);
+
+            }
+            int bgcolor = context.getResources().getColor(R.color.color_background);
+            int textcolor = context.getResources().getColor(R.color.color_text_grey);
+            float textsize = context.getResources().getDimension(R.dimen.dimen_cell_header_floor);
+            adapter.setHeaderBgColor(headerBgColor != 0 ? headerBgColor : bgcolor);
+            adapter.setHeaderTextColor(headerTextColor != 0 ? headerTextColor : textcolor);
+            adapter.setHeaderTextSize(headerTextSize != 0 ? headerTextSize : textsize);
+
+            adapter.setFloorBgColor(floorBgColor != 0 ? floorBgColor : bgcolor);
+            adapter.setFloorTextColor(floorTextColor != 0 ? floorTextColor : textcolor);
+            adapter.setFloorTextSize(floorTextSize != 0 ? floorTextSize : textsize);
+
             return tableView;
         }
     }

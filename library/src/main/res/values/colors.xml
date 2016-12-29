@@ -3,4 +3,5 @@
     <color name="color_background">#efeff4</color>
     <color name="color_title_floor_background">#efeff4</color>
     <color name="color_transparent">#00000000</color>
+    <color name="color_text_grey">#cccccc</color>
 </resources>

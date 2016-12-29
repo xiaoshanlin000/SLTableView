@@ -2,4 +2,5 @@
 <resources>
     <dimen name="dimen_sltableview_header">24dp</dimen>
     <dimen name="dimen_sltableview_floor">24dp</dimen>
+    <dimen name="dimen_cell_header_floor">12px</dimen>
 </resources>

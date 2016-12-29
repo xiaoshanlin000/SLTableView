@@ -11,7 +11,9 @@ public class SLIndexPath {
     public SLIndexPath() {
     }
 
-    public SLIndexPath(int row, int section) {
+    public SLIndexPath(int section,int row) {
+        if (row < 0) row = 0;
+        if (section < 0) section = 0;
         this.row = row;
         this.section = section;
     }
@@ -21,6 +23,7 @@ public class SLIndexPath {
     }
 
     public void setRow(int row) {
+        if (row < 0) row = 0;
         this.row = row;
     }
 
@@ -29,6 +32,7 @@ public class SLIndexPath {
     }
 
     public void setSection(int section) {
+        if (section < 0) section = 0;
         this.section = section;
     }
 
@@ -38,5 +42,10 @@ public class SLIndexPath {
         SLIndexPath indexPath = (SLIndexPath) obj;
         return this.getRow() == indexPath.getRow() && this
                 .getSection() == indexPath.getSection();
+    }
+
+    @Override
+    public String toString() {
+        return "SLIndexPath[section:"+section+" row:"+row+"]";
     }
 }

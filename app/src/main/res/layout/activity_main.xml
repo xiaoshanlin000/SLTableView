@@ -6,11 +6,19 @@
     android:layout_height="match_parent"
     tools:context="com.shanlin.sltableview.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/tableRootLayout"
-        android:orientation="vertical"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </LinearLayout>
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/pager_tab_strip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="#333"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:textColor="#fff"/>
+    </android.support.v4.view.ViewPager>
 </RelativeLayout>

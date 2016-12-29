@@ -29,7 +29,7 @@ def gitUrl = "https://github.com/xiaoshanlin000/SLTableView.git"
 
 //填写唯一包名
 group = "com.shanlin.library.sltableview"
-version = "1.0.1"
+version = "1.0.2"
 
 install {
     repositories.mavenInstaller {
@@ -120,5 +120,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:25.1.0'
+    compile 'com.nineoldandroids:library:2.4.0'
 }
 
