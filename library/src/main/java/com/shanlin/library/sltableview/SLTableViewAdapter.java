@@ -2,7 +2,6 @@ package com.shanlin.library.sltableview;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell>{
+public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> implements SLTableViewHeaderFloor{
 
     protected static final int HEAD = -1;
     protected static final int CONTENT = -2;
@@ -173,15 +172,12 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell>{
             count = count + row;
             sectionInfos.add(sectionInfo);
         }
-        Log.d("sl","adapter count "+(count + headerCount + floorCount));
         if (count == 0) return  0;
         return count + headerCount + floorCount;// 内容个数 + cell头尾个数
     }
 
     public void scrollToRowAtIndexPath(SLIndexPath indexPath) {
-        Log.d("sl","scrollToRowAtIndexPath -> "+indexPath);
         int position = indexPathToPosition(indexPath);
-        Log.d("sl","scrollToPosition:"+position);
         LinearLayoutManager manager = (LinearLayoutManager) tableView.getLayoutManager();
         manager.scrollToPositionWithOffset(position,0);
     }
@@ -197,6 +193,13 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell>{
             row = info.getRowCount() -1;
         }
         return info.getStartPosition() + info.getHeader() + row;
+    }
+
+    @Override
+    public boolean headerFloorOfPosition(int position) {
+        SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
+        int type = typeIndexPath.getType();
+        return  type == HEAD || type == FLOOR;
     }
 
 

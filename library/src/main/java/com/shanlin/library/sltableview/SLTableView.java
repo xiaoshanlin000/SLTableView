@@ -2,6 +2,7 @@ package com.shanlin.library.sltableview;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -73,6 +74,7 @@ public class SLTableView extends RecyclerView {
 
         private SLTableViewDataSource tableViewDataSource;
         private SLTableViewDataSourcePlus tableViewDataSourcePlus;
+        private LayoutManager layoutManager;
 
         private boolean stickyHeader;
 
@@ -145,6 +147,11 @@ public class SLTableView extends RecyclerView {
             return this;
         }
 
+        public Builder setLayoutManager(LayoutManager layoutManager) {
+            this.layoutManager = layoutManager;
+            return this;
+        }
+
         public SLTableView build(){
             if (tableView == null){
                 tableView = new SLTableView(context);
@@ -162,7 +169,11 @@ public class SLTableView extends RecyclerView {
             tableView.setBackgroundColor(context.getResources().getColor(R.color.color_background));
             tableView.setTableViewDataSource(tableViewDataSource);
             tableView.setTableViewDataSourcePlus(tableViewDataSourcePlus);
-            tableView.setLayoutManager(new LinearLayoutManager(context));
+            if (layoutManager != null){
+                tableView.setLayoutManager(layoutManager);
+            }else {
+                tableView.setLayoutManager(new LinearLayoutManager(context));
+            }
             SLTableViewAdapter adapter = null;
             if (!stickyHeader){
                 adapter = new SLTableViewAdapter(context,tableView,tableViewDataSource,tableViewDataSourcePlus);
@@ -173,6 +184,10 @@ public class SLTableView extends RecyclerView {
                 tableView.setTableViewAdapter(adapter);
                 tableView.addItemDecoration(decoration);
 
+            }
+            if (layoutManager instanceof GridLayoutManager
+                    && ((GridLayoutManager) layoutManager).getSpanSizeLookup() instanceof GridLayoutManager.DefaultSpanSizeLookup){
+                ((GridLayoutManager) layoutManager).setSpanSizeLookup(new SLSpanSizeLookup(adapter, (GridLayoutManager) layoutManager));
             }
             int bgcolor = context.getResources().getColor(R.color.color_background);
             int textcolor = context.getResources().getColor(R.color.color_text_grey);
@@ -186,6 +201,24 @@ public class SLTableView extends RecyclerView {
             adapter.setFloorTextSize(floorTextSize != 0 ? floorTextSize : textsize);
 
             return tableView;
+        }
+    }
+
+    private static class SLSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
+        private SLTableViewHeaderFloor headerFloor;
+        private GridLayoutManager layoutManager;
+
+        public SLSpanSizeLookup(SLTableViewHeaderFloor headerFloor, GridLayoutManager layoutManager) {
+            this.headerFloor = headerFloor;
+            this.layoutManager = layoutManager;
+        }
+
+        @Override
+        public int getSpanSize(int position) {
+            if (headerFloor.headerFloorOfPosition(position)){
+                return layoutManager.getSpanCount();
+            }
+            return 1;
         }
     }
 

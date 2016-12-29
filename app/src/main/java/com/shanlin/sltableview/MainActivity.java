@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.shanlin.sltableview.fragment.DefaultFragment;
+import com.shanlin.sltableview.fragment.GroupHeaderFragment;
+import com.shanlin.sltableview.fragment.GroupStickyHeaderFragment;
 import com.shanlin.sltableview.fragment.StickyHeaderFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
                 case 1:
                     return new StickyHeaderFragment();
+                case 2:
+                    return new GroupHeaderFragment();
+                case 3:
+                    return new GroupStickyHeaderFragment();
                 default:
                     return null;
             }
@@ -46,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 4;
         }
 
         @Override
@@ -57,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
 
                 case 1:
                     return "StickyHeader";
+                case 2:
+                    return "GroupHeader";
+                case 3:
+                    return "GroupStickyHeader";
 
                 default:
                     return null;

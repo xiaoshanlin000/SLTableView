@@ -1,6 +1,7 @@
 package com.shanlin.library.sltableview;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -60,15 +61,20 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
         boolean hidden = dataSourcePlus == null ? false : dataSourcePlus.hiddenHeaderInSection(tableView,typeIndexPath.getIndexPath().getSection());
         if (hidden)return false;
+        RecyclerView.LayoutManager manager = tableView.getLayoutManager();
+        if (manager instanceof GridLayoutManager){
+            return typeIndexPath.getStickyIndex() < ((GridLayoutManager) manager).getSpanCount();
+        }
         return typeIndexPath.getStickyIndex()==0;
     }
 
     @Override
     public boolean showStickyHeader(int position) {
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
-        boolean hidden = dataSourcePlus == null ? false : dataSourcePlus.hiddenHeaderInSection(tableView,typeIndexPath.getIndexPath().getSection());
+        int section = typeIndexPath.getIndexPath().getSection();
+        boolean hidden = dataSourcePlus == null ? false : dataSourcePlus.hiddenHeaderInSection(tableView,section);
         if (hidden)return false;
-        return  typeIndexPath.getStickyIndex() <= dataSource.numberOfRowsInSection(tableView,typeIndexPath.getIndexPath().getSection());
+        return  typeIndexPath.getStickyIndex() <= dataSource.numberOfRowsInSection(tableView,section);
     }
 
     @Override
@@ -97,4 +103,5 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
             titleCell.title_floor_text.setText("");
         }
     }
+
 }

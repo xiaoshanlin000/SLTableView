@@ -81,13 +81,13 @@ public abstract class BaseFragment extends Fragment  implements SLTableViewDataS
     public SLTableViewCell cellForType(SLTableView tableView, ViewGroup parent, int type) {
         SLTableViewCell cell = null;
         if (type == 0) {
-            View rootView = inflater.inflate(R.layout.type_one_cell, null, false);
+            View rootView = inflater.inflate(R.layout.type_one_cell, parent, false);
             cell = new TypeOneCell(rootView);
         }else if(type == 1){
-            View rootView = inflater.inflate(R.layout.type_two_cell, null, false);
+            View rootView = inflater.inflate(R.layout.type_two_cell, parent, false);
             cell = new TypeTwoCell(rootView);
         }else if(type == 2){
-            View rootView = inflater.inflate(R.layout.type_three_cell, null, false);
+            View rootView = inflater.inflate(R.layout.type_three_cell, parent, false);
             cell = new TypeThreeCell(rootView);
         }
         return cell;
