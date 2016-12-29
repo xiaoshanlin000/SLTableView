@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> implements SLTableViewHeaderFloor{
+public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> implements SLSpanSizeLookup {
 
     protected static final int HEAD = -1;
     protected static final int CONTENT = -2;
@@ -21,6 +21,7 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> imp
     protected SLTableView tableView;
     protected SLTableViewDataSource dataSource;
     protected SLTableViewDataSourcePlus dataSourcePlus;
+    protected SLTableViewSpanSizeLookup spanSizeLookup;
     protected LayoutInflater inflater;
 
     protected ArrayList<SLTypeIndexPath> typeIndexPaths = new ArrayList<>();
@@ -37,11 +38,13 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> imp
     public SLTableViewAdapter(Context context,
                               SLTableView tableView,
                               SLTableViewDataSource dataSource,
-                              SLTableViewDataSourcePlus dataSourcePlus) {
+                              SLTableViewDataSourcePlus dataSourcePlus,
+                              SLTableViewSpanSizeLookup spanSizeLookup) {
         this.context = context;
         this.tableView = tableView;
         this.dataSource = dataSource;
         this.dataSourcePlus = dataSourcePlus;
+        this.spanSizeLookup = spanSizeLookup;
         inflater = LayoutInflater.from(context);
     }
 
@@ -200,6 +203,15 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> imp
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
         int type = typeIndexPath.getType();
         return  type == HEAD || type == FLOOR;
+    }
+
+    @Override
+    public int getSpanSize(int position) {
+        SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
+        if (spanSizeLookup != null){
+            return spanSizeLookup.spanSizeOfIndexPath(typeIndexPath.getIndexPath());
+        }
+        return 0;
     }
 
 

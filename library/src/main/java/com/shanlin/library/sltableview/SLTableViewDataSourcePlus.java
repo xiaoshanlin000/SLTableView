@@ -16,7 +16,7 @@ public interface SLTableViewDataSourcePlus {
 
     /**
      * section组的floor 描述
-     * @param tableView SLTableView
+     * @param tableView {@link SLTableView}
      * @param section 组下标
      * @return header
      */
@@ -24,7 +24,7 @@ public interface SLTableViewDataSourcePlus {
 
     /**
      * section组title是否隐藏
-     * @param tableView SLTableView
+     * @param tableView {@link SLTableView}
      * @param section 组下标
      * @return true 隐藏,false不隐藏
      */
@@ -32,11 +32,13 @@ public interface SLTableViewDataSourcePlus {
 
     /**
      * section组的floor是否隐藏
-     * @param tableView SLTableView
+     * @param tableView {@link SLTableView}
      * @param section 组下标
      * @return true 隐藏,false不隐藏
      */
     public boolean hiddenFooterInSection(SLTableView tableView, int section);
+
+
 
 //    public boolean canEditRowAtIndexPath(SLTableView tableView, SLIndexPath indexPath);
 //

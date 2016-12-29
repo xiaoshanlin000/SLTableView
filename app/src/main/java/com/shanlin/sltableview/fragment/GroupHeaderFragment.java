@@ -9,12 +9,13 @@ import android.view.ViewGroup;
 
 import com.shanlin.library.sltableview.SLIndexPath;
 import com.shanlin.library.sltableview.SLTableView;
+import com.shanlin.library.sltableview.SLTableViewSpanSizeLookup;
 import com.shanlin.sltableview.R;
 
 import java.util.Arrays;
 
 
-public class GroupHeaderFragment extends BaseFragment{
+public class GroupHeaderFragment extends BaseFragment implements SLTableViewSpanSizeLookup {
 
 
     public GroupHeaderFragment(){
@@ -36,6 +37,7 @@ public class GroupHeaderFragment extends BaseFragment{
         tableView = new SLTableView.Builder(context)
                 .setTableViewDataSource(this)
                 .setTableViewDataSourcePlus(this)
+                .setSpanSizeLookup(this)
                 .showStickyHeader(false)
                 .setHeaderBgColor(context.getResources().getColor(R.color.color_red))
                 .setHeaderTextColor(context.getResources().getColor(R.color.color_white))
@@ -46,14 +48,14 @@ public class GroupHeaderFragment extends BaseFragment{
     @Override
     public void initData() {
         dataLists.clear();
-        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1"));
-        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2"));
-        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1"));
-        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2"));
-        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1"));
-        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2"));
-        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1"));
-        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2"));
+        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1","类型1"));
+        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2","类型2"));
+        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1","类型1"));
+        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2","类型2"));
+        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1","类型1"));
+        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2","类型2"));
+        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1","类型1"));
+        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2","类型2"));
         if (tableView != null) {
             tableView.notifyDataSetChanged();
         }
@@ -91,5 +93,14 @@ public class GroupHeaderFragment extends BaseFragment{
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public int spanSizeOfIndexPath(SLIndexPath indexPath) {
+        int row = indexPath.getRow();
+        if (row == 2){
+            return 2;
+        }
+        return 0;
     }
 }

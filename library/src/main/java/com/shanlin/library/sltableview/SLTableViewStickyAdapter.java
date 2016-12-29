@@ -11,8 +11,8 @@ import android.view.View;
 
 public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTableViewStickyHeaderAdapter {
 
-    public SLTableViewStickyAdapter(Context context, SLTableView tableView, SLTableViewDataSource dataSource, SLTableViewDataSourcePlus dataSourcePlus) {
-        super(context, tableView, dataSource, dataSourcePlus);
+    public SLTableViewStickyAdapter(Context context, SLTableView tableView, SLTableViewDataSource dataSource, SLTableViewDataSourcePlus dataSourcePlus, SLTableViewSpanSizeLookup spanSizeLookup) {
+        super(context, tableView, dataSource, dataSourcePlus, spanSizeLookup);
     }
 
     @Override
