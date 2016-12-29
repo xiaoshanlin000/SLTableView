@@ -68,7 +68,7 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
         boolean hidden = dataSourcePlus == null ? false : dataSourcePlus.hiddenHeaderInSection(tableView,typeIndexPath.getIndexPath().getSection());
         if (hidden)return false;
-        return  typeIndexPath.getStickyIndex() < dataSource.numberOfRowsInSection(tableView,typeIndexPath.getIndexPath().getSection());
+        return  typeIndexPath.getStickyIndex() <= dataSource.numberOfRowsInSection(tableView,typeIndexPath.getIndexPath().getSection());
     }
 
     @Override
