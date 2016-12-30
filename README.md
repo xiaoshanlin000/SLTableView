@@ -27,5 +27,5 @@ lvy
 ###操作效果
 ![Alt Text](https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/demo.gif)
 ###效果图
-![image](https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/1.png)
-![image](https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/2.png)
+![image](https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/1.png =384x640) ![image](https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/2.png =384x640)
+![image](https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/3.png =384x640) ![image](https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/4.png =384x640)
