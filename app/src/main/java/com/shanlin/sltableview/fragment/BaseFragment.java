@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shanlin.library.sltableview.SLIndexPath;
@@ -18,6 +17,9 @@ import com.shanlin.library.sltableview.SLTableViewCell;
 import com.shanlin.library.sltableview.SLTableViewDataSource;
 import com.shanlin.library.sltableview.SLTableViewDataSourcePlus;
 import com.shanlin.sltableview.R;
+import com.shanlin.sltableview.fragment.cell.TypeOneCell;
+import com.shanlin.sltableview.fragment.cell.TypeThreeCell;
+import com.shanlin.sltableview.fragment.cell.TypeTwoCell;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -151,37 +153,4 @@ public abstract class BaseFragment extends Fragment  implements SLTableViewDataS
         return false;
     }
 
-    private static class TypeOneCell extends SLTableViewCell{
-
-        public TextView cell_textView;
-        public LinearLayout cell_layout;
-
-        public TypeOneCell(View itemView) {
-            super(itemView);
-            cell_textView = (TextView) itemView.findViewById(R.id.cell_textView);
-            cell_layout = (LinearLayout) itemView.findViewById(R.id.cell_layout);
-        }
-    }
-    private static class TypeTwoCell extends SLTableViewCell{
-
-        public TextView cell_textView;
-        public LinearLayout cell_layout;
-
-        public TypeTwoCell(View itemView) {
-            super(itemView);
-            cell_textView = (TextView) itemView.findViewById(R.id.cell_textView);
-            cell_layout = (LinearLayout) itemView.findViewById(R.id.cell_layout);
-        }
-    }
-    private static class TypeThreeCell extends SLTableViewCell{
-
-        public TextView cell_textView;
-        public LinearLayout cell_layout;
-
-        public TypeThreeCell(View itemView) {
-            super(itemView);
-            cell_textView = (TextView) itemView.findViewById(R.id.cell_textView);
-            cell_layout = (LinearLayout) itemView.findViewById(R.id.cell_layout);
-        }
-    }
 }

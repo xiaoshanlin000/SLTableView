@@ -49,7 +49,7 @@ public class StickyHeaderFragment extends BaseFragment{
         dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2"));
         dataLists.add(Arrays.asList("按钮"));
         if (tableView != null) {
-            tableView.notifyDataSetChanged();
+            tableView.getAdapter().notifyDataSetChanged();
         }
     }
 

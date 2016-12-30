@@ -85,7 +85,7 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> imp
     public int getItemViewType(int position) {
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
         int type = typeIndexPath.getType();
-        SLIndexPath indexPath = typeIndexPath.getIndexPath();
+        SLIndexPath indexPath = typeIndexPath.getIndexPath().clone();
         if (type == CONTENT){
             type =  dataSource.typeOfIndexPath(tableView,indexPath);
             typeIndexPath.setType(type);
@@ -117,7 +117,7 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> imp
     public void onBindViewHolder(SLTableViewCell cell, int position) {
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
         int type = typeIndexPath.getType();
-        SLIndexPath indexPath = typeIndexPath.getIndexPath();
+        SLIndexPath indexPath = typeIndexPath.getIndexPath().clone();
         if (type == HEAD) {
             DefaultTitleCell titleCell = (DefaultTitleCell) cell;
             if (dataSourcePlus != null){
@@ -209,7 +209,7 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> imp
     public int getSpanSize(int position) {
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
         if (spanSizeLookup != null){
-            return spanSizeLookup.spanSizeOfIndexPath(typeIndexPath.getIndexPath());
+            return spanSizeLookup.spanSizeOfIndexPath(typeIndexPath.getIndexPath().clone());
         }
         return 0;
     }

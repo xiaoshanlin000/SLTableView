@@ -94,7 +94,7 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
     @Override
     public void onBindHeaderCell(SLTableViewCell cell, int position) {
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
-        SLIndexPath indexPath = typeIndexPath.getIndexPath();
+        SLIndexPath indexPath = typeIndexPath.getIndexPath().clone();
         DefaultTitleCell titleCell = (DefaultTitleCell) cell;
         if (dataSourcePlus != null){
             String title = dataSourcePlus.titleForHeaderInSection(tableView, indexPath.getSection());

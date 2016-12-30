@@ -39,9 +39,9 @@ public class SLTableView extends RecyclerView {
         this.bgColor = bgColor;
     }
 
-    public void notifyDataSetChanged() {
-        this.getAdapter().notifyDataSetChanged();
-    }
+//    public void notifyDataSetChanged() {
+//        this.getAdapter().notifyDataSetChanged();
+//    }
 
     public SLTableViewAdapter getTableViewAdapter() {
         return tableViewAdapter;

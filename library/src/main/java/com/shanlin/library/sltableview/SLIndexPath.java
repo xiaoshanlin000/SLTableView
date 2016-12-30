@@ -45,6 +45,11 @@ public class SLIndexPath {
     }
 
     @Override
+    protected SLIndexPath clone() {
+        return new SLIndexPath(getSection(),getRow());
+    }
+
+    @Override
     public String toString() {
         return "SLIndexPath[section:"+section+" row:"+row+"]";
     }
