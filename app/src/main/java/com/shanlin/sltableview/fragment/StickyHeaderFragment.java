@@ -57,8 +57,7 @@ public class StickyHeaderFragment extends DemoBaseFragment {
             tableView.getAdapter().notifyDataSetChanged();
         }
     }
-
-
+    
 
     @Override
     public void onAttach(Context context) {
