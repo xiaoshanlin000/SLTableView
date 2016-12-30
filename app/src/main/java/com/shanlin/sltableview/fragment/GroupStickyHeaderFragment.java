@@ -3,18 +3,17 @@ package com.shanlin.sltableview.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.shanlin.library.sltableview.SLIndexPath;
 import com.shanlin.library.sltableview.SLTableView;
 import com.shanlin.sltableview.R;
+import com.shanlin.sltableview.fragment.base.DemoBaseFragment;
 
 import java.util.Arrays;
 
 
-public class GroupStickyHeaderFragment extends BaseFragment{
+public class GroupStickyHeaderFragment extends DemoBaseFragment {
 
 
     public GroupStickyHeaderFragment(){
@@ -32,6 +31,11 @@ public class GroupStickyHeaderFragment extends BaseFragment{
 
     }
     @Override
+    public int layoutId() {
+        return R.layout.fragment_sticky_header;
+    }
+
+    @Override
     public void initView(ViewGroup view) {
         tableView = new SLTableView.Builder(context)
                 .setTableViewDataSource(this)
@@ -46,24 +50,19 @@ public class GroupStickyHeaderFragment extends BaseFragment{
     @Override
     public void initData() {
         dataLists.clear();
-        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1"));
-        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2"));
-        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1"));
-        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2"));
-        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1"));
-        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2"));
-        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1"));
-        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2"));
+        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1","类型1","类型1","类型1","类型1"));
+        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2","类型2","类型2","类型2","类型2"));
+        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1","类型1","类型1","类型1","类型1"));
+        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2","类型2","类型2","类型2","类型2"));
+        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1","类型1","类型1","类型1","类型1"));
+        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2","类型2","类型2","类型2","类型2"));
+        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1","类型1","类型1","类型1","类型1"));
+        dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2","类型2","类型2","类型2","类型2"));
         if (tableView != null) {
             tableView.getAdapter().notifyDataSetChanged();
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return createView(R.layout.fragment_sticky_header,inflater,container,savedInstanceState);
-    }
 
 
     @Override

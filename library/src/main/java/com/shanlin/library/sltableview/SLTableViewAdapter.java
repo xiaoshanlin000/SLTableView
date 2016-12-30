@@ -136,6 +136,7 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> imp
             }
         }else{
             if (dataSource != null){
+                cell.setIndexPath(indexPath);
                 dataSource.onBindCell(tableView,cell,indexPath,type);
             }
         }

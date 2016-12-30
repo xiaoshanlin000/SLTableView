@@ -2,17 +2,16 @@ package com.shanlin.sltableview.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.shanlin.library.sltableview.SLTableView;
 import com.shanlin.sltableview.R;
+import com.shanlin.sltableview.fragment.base.DemoBaseFragment;
 
 import java.util.Arrays;
 
 
-public class StickyHeaderFragment extends BaseFragment{
+public class StickyHeaderFragment extends DemoBaseFragment {
 
 
     public StickyHeaderFragment(){
@@ -29,6 +28,12 @@ public class StickyHeaderFragment extends BaseFragment{
         super.onCreate(savedInstanceState);
 
     }
+
+    @Override
+    public int layoutId() {
+        return R.layout.fragment_sticky_header;
+    }
+
     @Override
     public void initView(ViewGroup view) {
         tableView = new SLTableView.Builder(context)
@@ -51,12 +56,6 @@ public class StickyHeaderFragment extends BaseFragment{
         if (tableView != null) {
             tableView.getAdapter().notifyDataSetChanged();
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return createView(R.layout.fragment_sticky_header,inflater,container,savedInstanceState);
     }
 
 

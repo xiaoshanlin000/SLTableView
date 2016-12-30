@@ -17,4 +17,5 @@ public class TypeOneCell extends SLTableViewCell {
         cell_textView = (TextView) itemView.findViewById(R.id.cell_textView);
         cell_layout = (LinearLayout) itemView.findViewById(R.id.cell_layout);
     }
+
 }

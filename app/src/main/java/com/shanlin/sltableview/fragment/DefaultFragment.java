@@ -2,16 +2,15 @@ package com.shanlin.sltableview.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.shanlin.library.sltableview.SLTableView;
 import com.shanlin.sltableview.R;
+import com.shanlin.sltableview.fragment.base.DemoBaseFragment;
 
 import java.util.Arrays;
 
-public class DefaultFragment extends BaseFragment {
+public class DefaultFragment extends DemoBaseFragment {
 
     public DefaultFragment() {
         // Required empty public constructor
@@ -36,6 +35,11 @@ public class DefaultFragment extends BaseFragment {
     }
 
     @Override
+    public int layoutId() {
+        return R.layout.fragment_default;
+    }
+
+    @Override
     public void initView(ViewGroup view) {
         tableView = new SLTableView.Builder(context)
                 .setTableViewDataSource(this)
@@ -56,11 +60,6 @@ public class DefaultFragment extends BaseFragment {
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return createView(R.layout.fragment_default,inflater,container,savedInstanceState);
-    }
 
 
 

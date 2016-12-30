@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/color_white"
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/cell_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:background="@drawable/layout_click_background"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/ic_launcher"
-            />
-        <TextView
-            android:layout_marginLeft="8dp"
-            android:id="@+id/cell_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/cell_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:layout_weight="1.0"
+            android:background="@drawable/layout_click_background"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_launcher"
+                />
+            <TextView
+                android:layout_marginLeft="8dp"
+                android:id="@+id/cell_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
+        </LinearLayout>
+        <View
+            android:layout_width="2px"
+            android:layout_height="match_parent"
+            android:background="#efeff4" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="2px"
         android:background="#efeff4"
-        />
-</LinearLayout>
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

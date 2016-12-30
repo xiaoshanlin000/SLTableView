@@ -1,14 +1,8 @@
-package com.shanlin.sltableview.fragment;
+package com.shanlin.sltableview.fragment.base;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shanlin.library.sltableview.SLIndexPath;
@@ -25,40 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Shanlin on 2016/12/29.
+ * Created by Shanlin on 2016/12/30.
  */
 
-public abstract class BaseFragment extends Fragment  implements SLTableViewDataSource,SLTableViewDataSourcePlus {
+public abstract class DemoBaseFragment extends BaseFragment implements SLTableViewDataSource,SLTableViewDataSourcePlus ,SLTableViewCell.SLCellViewClickListener{
 
-    protected Activity context;
 
     protected ArrayList<List<String>> dataLists = new ArrayList<>();
-    protected LayoutInflater inflater ;
-    protected View rootView;
-    protected LinearLayout tableRootLayout;
-    protected SLTableView tableView;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        context = getActivity();
-        inflater = LayoutInflater.from(context);
-
-    }
-
-    protected View createView(@LayoutRes int layoutId, LayoutInflater inflater, ViewGroup container,
-                            Bundle savedInstanceState){
-        if (rootView == null){
-            rootView = inflater.inflate(layoutId,container,false);
-            tableRootLayout = (LinearLayout) rootView.findViewById(R.id.tableRootLayout);
-            initView(tableRootLayout);
-            initData();
-        }
-        return rootView;
-    }
-
-    public abstract void initView(ViewGroup view);
-    public abstract void initData();
 
     @Override
     public int numberOfSections(SLTableView tableView) {
@@ -103,33 +70,19 @@ public abstract class BaseFragment extends Fragment  implements SLTableViewDataS
         if (type == 0){
             TypeOneCell typeCell = (TypeOneCell) cell;
             typeCell.cell_textView.setText(dataLists.get(section).get(row));
-            typeCell.cell_layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context,String.format("点击,%02d组,%02d行.",(section+1),(row+1)),Toast.LENGTH_SHORT).show();
-                }
-            });
+            typeCell.bindCellViewClick(typeCell.cell_layout,this);
         }else if (type == 1){
             TypeTwoCell typeCell = (TypeTwoCell) cell;
             typeCell.cell_textView.setText(dataLists.get(section).get(row));
-            typeCell.cell_layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context,String.format("点击,%02d组,%02d行.",(section+1),(row+1)),Toast.LENGTH_SHORT).show();
-                }
-            });
+            typeCell.bindCellViewClick(typeCell.cell_layout,this);
         }else if (type == 2){
             final TypeThreeCell typeCell = (TypeThreeCell) cell;
             typeCell.cell_textView.setText(dataLists.get(section).get(row));
-            typeCell.cell_layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context,String.format("点击,%s.",typeCell.cell_textView.getText().toString()),Toast.LENGTH_SHORT).show();
-                }
-            });
+            typeCell.bindCellViewClick(typeCell.cell_layout,this,typeCell.cell_textView);
         }
 
     }
+
 
     @Override
     public String titleForHeaderInSection(SLTableView tableView, int section) {
@@ -153,4 +106,16 @@ public abstract class BaseFragment extends Fragment  implements SLTableViewDataS
         return false;
     }
 
+    @Override
+    public void onCellViewClick(View view, SLIndexPath indexPath, Object userData) {
+        int section = indexPath.getSection();
+        int row = indexPath.getRow();
+        if (userData != null && section == dataLists.size() - 1) // 按钮
+        {
+            TextView textView = (TextView) userData;
+            Toast.makeText(context, String.format("点击,%s.", textView.getText().toString()), Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, String.format("点击,%02d组,%02d行.", (section + 1), (row + 1)), Toast.LENGTH_SHORT).show();
+        }
+    }
 }
