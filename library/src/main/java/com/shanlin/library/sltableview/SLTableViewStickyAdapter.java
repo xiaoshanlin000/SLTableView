@@ -11,7 +11,7 @@ import android.view.View;
 
 public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTableViewStickyHeaderAdapter {
 
-    public SLTableViewStickyAdapter(Context context, SLTableView tableView, SLTableViewDataSource dataSource, SLTableViewDataSourcePlus dataSourcePlus, SLTableViewSpanSizeLookup spanSizeLookup) {
+    public SLTableViewStickyAdapter(Context context, SLTableView tableView, SLTableViewDataSource dataSource, SLTableViewDataSourcePlus dataSourcePlus, SLTableViewLayoutManagerExpand spanSizeLookup) {
         super(context, tableView, dataSource, dataSourcePlus, spanSizeLookup);
     }
 
@@ -103,5 +103,6 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
             titleCell.title_floor_text.setText("");
         }
     }
+
 
 }

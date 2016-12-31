@@ -35,6 +35,7 @@ public class SLStickyHeaderDecoration extends RecyclerView.ItemDecoration {
             headerHeight = header.getHeight();
         }
         outRect.set(0,headerHeight,0,0);
+        headerAdapter.getItemOffsets(outRect,position);
     }
 
     @Override

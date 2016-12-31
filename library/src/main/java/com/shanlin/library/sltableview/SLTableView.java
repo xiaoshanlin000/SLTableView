@@ -37,6 +37,7 @@ public class SLTableView extends RecyclerView {
 
     public void setBgColor(int bgColor) {
         this.bgColor = bgColor;
+        setBackgroundColor(bgColor);
     }
 
 //    public void notifyDataSetChanged() {
@@ -64,7 +65,7 @@ public class SLTableView extends RecyclerView {
 
         private SLTableViewDataSource tableViewDataSource;
         private SLTableViewDataSourcePlus tableViewDataSourcePlus;
-        private SLTableViewSpanSizeLookup spanSizeLookup;
+        private SLTableViewLayoutManagerExpand spanSizeLookup;
         private LayoutManager layoutManager;
 
         private boolean stickyHeader;
@@ -199,10 +200,10 @@ public class SLTableView extends RecyclerView {
         /**
          *
          * 和 Builder#setLayoutManager(LayoutManager)  GridLayoutManager一起使用
-         * @param spanSizeLookup {@link SLTableViewSpanSizeLookup}
+         * @param spanSizeLookup {@link SLTableViewLayoutManagerExpand}
          * @return {@link Builder}
          */
-        public Builder setSpanSizeLookup(SLTableViewSpanSizeLookup spanSizeLookup) {
+        public Builder setSpanSizeLookup(SLTableViewLayoutManagerExpand spanSizeLookup) {
             this.spanSizeLookup = spanSizeLookup;
             return this;
         }
@@ -221,7 +222,6 @@ public class SLTableView extends RecyclerView {
             }else{
                 tableView.setBgColor(context.getResources().getColor(R.color.color_title_floor_background));
             }
-            tableView.setBackgroundColor(context.getResources().getColor(R.color.color_background));
             tableView.setTableViewDataSource(tableViewDataSource);
             tableView.setTableViewDataSourcePlus(tableViewDataSourcePlus);
             if (layoutManager != null){
@@ -232,7 +232,9 @@ public class SLTableView extends RecyclerView {
             SLTableViewAdapter adapter = null;
             if (!stickyHeader){
                 adapter = new SLTableViewAdapter(context,tableView,tableViewDataSource,tableViewDataSourcePlus,spanSizeLookup);
+                SLItemDecoration decoration = new SLItemDecoration(adapter);
                 tableView.setTableViewAdapter(adapter);
+                tableView.addItemDecoration(decoration);
             }else{
                 adapter = new SLTableViewStickyAdapter(context,tableView,tableViewDataSource,tableViewDataSourcePlus,spanSizeLookup);
                 SLStickyHeaderDecoration decoration = new SLStickyHeaderDecoration((SLTableViewStickyAdapter)adapter);
@@ -260,10 +262,10 @@ public class SLTableView extends RecyclerView {
     }
 
     private static class SLDefaultSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
-        private SLSpanSizeLookup spanSizeLookup;
+        private SLTableViewExpandAdapter spanSizeLookup;
         private GridLayoutManager layoutManager;
 
-        public SLDefaultSpanSizeLookup(SLSpanSizeLookup spanSizeLookup, GridLayoutManager layoutManager) {
+        public SLDefaultSpanSizeLookup(SLTableViewExpandAdapter spanSizeLookup, GridLayoutManager layoutManager) {
             this.spanSizeLookup = spanSizeLookup;
             this.layoutManager = layoutManager;
         }

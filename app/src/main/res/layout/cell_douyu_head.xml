@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cell_padding_x2"
+        android:background="@color/color_background"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:padding="@dimen/cell_padding"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_weight="1.0"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="@dimen/dimen_cell_head">
+            <ImageView
+                android:layout_width="@dimen/dimen_cell_head_img"
+                android:layout_height="@dimen/dimen_cell_head_img"
+                android:background="@drawable/img_head_play"
+                />
+            <TextView
+                android:layout_marginLeft="@dimen/cell_padding"
+                android:id="@+id/cell_head_title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_text"
+                android:textSize="@dimen/text_cell_head_title"
+                android:text="英雄联盟"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1.0"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:gravity="center_vertical"
+            android:layout_height="@dimen/dimen_cell_head">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                />
+            <LinearLayout
+
+                android:id="@+id/cell_head_more_layout"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/cell_head_more_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_text_grey_dark"
+                    android:textSize="@dimen/text_cell_head_more"
+                    android:text="更多"
+                    android:layout_marginRight="@dimen/cell_padding"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/img_arrow"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

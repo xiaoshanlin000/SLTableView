@@ -1,20 +1,21 @@
 package com.shanlin.sltableview.fragment;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.ViewGroup;
 
 import com.shanlin.library.sltableview.SLIndexPath;
 import com.shanlin.library.sltableview.SLTableView;
-import com.shanlin.library.sltableview.SLTableViewSpanSizeLookup;
+import com.shanlin.library.sltableview.SLTableViewLayoutManagerExpand;
 import com.shanlin.sltableview.R;
 import com.shanlin.sltableview.fragment.base.DemoBaseFragment;
 
 import java.util.Arrays;
 
 
-public class GroupHeaderFragment extends DemoBaseFragment implements SLTableViewSpanSizeLookup {
+public class GroupHeaderFragment extends DemoBaseFragment implements SLTableViewLayoutManagerExpand {
 
 
     public GroupHeaderFragment(){
@@ -77,7 +78,7 @@ public class GroupHeaderFragment extends DemoBaseFragment implements SLTableView
     }
 
     @Override
-    public int spanSizeOfIndexPath(SLIndexPath indexPath) {
+    public int gridSpanSizeOfIndexPath(SLIndexPath indexPath) {
         int row = indexPath.getRow();
         int section = indexPath.getSection();
         if (section == dataLists.size() - 1 && row == 0){ // 按钮夸两行
@@ -87,5 +88,10 @@ public class GroupHeaderFragment extends DemoBaseFragment implements SLTableView
             return 2;
         }
         return 0;
+    }
+
+    @Override
+    public void getItemOffsets(Rect outRect, SLIndexPath indexPath) {
+
     }
 }

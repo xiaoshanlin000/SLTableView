@@ -4,4 +4,12 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="dimen_tableview_header">24dp</dimen>
     <dimen name="dimen_tableview_floor">24dp</dimen>
+    <dimen name="dimen_cell_head">20dp</dimen>
+    <dimen name="dimen_cell_head_img">18dp</dimen>
+    <dimen name="cell_padding_s2">4dp</dimen>
+    <dimen name="cell_padding">8dp</dimen>
+    <dimen name="text_cell_head_title">16sp</dimen>
+    <dimen name="text_cell_head_more">14sp</dimen>
+    <dimen name="text_cell_content">12sp</dimen>
+    <dimen name="cell_padding_x2">16dp</dimen>
 </resources>

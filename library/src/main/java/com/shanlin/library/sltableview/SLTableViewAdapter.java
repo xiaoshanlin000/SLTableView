@@ -1,6 +1,7 @@
 package com.shanlin.library.sltableview;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> implements SLSpanSizeLookup {
+public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> implements SLTableViewExpandAdapter {
 
     protected static final int HEAD = -1;
     protected static final int CONTENT = -2;
@@ -21,7 +22,7 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> imp
     protected SLTableView tableView;
     protected SLTableViewDataSource dataSource;
     protected SLTableViewDataSourcePlus dataSourcePlus;
-    protected SLTableViewSpanSizeLookup spanSizeLookup;
+    protected SLTableViewLayoutManagerExpand spanSizeLookup;
     protected LayoutInflater inflater;
 
     protected ArrayList<SLTypeIndexPath> typeIndexPaths = new ArrayList<>();
@@ -39,7 +40,7 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> imp
                               SLTableView tableView,
                               SLTableViewDataSource dataSource,
                               SLTableViewDataSourcePlus dataSourcePlus,
-                              SLTableViewSpanSizeLookup spanSizeLookup) {
+                              SLTableViewLayoutManagerExpand spanSizeLookup) {
         this.context = context;
         this.tableView = tableView;
         this.dataSource = dataSource;
@@ -210,9 +211,20 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> imp
     public int getSpanSize(int position) {
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
         if (spanSizeLookup != null){
-            return spanSizeLookup.spanSizeOfIndexPath(typeIndexPath.getIndexPath().clone());
+            return spanSizeLookup.gridSpanSizeOfIndexPath(typeIndexPath.getIndexPath().clone());
         }
         return 0;
+    }
+
+    @Override
+    public void getItemOffsets(Rect outRect, int position) {
+        if (spanSizeLookup != null){
+            SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
+            int type = typeIndexPath.getType();
+            if (type != HEAD && type != FLOOR){
+                spanSizeLookup.getItemOffsets(outRect,typeIndexPath.getIndexPath().clone());
+            }
+        }
     }
 
 

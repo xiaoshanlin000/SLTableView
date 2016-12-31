@@ -32,9 +32,9 @@ public class SLTableViewCell extends SLTableView.ViewHolder implements View.OnCl
      */
     public void bindCellViewClick(View view,SLCellViewClickListener clickListener,Object userData){
         view.setOnClickListener(this);
-        this.clickListener = clickListener;
-        this.userData = userData;
-    }
+            this.clickListener = clickListener;
+            this.userData = userData;
+        }
 
     public SLTableViewCell setIndexPath(SLIndexPath indexPath) {
         this.indexPath = indexPath;
