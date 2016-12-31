@@ -44,7 +44,7 @@ public class GroupHeaderFragment extends DemoBaseFragment implements SLTableView
         tableView = new SLTableView.Builder(context)
                 .setTableViewDataSource(this)
                 .setTableViewDataSourcePlus(this)
-                .setSpanSizeLookup(this)
+                .setTableViewLayoutManagerExpand(this)
                 .showStickyHeader(false)
                 .setHeaderBgColor(context.getResources().getColor(R.color.color_red))
                 .setHeaderTextColor(context.getResources().getColor(R.color.color_white))

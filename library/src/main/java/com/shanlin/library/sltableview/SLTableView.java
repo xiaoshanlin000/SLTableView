@@ -65,7 +65,7 @@ public class SLTableView extends RecyclerView {
 
         private SLTableViewDataSource tableViewDataSource;
         private SLTableViewDataSourcePlus tableViewDataSourcePlus;
-        private SLTableViewLayoutManagerExpand spanSizeLookup;
+        private SLTableViewLayoutManagerExpand tableViewLayoutManagerExpand;
         private LayoutManager layoutManager;
 
         private boolean stickyHeader;
@@ -200,11 +200,11 @@ public class SLTableView extends RecyclerView {
         /**
          *
          * 和 Builder#setLayoutManager(LayoutManager)  GridLayoutManager一起使用
-         * @param spanSizeLookup {@link SLTableViewLayoutManagerExpand}
+         * @param tableViewLayoutManagerExpand {@link SLTableViewLayoutManagerExpand}
          * @return {@link Builder}
          */
-        public Builder setSpanSizeLookup(SLTableViewLayoutManagerExpand spanSizeLookup) {
-            this.spanSizeLookup = spanSizeLookup;
+        public Builder setTableViewLayoutManagerExpand(SLTableViewLayoutManagerExpand tableViewLayoutManagerExpand) {
+            this.tableViewLayoutManagerExpand = tableViewLayoutManagerExpand;
             return this;
         }
 
@@ -231,12 +231,12 @@ public class SLTableView extends RecyclerView {
             }
             SLTableViewAdapter adapter = null;
             if (!stickyHeader){
-                adapter = new SLTableViewAdapter(context,tableView,tableViewDataSource,tableViewDataSourcePlus,spanSizeLookup);
+                adapter = new SLTableViewAdapter(context,tableView,tableViewDataSource,tableViewDataSourcePlus, tableViewLayoutManagerExpand);
                 SLItemDecoration decoration = new SLItemDecoration(adapter);
                 tableView.setTableViewAdapter(adapter);
                 tableView.addItemDecoration(decoration);
             }else{
-                adapter = new SLTableViewStickyAdapter(context,tableView,tableViewDataSource,tableViewDataSourcePlus,spanSizeLookup);
+                adapter = new SLTableViewStickyAdapter(context,tableView,tableViewDataSource,tableViewDataSourcePlus, tableViewLayoutManagerExpand);
                 SLStickyHeaderDecoration decoration = new SLStickyHeaderDecoration((SLTableViewStickyAdapter)adapter);
                 tableView.setTableViewAdapter(adapter);
                 tableView.addItemDecoration(decoration);

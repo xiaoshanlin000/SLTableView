@@ -65,7 +65,7 @@ public class DouyuFragment extends BaseFragment  implements SLTableViewDataSourc
         tableView = new SLTableView.Builder(context)
                 .setTableViewDataSource(this)
                 .setTableViewDataSourcePlus(this)
-                .setSpanSizeLookup(this)
+                .setTableViewLayoutManagerExpand(this)
                 .showStickyHeader(false)
                 .setBgColor(context.getResources().getColor(R.color.color_white))
                 .setLayoutManager(new GridLayoutManager(context,2))
@@ -181,7 +181,7 @@ public class DouyuFragment extends BaseFragment  implements SLTableViewDataSourc
             case CELL_TYPE_HEAD:
                 DouyuHeadCell douyuHeadCell = (DouyuHeadCell) cell;
                 douyuHeadCell.cell_head_title_text.setText(douyuHead.getTitle());
-                if (douyuHead.getType() == SHOW_TYPE_HOT_AUTHOR){
+                if (douyuHead.getType() == SHOW_TYPE_HOT_AUTHOR){//热门作者 没有更多选项
                     douyuHeadCell.cell_head_more_layout.setVisibility(View.GONE);
                 }else{
                     douyuHeadCell.cell_head_more_layout.setVisibility(View.VISIBLE);
