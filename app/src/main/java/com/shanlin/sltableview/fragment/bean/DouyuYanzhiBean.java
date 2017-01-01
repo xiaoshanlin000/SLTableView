@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
  * Created by Shanlin on 2016/12/31.
  */
 
-public class DouyuYanzhiBean {
+public class DouyuYanzhiBean extends DouyuBaseBean{
 
     private String roomId;
     private String roomOwner;
@@ -16,30 +16,17 @@ public class DouyuYanzhiBean {
     private Drawable roomImage;
 
     public DouyuYanzhiBean() {
+        super(DouyuType.TYPE_ROOM_YANZHI);
     }
 
     public DouyuYanzhiBean(String roomOwner, String roomNumber, String location) {
+        super(DouyuType.TYPE_ROOM_YANZHI);
         this.roomOwner = roomOwner;
         this.roomNumber = roomNumber;
         this.location = location;
     }
 
-    public DouyuYanzhiBean(String roomId, String roomOwner, String roomName, String roomNumber, String location) {
-        this.roomId = roomId;
-        this.roomOwner = roomOwner;
-        this.roomName = roomName;
-        this.roomNumber = roomNumber;
-        this.location = location;
-    }
 
-    public DouyuYanzhiBean(String roomId, String roomOwner, String roomName, String roomNumber, String location, Drawable roomImage) {
-        this.roomId = roomId;
-        this.roomOwner = roomOwner;
-        this.roomName = roomName;
-        this.roomNumber = roomNumber;
-        this.location = location;
-        this.roomImage = roomImage;
-    }
 
     public String getRoomId() {
         return roomId;

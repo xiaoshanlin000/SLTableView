@@ -6,27 +6,24 @@ import android.graphics.drawable.Drawable;
  * Created by Shanlin on 2016/12/31.
  */
 
-public class DouyuHotAuthorBean {
+public class DouyuHotAuthorBean extends DouyuBaseBean {
     private Drawable headIcon;
     private String authorName;
     private String videoNumber;
     private String subscribeNumber;
 
     public DouyuHotAuthorBean() {
+        super(DouyuType.TYPE_HOT_AUTHOR);
     }
 
     public DouyuHotAuthorBean(String authorName, String videoNumber, String subscribeNumber) {
+        super(DouyuType.TYPE_HOT_AUTHOR);
         this.authorName = authorName;
         this.videoNumber = videoNumber;
         this.subscribeNumber = subscribeNumber;
     }
 
-    public DouyuHotAuthorBean(Drawable headIcon, String authorName, String videoNumber, String subscribeNumber) {
-        this.headIcon = headIcon;
-        this.authorName = authorName;
-        this.videoNumber = videoNumber;
-        this.subscribeNumber = subscribeNumber;
-    }
+
 
     public Drawable getHeadIcon() {
         return headIcon;

@@ -16,9 +16,11 @@ import com.shanlin.library.sltableview.SLTableViewDataSourcePlus;
 import com.shanlin.library.sltableview.SLTableViewLayoutManagerExpand;
 import com.shanlin.sltableview.R;
 import com.shanlin.sltableview.fragment.base.BaseFragment;
+import com.shanlin.sltableview.fragment.bean.DouyuBaseBean;
 import com.shanlin.sltableview.fragment.bean.DouyuHeadBean;
 import com.shanlin.sltableview.fragment.bean.DouyuHotAuthorBean;
 import com.shanlin.sltableview.fragment.bean.DouyuRoomBean;
+import com.shanlin.sltableview.fragment.bean.DouyuType;
 import com.shanlin.sltableview.fragment.bean.DouyuYanzhiBean;
 import com.shanlin.sltableview.fragment.cell.DouyuHeadCell;
 import com.shanlin.sltableview.fragment.cell.DouyuHotAuthorCell;
@@ -33,10 +35,6 @@ import java.util.ArrayList;
 public class DouyuFragment extends BaseFragment  implements SLTableViewDataSource,
         SLTableViewDataSourcePlus,SLTableViewLayoutManagerExpand,SLTableViewCell.SLCellViewClickListener
 {
-
-    private static final int SHOW_TYPE_ROOM = 1;
-    private static final int SHOW_TYPE_HOT_AUTHOR = 2;
-    private static final int SHOW_TYPE_ROOM_YANZHI = 3;
     private static final int CELL_TYPE_HEAD = 0;
     private static final int CELL_TYPE_ROOM = 1;
     private static final int CELL_TYPE_HOT_AUTHOR = 2;
@@ -77,7 +75,7 @@ public class DouyuFragment extends BaseFragment  implements SLTableViewDataSourc
     public void initData() {
         dataLists.clear();
         ArrayList<Object> list = new ArrayList<>();
-        list.add(new DouyuHeadBean("最热",SHOW_TYPE_ROOM));
+        list.add(new DouyuHeadBean("最热"));
         list.add(new DouyuRoomBean("暴走漫画出品","暴走漫画 再看最后一集","6.6万"));
         list.add(new DouyuRoomBean("暴走漫画出品","暴走漫画 再看最后一集","6.6万"));
         list.add(new DouyuRoomBean("暴走漫画出品","暴走漫画 再看最后一集","6.6万"));
@@ -88,35 +86,35 @@ public class DouyuFragment extends BaseFragment  implements SLTableViewDataSourc
         list.add(new DouyuRoomBean("暴走漫画出品","暴走漫画 再看最后一集","6.6万"));
         dataLists.add(list);
         list = new ArrayList<>();
-        list.add(new DouyuHeadBean("颜值",SHOW_TYPE_ROOM_YANZHI));
+        list.add(new DouyuHeadBean("颜值"));
         list.add(new DouyuYanzhiBean("Cherry宛夕","4.1万","北京市"));
         list.add(new DouyuYanzhiBean("Cherry宛夕","4.1万","北京市"));
         list.add(new DouyuYanzhiBean("Cherry宛夕","4.1万","北京市"));
         list.add(new DouyuYanzhiBean("Cherry宛夕","4.1万","北京市"));
         dataLists.add(list);
         list = new ArrayList<>();
-        list.add(new DouyuHeadBean("英雄联盟",SHOW_TYPE_ROOM));
+        list.add(new DouyuHeadBean("英雄联盟"));
         list.add(new DouyuRoomBean("凉风有兴","斗鱼第一亚索","8万"));
         list.add(new DouyuRoomBean("凉风有兴","斗鱼第一亚索","8万"));
         list.add(new DouyuRoomBean("凉风有兴","斗鱼第一亚索","8万"));
         list.add(new DouyuRoomBean("凉风有兴","斗鱼第一亚索","8万"));
         dataLists.add(list);
         list = new ArrayList<>();
-        list.add(new DouyuHeadBean("魔兽世界",SHOW_TYPE_ROOM));
+        list.add(new DouyuHeadBean("魔兽世界"));
         list.add(new DouyuRoomBean("文艺冉","七煌|文艺冉 M勇气试炼","2113"));
         list.add(new DouyuRoomBean("文艺冉","七煌|文艺冉 M勇气试炼","2113"));
         list.add(new DouyuRoomBean("文艺冉","七煌|文艺冉 M勇气试炼","2113"));
         list.add(new DouyuRoomBean("文艺冉","七煌|文艺冉 M勇气试炼","2113"));
         dataLists.add(list);
         list = new ArrayList<>();
-        list.add(new DouyuHeadBean("DOTA2",SHOW_TYPE_ROOM));
+        list.add(new DouyuHeadBean("DOTA2"));
         list.add(new DouyuRoomBean("战术大师rubick","[战术大师] CDEC大师","4550"));
         list.add(new DouyuRoomBean("战术大师rubick","[战术大师] CDEC大师","4550"));
         list.add(new DouyuRoomBean("战术大师rubick","[战术大师] CDEC大师","4550"));
         list.add(new DouyuRoomBean("战术大师rubick","[战术大师] CDEC大师","4550"));
         dataLists.add(list);
         list = new ArrayList<>();
-        list.add(new DouyuHeadBean("热门作者",SHOW_TYPE_HOT_AUTHOR));
+        list.add(new DouyuHeadBean("热门作者"));
         list.add(new DouyuHotAuthorBean("萝菽菽_acfun","72","9237"));
         list.add(new DouyuHotAuthorBean("鱼小碗","30","437"));
         dataLists.add(list);
@@ -139,10 +137,10 @@ public class DouyuFragment extends BaseFragment  implements SLTableViewDataSourc
         int section = indexPath.getSection();
         int row = indexPath.getRow();
         if (row == 0) return CELL_TYPE_HEAD;
-        DouyuHeadBean douyuHead = (DouyuHeadBean) dataLists.get(section).get(0); // head
-        if (douyuHead.getType() == SHOW_TYPE_ROOM) return CELL_TYPE_ROOM;
-        if (douyuHead.getType() == SHOW_TYPE_HOT_AUTHOR) return CELL_TYPE_HOT_AUTHOR;
-        if (douyuHead.getType() == SHOW_TYPE_ROOM_YANZHI) return CELL_TYPE_ROOM_YANZHI;
+        DouyuBaseBean baseBean = (DouyuBaseBean) dataLists.get(section).get(row); // head
+        if (baseBean.getType() == DouyuType.TYPE_ROOM) return CELL_TYPE_ROOM;
+        if (baseBean.getType() == DouyuType.TYPE_HOT_AUTHOR) return CELL_TYPE_HOT_AUTHOR;
+        if (baseBean.getType() == DouyuType.TYPE_ROOM_YANZHI) return CELL_TYPE_ROOM_YANZHI;
         return 0;
     }
 
@@ -176,27 +174,28 @@ public class DouyuFragment extends BaseFragment  implements SLTableViewDataSourc
     public void onBindCell(SLTableView tableView, SLTableViewCell cell, SLIndexPath indexPath, int type) {
         int section = indexPath.getSection();
         int row = indexPath.getRow();
-        DouyuHeadBean douyuHead = (DouyuHeadBean) dataLists.get(section).get(0); // head
-        switch (type){
-            case CELL_TYPE_HEAD:
+        DouyuBaseBean baseBean = (DouyuBaseBean) dataLists.get(section).get(row); // head
+        switch (baseBean.getType()){
+            case TYPE_HEAD:
                 DouyuHeadCell douyuHeadCell = (DouyuHeadCell) cell;
+                DouyuHeadBean douyuHead = (DouyuHeadBean) baseBean;
                 douyuHeadCell.cell_head_title_text.setText(douyuHead.getTitle());
-                if (douyuHead.getType() == SHOW_TYPE_HOT_AUTHOR){//热门作者 没有更多选项
+                if (douyuHead.getType() == DouyuType.TYPE_HOT_AUTHOR){//热门作者 没有更多选项
                     douyuHeadCell.cell_head_more_layout.setVisibility(View.GONE);
                 }else{
                     douyuHeadCell.cell_head_more_layout.setVisibility(View.VISIBLE);
                     douyuHeadCell.bindCellViewClick(douyuHeadCell.cell_head_more_layout,this,type);
                 }
                 break;
-            case CELL_TYPE_ROOM:
+            case TYPE_ROOM:
                 DouyuRoomCell roomCell = (DouyuRoomCell) cell;
-                DouyuRoomBean roomBean = (DouyuRoomBean) dataLists.get(section).get(row);
+                DouyuRoomBean roomBean = (DouyuRoomBean) baseBean;
                 roomCell.room_number_text.setText(roomBean.getRoomNumber());
                 roomCell.room_owner_text.setText(roomBean.getRoomOwner());
                 roomCell.room_title_text.setText(roomBean.getRoomTitle());
                 roomCell.bindCellViewClick(roomCell.room_layout,this,(Integer)type);
                 break;
-            case CELL_TYPE_HOT_AUTHOR:
+            case TYPE_HOT_AUTHOR:
                 DouyuHotAuthorCell authorCell = (DouyuHotAuthorCell) cell;
                 DouyuHotAuthorBean authorBean = (DouyuHotAuthorBean) dataLists.get(section).get(row);
                 authorCell.hot_author_name_text.setText(authorBean.getAuthorName());
@@ -205,9 +204,9 @@ public class DouyuFragment extends BaseFragment  implements SLTableViewDataSourc
 
                 authorCell.bindCellViewClick(authorCell.room_layout,this,(Integer)type);
                 break;
-            case CELL_TYPE_ROOM_YANZHI:
+            case TYPE_ROOM_YANZHI:
                 DouyuYanzhiCell yanzhiCell = (DouyuYanzhiCell) cell;
-                DouyuYanzhiBean yanzhiBean = (DouyuYanzhiBean) dataLists.get(section).get(row);
+                DouyuYanzhiBean yanzhiBean = (DouyuYanzhiBean) baseBean;
                 yanzhiCell.bindCellViewClick(yanzhiCell.room_layout,this,(Integer)type);
                 yanzhiCell.room_owner_text.setText(yanzhiBean.getRoomOwner());
                 yanzhiCell.room_number_text.setText(yanzhiBean.getRoomNumber());
@@ -243,8 +242,8 @@ public class DouyuFragment extends BaseFragment  implements SLTableViewDataSourc
         int section = indexPath.getSection();
         int row = indexPath.getRow();
         if (row == 0) return  2;
-        DouyuHeadBean douyuHead = (DouyuHeadBean) dataLists.get(section).get(0); // head
-        if (douyuHead.getType() == SHOW_TYPE_HOT_AUTHOR){
+        DouyuBaseBean baseBean = (DouyuBaseBean) dataLists.get(section).get(row); // head
+        if (baseBean.getType() == DouyuType.TYPE_HOT_AUTHOR){
             return 2;
         }
         return 1;
@@ -254,8 +253,11 @@ public class DouyuFragment extends BaseFragment  implements SLTableViewDataSourc
     public void getItemOffsets(Rect outRect, SLIndexPath indexPath) {
         int section = indexPath.getSection();
         int row = indexPath.getRow();
-        DouyuHeadBean douyuHead = (DouyuHeadBean) dataLists.get(section).get(0); // head
-        if (douyuHead.getType() == SHOW_TYPE_HOT_AUTHOR){
+        DouyuBaseBean baseBean = (DouyuBaseBean) dataLists.get(section).get(row); // head
+        if (baseBean.getType() == DouyuType.TYPE_HOT_AUTHOR){
+            return;
+        }
+        if (baseBean.getType() == DouyuType.TYPE_HEAD){
             return;
         }
         if (row >0 && row % 2 == 1){
