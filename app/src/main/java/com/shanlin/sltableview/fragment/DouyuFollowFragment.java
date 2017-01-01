@@ -69,7 +69,6 @@ public class DouyuFollowFragment extends DouyuBaseFragment {
     //SLTableViewLayoutManagerExpand
     @Override
     public int gridSpanSizeOfIndexPath(SLIndexPath indexPath) {
-
         return 1;
     }
 
@@ -77,7 +76,6 @@ public class DouyuFollowFragment extends DouyuBaseFragment {
     public void getItemOffsets(Rect outRect, SLIndexPath indexPath) {
         int section = indexPath.getSection();
         int row = indexPath.getRow();
-
         if (row % 2 == 0){
             outRect.left = table_padding;
             outRect.right = table_padding_s2;

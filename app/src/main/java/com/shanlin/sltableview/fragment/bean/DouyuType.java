@@ -10,20 +10,20 @@ public enum DouyuType {
     TYPE_HOT_AUTHOR(2,"热门作者类型"),
     TYPE_ROOM_YANZHI(3,"颜值类型")
     ;
-    int type;
+    int cellType;
     String desc;
 
-    DouyuType(int type, String desc) {
-        this.type = type;
+    DouyuType(int cellType, String desc) {
+        this.cellType = cellType;
         this.desc = desc;
     }
 
-    public int getType() {
-        return type;
+    public int getCellType() {
+        return cellType;
     }
 
-    public DouyuType setType(int type) {
-        this.type = type;
+    public DouyuType setCellType(int cellType) {
+        this.cellType = cellType;
         return this;
     }
 
@@ -34,5 +34,17 @@ public enum DouyuType {
     public DouyuType setDesc(String desc) {
         this.desc = desc;
         return this;
+    }
+
+    public static DouyuType typeOfCellType(int cellType){
+        DouyuType type = null;
+        DouyuType[] types = values();
+        for (DouyuType douyuType : types) {
+            if (douyuType.getCellType() == cellType){
+                type = douyuType;
+                break;
+            }
+        }
+        return type;
     }
 }

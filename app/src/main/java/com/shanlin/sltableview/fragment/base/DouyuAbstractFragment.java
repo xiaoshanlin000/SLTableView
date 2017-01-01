@@ -34,14 +34,10 @@ import java.util.ArrayList;
  */
 
 public abstract  class DouyuAbstractFragment extends BaseFragment  implements SLTableViewDataSource,
-        SLTableViewDataSourcePlus,SLTableViewLayoutManagerExpand,SLTableViewCell.SLCellViewClickListener{
-
-
-    protected static final int CELL_TYPE_HEAD = 0;
-    protected static final int CELL_TYPE_ROOM = 1;
-    protected static final int CELL_TYPE_HOT_AUTHOR = 2;
-    protected static final int CELL_TYPE_ROOM_YANZHI = 3;
-
+        SLTableViewDataSourcePlus,
+        SLTableViewLayoutManagerExpand,
+        SLTableViewCell.SLCellViewClickListener
+{
 
     protected   int table_padding ;
     protected   int table_padding_s2 ;
@@ -72,31 +68,28 @@ public abstract  class DouyuAbstractFragment extends BaseFragment  implements SL
         int section = indexPath.getSection();
         int row = indexPath.getRow();
         DouyuBaseBean baseBean =  dataLists.get(section).get(row);
-        if (baseBean.getType() == DouyuType.TYPE_HEAD) return CELL_TYPE_HEAD;
-        if (baseBean.getType() == DouyuType.TYPE_ROOM) return CELL_TYPE_ROOM;
-        if (baseBean.getType() == DouyuType.TYPE_HOT_AUTHOR) return CELL_TYPE_HOT_AUTHOR;
-        if (baseBean.getType() == DouyuType.TYPE_ROOM_YANZHI) return CELL_TYPE_ROOM_YANZHI;
-        return 0;
+        return baseBean.getType().getCellType();
     }
 
     @Override
     public SLTableViewCell cellForType(SLTableView tableView, ViewGroup parent, int type) {
         SLTableViewCell cell = null;
         View rootView;
-        switch (type){
-            case CELL_TYPE_HEAD:
+        DouyuType douyuType = DouyuType.typeOfCellType(type);
+        switch (douyuType){
+            case TYPE_HEAD:
                 rootView = inflater.inflate(R.layout.cell_douyu_head,parent,false);
                 cell = new DouyuHeadCell(rootView);
                 break;
-            case CELL_TYPE_ROOM:
+            case TYPE_ROOM:
                 rootView = inflater.inflate(R.layout.cell_douyu_room,parent,false);
                 cell = new DouyuRoomCell(rootView);
                 break;
-            case CELL_TYPE_HOT_AUTHOR:
+            case TYPE_HOT_AUTHOR:
                 rootView = inflater.inflate(R.layout.cell_douyu_hot_author,parent,false);
                 cell = new DouyuHotAuthorCell(rootView);
                 break;
-            case CELL_TYPE_ROOM_YANZHI:
+            case TYPE_ROOM_YANZHI:
                 rootView = inflater.inflate(R.layout.cell_douyu_yanzhi,parent,false);
                 cell = new DouyuYanzhiCell(rootView);
                 break;
