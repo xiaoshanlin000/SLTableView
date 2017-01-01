@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.shanlin.sltableview.fragment.DefaultFragment;
+import com.shanlin.sltableview.fragment.DouyuFollowFragment;
 import com.shanlin.sltableview.fragment.DouyuFragment;
 import com.shanlin.sltableview.fragment.GroupHeaderFragment;
 import com.shanlin.sltableview.fragment.GroupStickyHeaderFragment;
@@ -40,12 +41,14 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return new DouyuFragment();
                 case 1:
-                    return new DefaultFragment();
+                    return new DouyuFollowFragment();
                 case 2:
-                    return new StickyHeaderFragment();
+                    return new DefaultFragment();
                 case 3:
-                    return new GroupHeaderFragment();
+                    return new StickyHeaderFragment();
                 case 4:
+                    return new GroupHeaderFragment();
+                case 5:
                     return new GroupStickyHeaderFragment();
                 default:
                     return null;
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 5;
+            return 6;
         }
 
         @Override
@@ -63,13 +66,15 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return "DouyuDemo";
                 case 1:
+                    return "DouyuFollow";
+                case 2:
                     return "DefaultHeader";
 
-                case 2:
-                    return "StickyHeader";
                 case 3:
-                    return "GroupHeader";
+                    return "StickyHeader";
                 case 4:
+                    return "GroupHeader";
+                case 5:
                     return "GroupStickyHeader";
 
                 default:

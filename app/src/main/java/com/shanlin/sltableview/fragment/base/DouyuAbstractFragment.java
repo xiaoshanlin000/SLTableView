@@ -1,8 +1,11 @@
 package com.shanlin.sltableview.fragment.base;
 
 import android.graphics.Rect;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.shanlin.library.sltableview.SLIndexPath;
 import com.shanlin.library.sltableview.SLTableView;
@@ -40,7 +43,18 @@ public abstract  class DouyuAbstractFragment extends BaseFragment  implements SL
     protected static final int CELL_TYPE_ROOM_YANZHI = 3;
 
 
+    protected   int table_padding ;
+    protected   int table_padding_s2 ;
+
+
     protected ArrayList<ArrayList<DouyuBaseBean>> dataLists = new ArrayList<>();
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        table_padding = context.getResources().getDimensionPixelSize(R.dimen.cell_padding);
+        table_padding_s2 = context.getResources().getDimensionPixelSize(R.dimen.cell_padding_s2);
+    }
 
     //SLTableViewDataSource
     @Override
@@ -57,8 +71,8 @@ public abstract  class DouyuAbstractFragment extends BaseFragment  implements SL
     public int typeOfIndexPath(SLTableView tableView, SLIndexPath indexPath) {
         int section = indexPath.getSection();
         int row = indexPath.getRow();
-        if (row == 0) return CELL_TYPE_HEAD;
-        DouyuBaseBean baseBean =  dataLists.get(section).get(row); // head
+        DouyuBaseBean baseBean =  dataLists.get(section).get(row);
+        if (baseBean.getType() == DouyuType.TYPE_HEAD) return CELL_TYPE_HEAD;
         if (baseBean.getType() == DouyuType.TYPE_ROOM) return CELL_TYPE_ROOM;
         if (baseBean.getType() == DouyuType.TYPE_HOT_AUTHOR) return CELL_TYPE_HOT_AUTHOR;
         if (baseBean.getType() == DouyuType.TYPE_ROOM_YANZHI) return CELL_TYPE_ROOM_YANZHI;
@@ -95,7 +109,7 @@ public abstract  class DouyuAbstractFragment extends BaseFragment  implements SL
     public void onBindCell(SLTableView tableView, SLTableViewCell cell, SLIndexPath indexPath, int type) {
         int section = indexPath.getSection();
         int row = indexPath.getRow();
-        DouyuBaseBean baseBean =  dataLists.get(section).get(row); // head
+        DouyuBaseBean baseBean =  dataLists.get(section).get(row); 
         switch (baseBean.getType()){
             case TYPE_HEAD:
                 DouyuHeadCell douyuHeadCell = (DouyuHeadCell) cell;
@@ -137,11 +151,9 @@ public abstract  class DouyuAbstractFragment extends BaseFragment  implements SL
         }
     }
 
-    @Override
-    public void onCellViewClick(View view, SLIndexPath indexPath, Object userData) {
 
-    }
 
+    //SLTableViewDataSourcePlus
     @Override
     public String titleForHeaderInSection(SLTableView tableView, int section) {
         return null;
@@ -154,12 +166,17 @@ public abstract  class DouyuAbstractFragment extends BaseFragment  implements SL
 
     @Override
     public boolean hiddenHeaderInSection(SLTableView tableView, int section) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean hiddenFooterInSection(SLTableView tableView, int section) {
-        return false;
+        return true;
+    }
+
+    @Override
+    public void getItemOffsets(Rect outRect, SLIndexPath indexPath) {
+
     }
 
     @Override
@@ -167,8 +184,32 @@ public abstract  class DouyuAbstractFragment extends BaseFragment  implements SL
         return 0;
     }
 
+    //SLCellViewClickListener
     @Override
-    public void getItemOffsets(Rect outRect, SLIndexPath indexPath) {
+    public void onCellViewClick(View view, SLIndexPath indexPath, Object userData) {
+        int section = indexPath.getSection();
+        int row = indexPath.getRow();
+        String message = "";
+        DouyuBaseBean baseBean = dataLists.get(section).get(row);
+        switch (baseBean.getType()){
+            case TYPE_HEAD:
+                DouyuHeadBean douyuHead = (DouyuHeadBean) baseBean;
+                message = String.format("点击<%s>更多,类型:<%s>",douyuHead.getTitle(),baseBean.getType());
+                break;
+            case TYPE_ROOM:
+                DouyuRoomBean roomBean = (DouyuRoomBean) baseBean;
+                message = String.format("点击<%s>的房间,类型:<%s>",roomBean.getRoomOwner(),baseBean.getType());
+                break;
+            case TYPE_HOT_AUTHOR:
+                DouyuHotAuthorBean authorBean = (DouyuHotAuthorBean)baseBean;
+                message = String.format("点击<%s>的房间,类型:<%s>",authorBean.getAuthorName(),baseBean.getType());
+                break;
+            case TYPE_ROOM_YANZHI:
+                DouyuYanzhiBean yanzhiBean = (DouyuYanzhiBean)baseBean;
+                message = String.format("点击<%s>的房间,类型:<%s>",yanzhiBean.getRoomOwner(),baseBean.getType());
+                break;
 
+        }
+        Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
     }
 }
