@@ -4,11 +4,5 @@
     android:layout_height="match_parent"
     tools:context="com.shanlin.sltableview.fragment.DefaultFragment">
 
-    <LinearLayout
-        android:id="@+id/tableRootLayout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </LinearLayout>
+    <include layout="@layout/table_root"/>
 </FrameLayout>

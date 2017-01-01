@@ -5,12 +5,6 @@
     android:background="@color/color_background"
     tools:context="com.shanlin.sltableview.fragment.DouyuFragment">
 
-    <LinearLayout
-        android:id="@+id/tableRootLayout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </LinearLayout>
+    <include layout="@layout/table_root"/>
 
 </FrameLayout>
