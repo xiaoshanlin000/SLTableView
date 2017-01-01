@@ -184,7 +184,7 @@ public class DouyuFragment extends BaseFragment  implements SLTableViewDataSourc
                     douyuHeadCell.cell_head_more_layout.setVisibility(View.GONE);
                 }else{
                     douyuHeadCell.cell_head_more_layout.setVisibility(View.VISIBLE);
-                    douyuHeadCell.bindCellViewClick(douyuHeadCell.cell_head_more_layout,this,type);
+                    douyuHeadCell.bindCellViewClick(douyuHeadCell.cell_head_more_layout,this);
                 }
                 break;
             case TYPE_ROOM:
@@ -193,7 +193,7 @@ public class DouyuFragment extends BaseFragment  implements SLTableViewDataSourc
                 roomCell.room_number_text.setText(roomBean.getRoomNumber());
                 roomCell.room_owner_text.setText(roomBean.getRoomOwner());
                 roomCell.room_title_text.setText(roomBean.getRoomTitle());
-                roomCell.bindCellViewClick(roomCell.room_layout,this,(Integer)type);
+                roomCell.bindCellViewClick(roomCell.room_layout,this);
                 break;
             case TYPE_HOT_AUTHOR:
                 DouyuHotAuthorCell authorCell = (DouyuHotAuthorCell) cell;
@@ -202,12 +202,12 @@ public class DouyuFragment extends BaseFragment  implements SLTableViewDataSourc
                 authorCell.hot_author_subscribe_number_text.setText(String.format("订阅数:%s",authorBean.getSubscribeNumber()));
                 authorCell.hot_author_video_number_text.setText(String.format("视屏数:%s",authorBean.getVideoNumber()));
 
-                authorCell.bindCellViewClick(authorCell.room_layout,this,(Integer)type);
+                authorCell.bindCellViewClick(authorCell.room_layout,this);
                 break;
             case TYPE_ROOM_YANZHI:
                 DouyuYanzhiCell yanzhiCell = (DouyuYanzhiCell) cell;
                 DouyuYanzhiBean yanzhiBean = (DouyuYanzhiBean) baseBean;
-                yanzhiCell.bindCellViewClick(yanzhiCell.room_layout,this,(Integer)type);
+                yanzhiCell.bindCellViewClick(yanzhiCell.room_layout,this);
                 yanzhiCell.room_owner_text.setText(yanzhiBean.getRoomOwner());
                 yanzhiCell.room_number_text.setText(yanzhiBean.getRoomNumber());
                 yanzhiCell.room_location.setText(yanzhiBean.getLocation());
@@ -279,24 +279,24 @@ public class DouyuFragment extends BaseFragment  implements SLTableViewDataSourc
     public void onCellViewClick(View view, SLIndexPath indexPath, Object userData) {
         int section = indexPath.getSection();
         int row = indexPath.getRow();
-        Integer type = (Integer) userData;
         String message = "";
-        DouyuHeadBean douyuHead = (DouyuHeadBean) dataLists.get(section).get(0);
-        switch (type){
-            case CELL_TYPE_HEAD:
-                message = String.format("点击<%s>更多,类型:<%d>",douyuHead.getTitle(),douyuHead.getType());
+        DouyuBaseBean baseBean = (DouyuBaseBean) dataLists.get(section).get(row);
+        switch (baseBean.getType()){
+            case TYPE_HEAD:
+                DouyuHeadBean douyuHead = (DouyuHeadBean) baseBean;
+                message = String.format("点击<%s>更多,类型:<%s>",douyuHead.getTitle(),baseBean.getType());
                 break;
-            case CELL_TYPE_ROOM:
-                DouyuRoomBean roomBean = (DouyuRoomBean) dataLists.get(section).get(row);
-                message = String.format("点击<%s>的房间,类型:<%d>",roomBean.getRoomOwner(),douyuHead.getType());
+            case TYPE_ROOM:
+                DouyuRoomBean roomBean = (DouyuRoomBean) baseBean;
+                message = String.format("点击<%s>的房间,类型:<%s>",roomBean.getRoomOwner(),baseBean.getType());
                 break;
-            case CELL_TYPE_HOT_AUTHOR:
-                DouyuHotAuthorBean authorBean = (DouyuHotAuthorBean) dataLists.get(section).get(row);
-                message = String.format("点击<%s>的房间,类型:<%d>",authorBean.getAuthorName(),douyuHead.getType());
+            case TYPE_HOT_AUTHOR:
+                DouyuHotAuthorBean authorBean = (DouyuHotAuthorBean)baseBean;
+                message = String.format("点击<%s>的房间,类型:<%s>",authorBean.getAuthorName(),baseBean.getType());
                 break;
-            case CELL_TYPE_ROOM_YANZHI:
-                DouyuYanzhiBean yanzhiBean = (DouyuYanzhiBean) dataLists.get(section).get(row);
-                message = String.format("点击<%s>的房间,类型:<%d>",yanzhiBean.getRoomOwner(),douyuHead.getType());
+            case TYPE_ROOM_YANZHI:
+                DouyuYanzhiBean yanzhiBean = (DouyuYanzhiBean)baseBean;
+                message = String.format("点击<%s>的房间,类型:<%s>",yanzhiBean.getRoomOwner(),baseBean.getType());
                 break;
 
         }
