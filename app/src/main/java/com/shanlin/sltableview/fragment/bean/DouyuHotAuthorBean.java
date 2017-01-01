@@ -13,11 +13,11 @@ public class DouyuHotAuthorBean extends DouyuBaseBean {
     private String subscribeNumber;
 
     public DouyuHotAuthorBean() {
-        super(DouyuType.TYPE_HOT_AUTHOR);
+        super(DouyuType.TYPE_HOT_AUTHOR,2);
     }
 
     public DouyuHotAuthorBean(String authorName, String videoNumber, String subscribeNumber) {
-        super(DouyuType.TYPE_HOT_AUTHOR);
+        super(DouyuType.TYPE_HOT_AUTHOR,2);
         this.authorName = authorName;
         this.videoNumber = videoNumber;
         this.subscribeNumber = subscribeNumber;

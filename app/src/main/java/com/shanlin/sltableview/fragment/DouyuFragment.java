@@ -92,18 +92,6 @@ public class DouyuFragment extends DouyuBaseFragment {
 
     //SLTableViewLayoutManagerExpand
     @Override
-    public int gridSpanSizeOfIndexPath(SLIndexPath indexPath) {
-        int section = indexPath.getSection();
-        int row = indexPath.getRow();
-        if (row == 0) return  2;
-        DouyuBaseBean baseBean = dataLists.get(section).get(row);
-        if (baseBean.getType() == DouyuType.TYPE_HOT_AUTHOR){
-            return 2;
-        }
-        return 1;
-    }
-
-    @Override
     public void getItemOffsets(Rect outRect, SLIndexPath indexPath) {
         int section = indexPath.getSection();
         int row = indexPath.getRow();

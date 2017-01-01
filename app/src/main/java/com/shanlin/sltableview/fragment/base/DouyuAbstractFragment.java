@@ -125,7 +125,7 @@ public abstract  class DouyuAbstractFragment extends BaseFragment  implements SL
                 break;
             case TYPE_HOT_AUTHOR:
                 DouyuHotAuthorCell authorCell = (DouyuHotAuthorCell) cell;
-                DouyuHotAuthorBean authorBean = (DouyuHotAuthorBean) dataLists.get(section).get(row);
+                DouyuHotAuthorBean authorBean = (DouyuHotAuthorBean) baseBean;
                 authorCell.hot_author_name_text.setText(authorBean.getAuthorName());
                 authorCell.hot_author_subscribe_number_text.setText(String.format("订阅数:%s",authorBean.getSubscribeNumber()));
                 authorCell.hot_author_video_number_text.setText(String.format("视屏数:%s",authorBean.getVideoNumber()));
@@ -174,7 +174,10 @@ public abstract  class DouyuAbstractFragment extends BaseFragment  implements SL
 
     @Override
     public int gridSpanSizeOfIndexPath(SLIndexPath indexPath) {
-        return 0;
+        int section = indexPath.getSection();
+        int row = indexPath.getRow();
+        DouyuBaseBean baseBean =  dataLists.get(section).get(row);
+        return baseBean.getSpanSize();
     }
 
     //SLCellViewClickListener

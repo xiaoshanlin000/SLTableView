@@ -13,11 +13,11 @@ public class DouyuHeadBean extends DouyuBaseBean{
     private String more;
 
     public DouyuHeadBean() {
-        super(DouyuType.TYPE_HEAD);
+        super(DouyuType.TYPE_HEAD,2);
     }
 
     public DouyuHeadBean(String title) {
-        super(DouyuType.TYPE_HEAD);
+        super(DouyuType.TYPE_HEAD,2);
         this.title = title;
     }
 

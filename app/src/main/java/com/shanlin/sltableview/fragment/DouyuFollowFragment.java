@@ -68,11 +68,6 @@ public class DouyuFollowFragment extends DouyuBaseFragment {
 
     //SLTableViewLayoutManagerExpand
     @Override
-    public int gridSpanSizeOfIndexPath(SLIndexPath indexPath) {
-        return 1;
-    }
-
-    @Override
     public void getItemOffsets(Rect outRect, SLIndexPath indexPath) {
         int section = indexPath.getSection();
         int row = indexPath.getRow();
