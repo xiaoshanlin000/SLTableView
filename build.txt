@@ -1,0 +1,514 @@
+To honour the JVM settings for this build a new JVM will be forked. Please consider using the daemon: https://docs.gradle.org/2.14.1/userguide/gradle_daemon.html.
+Starting daemon process: workingDir = /Users/apple/.gradle/daemon/2.14.1, daemonArgs: [/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/bin/java, -Xmx1536m, -Dfile.encoding=UTF-8, -Duser.country=CN, -Duser.language=zh, -Duser.variant, -cp, /Users/apple/.gradle/wrapper/dists/gradle-2.14.1-all/8bnwg5hd3w55iofp58khbp6yv/gradle-2.14.1/lib/gradle-launcher-2.14.1.jar, org.gradle.launcher.daemon.bootstrap.GradleDaemon, 2.14.1]
+Starting process 'Gradle build daemon'. Working directory: /Users/apple/.gradle/daemon/2.14.1 Command: /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/bin/java -Xmx1536m -Dfile.encoding=UTF-8 -Duser.country=CN -Duser.language=zh -Duser.variant -cp /Users/apple/.gradle/wrapper/dists/gradle-2.14.1-all/8bnwg5hd3w55iofp58khbp6yv/gradle-2.14.1/lib/gradle-launcher-2.14.1.jar org.gradle.launcher.daemon.bootstrap.GradleDaemon 2.14.1
+Successfully started process 'Gradle build daemon'
+An attempt to start the daemon took 0.864 secs.
+Connected to daemon DaemonInfo{pid=24847, address=[813e822f-4e2d-4ebf-a3b9-6ee8e2918a81 port:60102, addresses:[/0:0:0:0:0:0:0:1, /127.0.0.1]], idle=false, lastBusy=1487063311954, context=DefaultDaemonContext[uid=f1b98a86-4560-48a4-bd67-487296af30bb,javaHome=/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home,daemonRegistryDir=/Users/apple/.gradle/daemon,pid=24847,idleTimeout=120000,daemonOpts=-Xmx1536m,-Dfile.encoding=UTF-8,-Duser.country=CN,-Duser.language=zh,-Duser.variant]}. Dispatching request BuildAndStop{id=4cfe385a-7729-44fa-8035-734e24ab9ca1.1, currentDir=/Users/apple/github/SLTableView}.
+Received result org.gradle.launcher.daemon.protocol.BuildStarted@7e19ebf0 from daemon DaemonInfo{pid=24847, address=[813e822f-4e2d-4ebf-a3b9-6ee8e2918a81 port:60102, addresses:[/0:0:0:0:0:0:0:1, /127.0.0.1]], idle=false, lastBusy=1487063311954, context=DefaultDaemonContext[uid=f1b98a86-4560-48a4-bd67-487296af30bb,javaHome=/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home,daemonRegistryDir=/Users/apple/.gradle/daemon,pid=24847,idleTimeout=120000,daemonOpts=-Xmx1536m,-Dfile.encoding=UTF-8,-Duser.country=CN,-Duser.language=zh,-Duser.variant]} (build should be starting).
+The client will now receive all logging from the daemon (pid: 24847). The daemon log file: /Users/apple/.gradle/daemon/2.14.1/daemon-24847.out.log
+Executing build with daemon context: DefaultDaemonContext[uid=f1b98a86-4560-48a4-bd67-487296af30bb,javaHome=/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home,daemonRegistryDir=/Users/apple/.gradle/daemon,pid=24847,idleTimeout=120000,daemonOpts=-Xmx1536m,-Dfile.encoding=UTF-8,-Duser.country=CN,-Duser.language=zh,-Duser.variant]
+Starting Build
+Settings evaluated using settings file '/Users/apple/github/SLTableView/settings.gradle'.
+Projects loaded. Root project using build file '/Users/apple/github/SLTableView/build.gradle'.
+Included projects: [root project 'SLTableView', project ':app', project ':library']
+Evaluating root project 'SLTableView' using build file '/Users/apple/github/SLTableView/build.gradle'.
+Evaluating project ':app' using build file '/Users/apple/github/SLTableView/app/build.gradle'.
+Creating configuration compile
+Creating configuration apk
+Creating configuration provided
+Creating configuration wearApp
+Creating configuration annotationProcessor
+Creating configuration androidTestCompile
+Creating configuration androidTestApk
+Creating configuration androidTestProvided
+Creating configuration androidTestWearApp
+Creating configuration androidTestAnnotationProcessor
+Creating configuration testCompile
+Creating configuration testApk
+Creating configuration testProvided
+Creating configuration testWearApp
+Creating configuration testAnnotationProcessor
+Creating configuration debugCompile
+Creating configuration debugApk
+Creating configuration debugProvided
+Creating configuration debugWearApp
+Creating configuration debugAnnotationProcessor
+Creating configuration testDebugCompile
+Creating configuration testDebugApk
+Creating configuration testDebugProvided
+Creating configuration testDebugWearApp
+Creating configuration testDebugAnnotationProcessor
+Creating configuration releaseCompile
+Creating configuration releaseApk
+Creating configuration releaseProvided
+Creating configuration releaseWearApp
+Creating configuration releaseAnnotationProcessor
+Creating configuration testReleaseCompile
+Creating configuration testReleaseApk
+Creating configuration testReleaseProvided
+Creating configuration testReleaseWearApp
+Creating configuration testReleaseAnnotationProcessor
+Parsing the SDK, no caching allowed
+Parsing /Users/apple/Android/sdk/add-ons/addon-google_apis-google-24/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/19.1.0/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/21.1.1/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/21.1.2/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/22.0.1/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/23.0.1/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/23.0.2/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/23.0.3/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/24.0.1/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/24.0.2/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/24.0.3/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/25.0.0/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/25.0.1/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/25.0.2/package.xml
+Parsing /Users/apple/Android/sdk/cmake/3.6.3155560/package.xml
+Parsing /Users/apple/Android/sdk/extras/android/gapid/1/package.xml
+Parsing /Users/apple/Android/sdk/extras/android/gapid/3/package.xml
+Parsing /Users/apple/Android/sdk/extras/android/m2repository/package.xml
+Parsing /Users/apple/Android/sdk/extras/android/support/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/auto/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/google_play_services/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/m2repository/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/market_apk_expansion/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/market_licensing/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/play_billing/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/simulators/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/webdriver/package.xml
+Parsing /Users/apple/Android/sdk/extras/intel/Hardware_Accelerated_Execution_Manager/package.xml
+Parsing /Users/apple/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.0-beta4/package.xml
+Parsing /Users/apple/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout/1.0.0-beta4/package.xml
+Parsing /Users/apple/Android/sdk/lldb/2.2/package.xml
+Parsing /Users/apple/Android/sdk/ndk-bundle/package.xml
+Parsing /Users/apple/Android/sdk/patcher/v1/package.xml
+Parsing /Users/apple/Android/sdk/patcher/v4/package.xml
+Parsing /Users/apple/Android/sdk/platform-tools/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-10/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-15/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-16/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-17/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-18/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-19/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-20/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-21/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-22/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-23/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-24/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-25/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-8/package.xml
+Parsing /Users/apple/Android/sdk/samples/android-21/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-15/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-16/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-17/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-18/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-19/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-20/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-21/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-22/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-23/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-24/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-25/package.xml
+Parsing /Users/apple/Android/sdk/system-images/android-25/google_apis/x86_64/package.xml
+Parsing /Users/apple/Android/sdk/tools/package.xml
+Parsing /Users/apple/Android/sdk/add-ons/addon-google_apis-google-24/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/19.1.0/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/21.1.1/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/21.1.2/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/22.0.1/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/23.0.1/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/23.0.2/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/23.0.3/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/24.0.1/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/24.0.2/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/24.0.3/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/25.0.0/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/25.0.1/package.xml
+Parsing /Users/apple/Android/sdk/build-tools/25.0.2/package.xml
+Parsing /Users/apple/Android/sdk/cmake/3.6.3155560/package.xml
+Parsing /Users/apple/Android/sdk/extras/android/gapid/1/package.xml
+Parsing /Users/apple/Android/sdk/extras/android/gapid/3/package.xml
+Parsing /Users/apple/Android/sdk/extras/android/m2repository/package.xml
+Parsing /Users/apple/Android/sdk/extras/android/support/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/auto/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/google_play_services/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/m2repository/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/market_apk_expansion/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/market_licensing/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/play_billing/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/simulators/package.xml
+Parsing /Users/apple/Android/sdk/extras/google/webdriver/package.xml
+Parsing /Users/apple/Android/sdk/extras/intel/Hardware_Accelerated_Execution_Manager/package.xml
+Parsing /Users/apple/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.0-beta4/package.xml
+Parsing /Users/apple/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout/1.0.0-beta4/package.xml
+Parsing /Users/apple/Android/sdk/lldb/2.2/package.xml
+Parsing /Users/apple/Android/sdk/ndk-bundle/package.xml
+Parsing /Users/apple/Android/sdk/patcher/v1/package.xml
+Parsing /Users/apple/Android/sdk/patcher/v4/package.xml
+Parsing /Users/apple/Android/sdk/platform-tools/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-10/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-15/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-16/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-17/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-18/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-19/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-20/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-21/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-22/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-23/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-24/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-25/package.xml
+Parsing /Users/apple/Android/sdk/platforms/android-8/package.xml
+Parsing /Users/apple/Android/sdk/samples/android-21/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-15/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-16/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-17/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-18/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-19/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-20/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-21/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-22/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-23/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-24/package.xml
+Parsing /Users/apple/Android/sdk/sources/android-25/package.xml
+Parsing /Users/apple/Android/sdk/system-images/android-25/google_apis/x86_64/package.xml
+Parsing /Users/apple/Android/sdk/tools/package.xml
+Evaluating project ':library' using build file '/Users/apple/github/SLTableView/library/build.gradle'.
+Creating configuration compile
+Creating configuration publish
+Creating configuration provided
+Creating configuration wearApp
+Creating configuration annotationProcessor
+Creating configuration androidTestCompile
+Creating configuration androidTestPublish
+Creating configuration androidTestProvided
+Creating configuration androidTestWearApp
+Creating configuration androidTestAnnotationProcessor
+Creating configuration testCompile
+Creating configuration testPublish
+Creating configuration testProvided
+Creating configuration testWearApp
+Creating configuration testAnnotationProcessor
+Creating configuration debugCompile
+Creating configuration debugPublish
+Creating configuration debugProvided
+Creating configuration debugWearApp
+Creating configuration debugAnnotationProcessor
+Creating configuration testDebugCompile
+Creating configuration testDebugPublish
+Creating configuration testDebugProvided
+Creating configuration testDebugWearApp
+Creating configuration testDebugAnnotationProcessor
+Creating configuration releaseCompile
+Creating configuration releasePublish
+Creating configuration releaseProvided
+Creating configuration releaseWearApp
+Creating configuration releaseAnnotationProcessor
+Creating configuration testReleaseCompile
+Creating configuration testReleasePublish
+Creating configuration testReleaseProvided
+Creating configuration testReleaseWearApp
+Creating configuration testReleaseAnnotationProcessor
+Parsing the SDK, no caching allowed
+Using incremental javac compilation.
+Incremental java compilation is an incubating feature.
+Not using incremental javac compilation.
+Using incremental javac compilation.
+Not using incremental javac compilation.
+Not using incremental javac compilation.
+Using incremental javac compilation.
+Not using incremental javac compilation.
+Using incremental javac compilation.
+Not using incremental javac compilation.
+Not using incremental javac compilation.
+All projects evaluated.
+Selected primary task 'bintrayUpload' from project :
+Tasks to be executed: [task ':library:preBuild', task ':library:preReleaseBuild', task ':library:checkReleaseManifest', task ':library:preDebugAndroidTestBuild', task ':library:preDebugBuild', task ':library:preDebugUnitTestBuild', task ':library:preReleaseUnitTestBuild', task ':library:prepareComAndroidSupportAnimatedVectorDrawable2511Library', task ':library:prepareComAndroidSupportAppcompatV72511Library', task ':library:prepareComAndroidSupportRecyclerviewV72511Library', task ':library:prepareComAndroidSupportSupportCompat2511Library', task ':library:prepareComAndroidSupportSupportCoreUi2511Library', task ':library:prepareComAndroidSupportSupportCoreUtils2511Library', task ':library:prepareComAndroidSupportSupportFragment2511Library', task ':library:prepareComAndroidSupportSupportMediaCompat2511Library', task ':library:prepareComAndroidSupportSupportV42511Library', task ':library:prepareComAndroidSupportSupportVectorDrawable2511Library', task ':library:prepareReleaseDependencies', task ':library:compileReleaseAidl', task ':library:compileReleaseNdk', task ':library:compileLint', task ':library:copyReleaseLint', task ':library:compileReleaseRenderscript', task ':library:generateReleaseBuildConfig', task ':library:generateReleaseResValues', task ':library:generateReleaseResources', task ':library:mergeReleaseResources', task ':library:processReleaseManifest', task ':library:processReleaseResources', task ':library:generateReleaseSources', task ':library:incrementalReleaseJavaCompilationSafeguard', task ':library:compileReleaseJavaWithJavac', task ':library:extractReleaseAnnotations', task ':library:mergeReleaseShaders', task ':library:compileReleaseShaders', task ':library:generateReleaseAssets', task ':library:mergeReleaseAssets', task ':library:mergeReleaseProguardFiles', task ':library:packageReleaseRenderscript', task ':library:packageReleaseResources', task ':library:processReleaseJavaRes', task ':library:transformResourcesWithMergeJavaResForRelease', task ':library:transformClassesAndResourcesWithSyncLibJarsForRelease', task ':library:mergeReleaseJniLibFolders', task ':library:transformNative_libsWithMergeJniLibsForRelease', task ':library:transformNative_libsWithSyncJniLibsForRelease', task ':library:bundleRelease', task ':library:javadoc', task ':library:javadocJar', task ':library:sourcesJar', task ':library:install', task ':library:bintrayUpload']
+Creating In-memory cache of /Users/apple/github/SLTableView/.gradle/2.14.1/taskArtifacts/fileHashes.bin: MaxSize{639400}
+Creating In-memory cache of /Users/apple/github/SLTableView/.gradle/2.14.1/taskArtifacts/treeSnapshots.bin: MaxSize{31900}
+Creating In-memory cache of /Users/apple/github/SLTableView/.gradle/2.14.1/taskArtifacts/treeSnapshotUsage.bin: MaxSize{31900}
+Creating In-memory cache of /Users/apple/github/SLTableView/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin: MaxSize{15900}
+Creating In-memory cache of /Users/apple/github/SLTableView/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin: MaxSize{15900}
+Creating In-memory cache of /Users/apple/github/SLTableView/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin: MaxSize{3100}
+:library:preBuild (Thread[Daemon worker,5,main]) started.
+:library:preBuild
+Skipping task ':library:preBuild' as it has no actions.
+:library:preBuild UP-TO-DATE
+:library:preBuild (Thread[Daemon worker,5,main]) completed. Took 0.024 secs.
+:library:preReleaseBuild (Thread[Daemon worker,5,main]) started.
+:library:preReleaseBuild
+Skipping task ':library:preReleaseBuild' as it has no actions.
+:library:preReleaseBuild UP-TO-DATE
+:library:preReleaseBuild (Thread[Daemon worker,5,main]) completed. Took 0.001 secs.
+:library:checkReleaseManifest (Thread[Daemon worker,5,main]) started.
+:library:checkReleaseManifest
+Executing task ':library:checkReleaseManifest' (up-to-date check took 0.001 secs) due to:
+  Task has not declared any outputs.
+:library:checkReleaseManifest (Thread[Daemon worker,5,main]) completed. Took 0.005 secs.
+:library:preDebugAndroidTestBuild (Thread[Daemon worker,5,main]) started.
+:library:preDebugAndroidTestBuild
+Skipping task ':library:preDebugAndroidTestBuild' as it has no actions.
+:library:preDebugAndroidTestBuild UP-TO-DATE
+:library:preDebugAndroidTestBuild (Thread[Daemon worker,5,main]) completed. Took 0.005 secs.
+:library:preDebugBuild (Thread[Daemon worker,5,main]) started.
+:library:preDebugBuild
+Skipping task ':library:preDebugBuild' as it has no actions.
+:library:preDebugBuild UP-TO-DATE
+:library:preDebugBuild (Thread[Daemon worker,5,main]) completed. Took 0.002 secs.
+:library:preDebugUnitTestBuild (Thread[Daemon worker,5,main]) started.
+:library:preDebugUnitTestBuild
+Skipping task ':library:preDebugUnitTestBuild' as it has no actions.
+:library:preDebugUnitTestBuild UP-TO-DATE
+:library:preDebugUnitTestBuild (Thread[Daemon worker,5,main]) completed. Took 0.003 secs.
+:library:preReleaseUnitTestBuild (Thread[Daemon worker,5,main]) started.
+:library:preReleaseUnitTestBuild
+Skipping task ':library:preReleaseUnitTestBuild' as it has no actions.
+:library:preReleaseUnitTestBuild UP-TO-DATE
+:library:preReleaseUnitTestBuild (Thread[Daemon worker,5,main]) completed. Took 0.001 secs.
+:library:prepareComAndroidSupportAnimatedVectorDrawable2511Library (Thread[Daemon worker,5,main]) started.
+:library:prepareComAndroidSupportAnimatedVectorDrawable2511Library
+Invalidating in-memory cache of /Users/apple/github/SLTableView/.gradle/2.14.1/taskArtifacts/treeSnapshots.bin
+Invalidating in-memory cache of /Users/apple/github/SLTableView/.gradle/2.14.1/taskArtifacts/fileHashes.bin
+Invalidating in-memory cache of /Users/apple/github/SLTableView/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin
+Invalidating in-memory cache of /Users/apple/github/SLTableView/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin
+Invalidating in-memory cache of /Users/apple/github/SLTableView/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin
+Invalidating in-memory cache of /Users/apple/github/SLTableView/.gradle/2.14.1/taskArtifacts/treeSnapshotUsage.bin
+Skipping task ':library:prepareComAndroidSupportAnimatedVectorDrawable2511Library' as it is up-to-date (took 0.053 secs).
+:library:prepareComAndroidSupportAnimatedVectorDrawable2511Library UP-TO-DATE
+:library:prepareComAndroidSupportAnimatedVectorDrawable2511Library (Thread[Daemon worker,5,main]) completed. Took 0.054 secs.
+:library:prepareComAndroidSupportAppcompatV72511Library (Thread[Daemon worker,5,main]) started.
+:library:prepareComAndroidSupportAppcompatV72511Library
+Skipping task ':library:prepareComAndroidSupportAppcompatV72511Library' as it is up-to-date (took 0.064 secs).
+:library:prepareComAndroidSupportAppcompatV72511Library UP-TO-DATE
+:library:prepareComAndroidSupportAppcompatV72511Library (Thread[Daemon worker,5,main]) completed. Took 0.066 secs.
+:library:prepareComAndroidSupportRecyclerviewV72511Library (Thread[Daemon worker,5,main]) started.
+:library:prepareComAndroidSupportRecyclerviewV72511Library
+Skipping task ':library:prepareComAndroidSupportRecyclerviewV72511Library' as it is up-to-date (took 0.004 secs).
+:library:prepareComAndroidSupportRecyclerviewV72511Library UP-TO-DATE
+:library:prepareComAndroidSupportRecyclerviewV72511Library (Thread[Daemon worker,5,main]) completed. Took 0.005 secs.
+:library:prepareComAndroidSupportSupportCompat2511Library (Thread[Daemon worker,5,main]) started.
+:library:prepareComAndroidSupportSupportCompat2511Library
+Skipping task ':library:prepareComAndroidSupportSupportCompat2511Library' as it is up-to-date (took 0.004 secs).
+:library:prepareComAndroidSupportSupportCompat2511Library UP-TO-DATE
+:library:prepareComAndroidSupportSupportCompat2511Library (Thread[Daemon worker,5,main]) completed. Took 0.005 secs.
+:library:prepareComAndroidSupportSupportCoreUi2511Library (Thread[Daemon worker,5,main]) started.
+:library:prepareComAndroidSupportSupportCoreUi2511Library
+Skipping task ':library:prepareComAndroidSupportSupportCoreUi2511Library' as it is up-to-date (took 0.002 secs).
+:library:prepareComAndroidSupportSupportCoreUi2511Library UP-TO-DATE
+:library:prepareComAndroidSupportSupportCoreUi2511Library (Thread[Daemon worker,5,main]) completed. Took 0.004 secs.
+:library:prepareComAndroidSupportSupportCoreUtils2511Library (Thread[Daemon worker,5,main]) started.
+:library:prepareComAndroidSupportSupportCoreUtils2511Library
+Skipping task ':library:prepareComAndroidSupportSupportCoreUtils2511Library' as it is up-to-date (took 0.002 secs).
+:library:prepareComAndroidSupportSupportCoreUtils2511Library UP-TO-DATE
+:library:prepareComAndroidSupportSupportCoreUtils2511Library (Thread[Daemon worker,5,main]) completed. Took 0.004 secs.
+:library:prepareComAndroidSupportSupportFragment2511Library (Thread[Daemon worker,5,main]) started.
+:library:prepareComAndroidSupportSupportFragment2511Library
+Skipping task ':library:prepareComAndroidSupportSupportFragment2511Library' as it is up-to-date (took 0.004 secs).
+:library:prepareComAndroidSupportSupportFragment2511Library UP-TO-DATE
+:library:prepareComAndroidSupportSupportFragment2511Library (Thread[Daemon worker,5,main]) completed. Took 0.005 secs.
+:library:prepareComAndroidSupportSupportMediaCompat2511Library (Thread[Daemon worker,5,main]) started.
+:library:prepareComAndroidSupportSupportMediaCompat2511Library
+Skipping task ':library:prepareComAndroidSupportSupportMediaCompat2511Library' as it is up-to-date (took 0.003 secs).
+:library:prepareComAndroidSupportSupportMediaCompat2511Library UP-TO-DATE
+:library:prepareComAndroidSupportSupportMediaCompat2511Library (Thread[Daemon worker,5,main]) completed. Took 0.006 secs.
+:library:prepareComAndroidSupportSupportV42511Library (Thread[Daemon worker,5,main]) started.
+:library:prepareComAndroidSupportSupportV42511Library
+Skipping task ':library:prepareComAndroidSupportSupportV42511Library' as it is up-to-date (took 0.002 secs).
+:library:prepareComAndroidSupportSupportV42511Library UP-TO-DATE
+:library:prepareComAndroidSupportSupportV42511Library (Thread[Daemon worker,5,main]) completed. Took 0.003 secs.
+:library:prepareComAndroidSupportSupportVectorDrawable2511Library (Thread[Daemon worker,5,main]) started.
+:library:prepareComAndroidSupportSupportVectorDrawable2511Library
+Skipping task ':library:prepareComAndroidSupportSupportVectorDrawable2511Library' as it is up-to-date (took 0.002 secs).
+:library:prepareComAndroidSupportSupportVectorDrawable2511Library UP-TO-DATE
+:library:prepareComAndroidSupportSupportVectorDrawable2511Library (Thread[Daemon worker,5,main]) completed. Took 0.004 secs.
+:library:prepareReleaseDependencies (Thread[Daemon worker,5,main]) started.
+:library:prepareReleaseDependencies
+Executing task ':library:prepareReleaseDependencies' (up-to-date check took 0.0 secs) due to:
+  Task has not declared any outputs.
+:library:prepareReleaseDependencies (Thread[Daemon worker,5,main]) completed. Took 0.003 secs.
+:library:compileReleaseAidl (Thread[Daemon worker,5,main]) started.
+:library:compileReleaseAidl
+Skipping task ':library:compileReleaseAidl' as it is up-to-date (took 0.016 secs).
+:library:compileReleaseAidl UP-TO-DATE
+:library:compileReleaseAidl (Thread[Daemon worker,5,main]) completed. Took 0.017 secs.
+:library:compileReleaseNdk (Thread[Daemon worker,5,main]) started.
+:library:compileReleaseNdk
+Skipping task ':library:compileReleaseNdk' as it has no source files.
+:library:compileReleaseNdk UP-TO-DATE
+:library:compileReleaseNdk (Thread[Daemon worker,5,main]) completed. Took 0.001 secs.
+:library:compileLint (Thread[Daemon worker,5,main]) started.
+:library:compileLint
+Skipping task ':library:compileLint' as it is up-to-date (took 0.001 secs).
+:library:compileLint UP-TO-DATE
+:library:compileLint (Thread[Daemon worker,5,main]) completed. Took 0.003 secs.
+:library:copyReleaseLint (Thread[Daemon worker,5,main]) started.
+:library:copyReleaseLint
+Skipping task ':library:copyReleaseLint' as it has no source files.
+:library:copyReleaseLint UP-TO-DATE
+:library:copyReleaseLint (Thread[Daemon worker,5,main]) completed. Took 0.001 secs.
+:library:compileReleaseRenderscript (Thread[Daemon worker,5,main]) started.
+:library:compileReleaseRenderscript
+Skipping task ':library:compileReleaseRenderscript' as it is up-to-date (took 0.004 secs).
+:library:compileReleaseRenderscript UP-TO-DATE
+:library:compileReleaseRenderscript (Thread[Daemon worker,5,main]) completed. Took 0.005 secs.
+:library:generateReleaseBuildConfig (Thread[Daemon worker,5,main]) started.
+:library:generateReleaseBuildConfig
+Skipping task ':library:generateReleaseBuildConfig' as it is up-to-date (took 0.003 secs).
+:library:generateReleaseBuildConfig UP-TO-DATE
+:library:generateReleaseBuildConfig (Thread[Daemon worker,5,main]) completed. Took 0.004 secs.
+:library:generateReleaseResValues (Thread[Daemon worker,5,main]) started.
+:library:generateReleaseResValues
+Skipping task ':library:generateReleaseResValues' as it is up-to-date (took 0.002 secs).
+:library:generateReleaseResValues UP-TO-DATE
+:library:generateReleaseResValues (Thread[Daemon worker,5,main]) completed. Took 0.003 secs.
+:library:generateReleaseResources (Thread[Daemon worker,5,main]) started.
+:library:generateReleaseResources
+Skipping task ':library:generateReleaseResources' as it has no actions.
+:library:generateReleaseResources UP-TO-DATE
+:library:generateReleaseResources (Thread[Daemon worker,5,main]) completed. Took 0.0 secs.
+:library:mergeReleaseResources (Thread[Daemon worker,5,main]) started.
+:library:mergeReleaseResources
+Skipping task ':library:mergeReleaseResources' as it is up-to-date (took 0.153 secs).
+:library:mergeReleaseResources UP-TO-DATE
+:library:mergeReleaseResources (Thread[Daemon worker,5,main]) completed. Took 0.154 secs.
+:library:processReleaseManifest (Thread[Daemon worker,5,main]) started.
+:library:processReleaseManifest
+Skipping task ':library:processReleaseManifest' as it is up-to-date (took 0.003 secs).
+:library:processReleaseManifest UP-TO-DATE
+:library:processReleaseManifest (Thread[Daemon worker,5,main]) completed. Took 0.008 secs.
+:library:processReleaseResources (Thread[Daemon worker,5,main]) started.
+:library:processReleaseResources
+Skipping task ':library:processReleaseResources' as it is up-to-date (took 0.037 secs).
+:library:processReleaseResources UP-TO-DATE
+:library:processReleaseResources (Thread[Daemon worker,5,main]) completed. Took 0.04 secs.
+:library:generateReleaseSources (Thread[Daemon worker,5,main]) started.
+:library:generateReleaseSources
+Skipping task ':library:generateReleaseSources' as it has no actions.
+:library:generateReleaseSources UP-TO-DATE
+:library:generateReleaseSources (Thread[Daemon worker,5,main]) completed. Took 0.002 secs.
+:library:incrementalReleaseJavaCompilationSafeguard (Thread[Daemon worker,5,main]) started.
+:library:incrementalReleaseJavaCompilationSafeguard
+Skipping task ':library:incrementalReleaseJavaCompilationSafeguard' as it is up-to-date (took 0.005 secs).
+:library:incrementalReleaseJavaCompilationSafeguard UP-TO-DATE
+:library:incrementalReleaseJavaCompilationSafeguard (Thread[Daemon worker,5,main]) completed. Took 0.007 secs.
+:library:compileReleaseJavaWithJavac (Thread[Daemon worker,5,main]) started.
+:library:compileReleaseJavaWithJavac
+file or directory '/Users/apple/github/SLTableView/library/src/release/java', not found
+Skipping task ':library:compileReleaseJavaWithJavac' as it is up-to-date (took 0.03 secs).
+:library:compileReleaseJavaWithJavac UP-TO-DATE
+:library:compileReleaseJavaWithJavac (Thread[Daemon worker,5,main]) completed. Took 0.035 secs.
+:library:extractReleaseAnnotations (Thread[Daemon worker,5,main]) started.
+:library:extractReleaseAnnotations
+file or directory '/Users/apple/github/SLTableView/library/src/release/java', not found
+Skipping task ':library:extractReleaseAnnotations' as it is up-to-date (took 0.014 secs).
+:library:extractReleaseAnnotations UP-TO-DATE
+:library:extractReleaseAnnotations (Thread[Daemon worker,5,main]) completed. Took 0.017 secs.
+:library:mergeReleaseShaders (Thread[Daemon worker,5,main]) started.
+:library:mergeReleaseShaders
+Skipping task ':library:mergeReleaseShaders' as it is up-to-date (took 0.005 secs).
+:library:mergeReleaseShaders UP-TO-DATE
+:library:mergeReleaseShaders (Thread[Daemon worker,5,main]) completed. Took 0.006 secs.
+:library:compileReleaseShaders (Thread[Daemon worker,5,main]) started.
+:library:compileReleaseShaders
+Skipping task ':library:compileReleaseShaders' as it is up-to-date (took 0.007 secs).
+:library:compileReleaseShaders UP-TO-DATE
+:library:compileReleaseShaders (Thread[Daemon worker,5,main]) completed. Took 0.008 secs.
+:library:generateReleaseAssets (Thread[Daemon worker,5,main]) started.
+:library:generateReleaseAssets
+Skipping task ':library:generateReleaseAssets' as it has no actions.
+:library:generateReleaseAssets UP-TO-DATE
+:library:generateReleaseAssets (Thread[Daemon worker,5,main]) completed. Took 0.001 secs.
+:library:mergeReleaseAssets (Thread[Daemon worker,5,main]) started.
+:library:mergeReleaseAssets
+Skipping task ':library:mergeReleaseAssets' as it is up-to-date (took 0.002 secs).
+:library:mergeReleaseAssets UP-TO-DATE
+:library:mergeReleaseAssets (Thread[Daemon worker,5,main]) completed. Took 0.003 secs.
+:library:mergeReleaseProguardFiles (Thread[Daemon worker,5,main]) started.
+:library:mergeReleaseProguardFiles
+Skipping task ':library:mergeReleaseProguardFiles' as it is up-to-date (took 0.001 secs).
+:library:mergeReleaseProguardFiles UP-TO-DATE
+:library:mergeReleaseProguardFiles (Thread[Daemon worker,5,main]) completed. Took 0.002 secs.
+:library:packageReleaseRenderscript (Thread[Daemon worker,5,main]) started.
+:library:packageReleaseRenderscript
+Skipping task ':library:packageReleaseRenderscript' as it has no source files.
+:library:packageReleaseRenderscript UP-TO-DATE
+:library:packageReleaseRenderscript (Thread[Daemon worker,5,main]) completed. Took 0.001 secs.
+:library:packageReleaseResources (Thread[Daemon worker,5,main]) started.
+:library:packageReleaseResources
+Skipping task ':library:packageReleaseResources' as it is up-to-date (took 0.005 secs).
+:library:packageReleaseResources UP-TO-DATE
+:library:packageReleaseResources (Thread[Daemon worker,5,main]) completed. Took 0.007 secs.
+:library:processReleaseJavaRes (Thread[Daemon worker,5,main]) started.
+:library:processReleaseJavaRes
+Skipping task ':library:processReleaseJavaRes' as it has no source files.
+:library:processReleaseJavaRes UP-TO-DATE
+:library:processReleaseJavaRes (Thread[Daemon worker,5,main]) completed. Took 0.002 secs.
+:library:transformResourcesWithMergeJavaResForRelease (Thread[Daemon worker,5,main]) started.
+:library:transformResourcesWithMergeJavaResForRelease
+Skipping task ':library:transformResourcesWithMergeJavaResForRelease' as it is up-to-date (took 0.006 secs).
+:library:transformResourcesWithMergeJavaResForRelease UP-TO-DATE
+:library:transformResourcesWithMergeJavaResForRelease (Thread[Daemon worker,5,main]) completed. Took 0.009 secs.
+:library:transformClassesAndResourcesWithSyncLibJarsForRelease (Thread[Daemon worker,5,main]) started.
+:library:transformClassesAndResourcesWithSyncLibJarsForRelease
+Skipping task ':library:transformClassesAndResourcesWithSyncLibJarsForRelease' as it is up-to-date (took 0.01 secs).
+:library:transformClassesAndResourcesWithSyncLibJarsForRelease UP-TO-DATE
+:library:transformClassesAndResourcesWithSyncLibJarsForRelease (Thread[Daemon worker,5,main]) completed. Took 0.012 secs.
+:library:mergeReleaseJniLibFolders (Thread[Daemon worker,5,main]) started.
+:library:mergeReleaseJniLibFolders
+Skipping task ':library:mergeReleaseJniLibFolders' as it is up-to-date (took 0.005 secs).
+:library:mergeReleaseJniLibFolders UP-TO-DATE
+:library:mergeReleaseJniLibFolders (Thread[Daemon worker,5,main]) completed. Took 0.009 secs.
+:library:transformNative_libsWithMergeJniLibsForRelease (Thread[Daemon worker,5,main]) started.
+:library:transformNative_libsWithMergeJniLibsForRelease
+Skipping task ':library:transformNative_libsWithMergeJniLibsForRelease' as it is up-to-date (took 0.003 secs).
+:library:transformNative_libsWithMergeJniLibsForRelease UP-TO-DATE
+:library:transformNative_libsWithMergeJniLibsForRelease (Thread[Daemon worker,5,main]) completed. Took 0.005 secs.
+:library:transformNative_libsWithSyncJniLibsForRelease (Thread[Daemon worker,5,main]) started.
+:library:transformNative_libsWithSyncJniLibsForRelease
+Skipping task ':library:transformNative_libsWithSyncJniLibsForRelease' as it is up-to-date (took 0.004 secs).
+:library:transformNative_libsWithSyncJniLibsForRelease UP-TO-DATE
+:library:transformNative_libsWithSyncJniLibsForRelease (Thread[Daemon worker,5,main]) completed. Took 0.006 secs.
+:library:bundleRelease (Thread[Daemon worker,5,main]) started.
+:library:bundleRelease
+Skipping task ':library:bundleRelease' as it is up-to-date (took 0.002 secs).
+:library:bundleRelease UP-TO-DATE
+:library:bundleRelease (Thread[Daemon worker,5,main]) completed. Took 0.004 secs.
+:library:javadoc (Thread[Daemon worker,5,main]) started.
+:library:javadoc
+Executing task ':library:javadoc' (up-to-date check took 0.004 secs) due to:
+  Value of input property 'title' has changed for task ':library:javadoc'
+Starting process 'command '/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/bin/javadoc''. Working directory: /Users/apple/github/SLTableView/library Command: /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/bin/javadoc @/Users/apple/github/SLTableView/library/build/tmp/javadoc/javadoc.options
+Successfully started process 'command '/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/bin/javadoc''
+3 个错误
+61 个警告
+Problems generating Javadoc.
+  Command line issued: [/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/bin/javadoc, @/Users/apple/github/SLTableView/library/build/tmp/javadoc/javadoc.options]
+  Generated Javadoc options file has following contents:
+------
+-classpath '/Users/apple/Android/sdk/platforms/android-25/android.jar'
+-d '/Users/apple/github/SLTableView/library/build/docs/javadoc'
+-doctitle 'library 1.0.6 API'
+-quiet 
+-windowtitle 'library 1.0.6 API'
+'/Users/apple/github/SLTableView/library/src/main/java/com/github/nuptboyzhb/lib/SuperSwipeRefreshLayout.java'
+'/Users/apple/github/SLTableView/library/src/main/java/com/shanlin/library/sltableview/adapter/SLItemDecoration.java'
+'/Users/apple/github/SLTableView/library/src/main/java/com/shanlin/library/sltableview/adapter/SLStickyHeaderDecoration.java'
+'/Users/apple/github/SLTableView/library/src/main/java/com/shanlin/library/sltableview/adapter/SLTableViewAdapter.java'
+'/Users/apple/github/SLTableView/library/src/main/java/com/shanlin/library/sltableview/adapter/SLTableViewExpandAdapter.java'
+'/Users/apple/github/SLTableView/library/src/main/java/com/shanlin/library/sltableview/adapter/SLTableViewStickyAdapter.java'
+'/Users/apple/github/SLTableView/library/src/main/java/com/shanlin/library/sltableview/adapter/SLTableViewStickyHeaderAdapter.java'
+'/Users/apple/github/SLTableView/library/src/main/java/com/shanlin/library/sltableview/SLIndexPath.java'
+'/Users/apple/github/SLTableView/library/src/main/java/com/shanlin/library/sltableview/SLTableView.java'
+'/Users/apple/github/SLTableView/library/src/main/java/com/shanlin/library/sltableview/SLTableViewCell.java'
+'/Users/apple/github/SLTableView/library/src/main/java/com/shanlin/library/sltableview/SLTableViewDataSource.java'
+'/Users/apple/github/SLTableView/library/src/main/java/com/shanlin/library/sltableview/SLTableViewDataSourcePlus.java'
+'/Users/apple/github/SLTableView/library/src/main/java/com/shanlin/library/sltableview/SLTableViewLayoutManagerExpand.java'
+------
+:library:javadoc FAILED
+:library:javadoc (Thread[Daemon worker,5,main]) completed. Took 2.674 secs.
+
+BUILD FAILED
+
+Total time: 16.292 secs
+Stopped 0 compiler daemon(s).
+Received result Failure[value=org.gradle.initialization.ReportedException: org.gradle.internal.exceptions.LocationAwareException: Execution failed for task ':library:javadoc'.] from daemon DaemonInfo{pid=24847, address=[813e822f-4e2d-4ebf-a3b9-6ee8e2918a81 port:60102, addresses:[/0:0:0:0:0:0:0:1, /127.0.0.1]], idle=false, lastBusy=1487063311954, context=DefaultDaemonContext[uid=f1b98a86-4560-48a4-bd67-487296af30bb,javaHome=/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home,daemonRegistryDir=/Users/apple/.gradle/daemon,pid=24847,idleTimeout=120000,daemonOpts=-Xmx1536m,-Dfile.encoding=UTF-8,-Duser.country=CN,-Duser.language=zh,-Duser.variant]} (build should be done).

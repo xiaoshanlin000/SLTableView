@@ -107,6 +107,26 @@ public abstract class DemoBaseFragment extends BaseFragment implements SLTableVi
     }
 
     @Override
+    public View viewForHeaderInSection(SLTableView tableView, int section) {
+        return null;
+    }
+
+    @Override
+    public View viewForFooterInSection(SLTableView tableView, int section) {
+        return null;
+    }
+
+    @Override
+    public void onBindHeaderInSection(SLTableView tableView, View view, int section) {
+
+    }
+
+    @Override
+    public void onBindFooterInSection(SLTableView tableView, View view, int section) {
+
+    }
+
+    @Override
     public void onCellViewClick(View view, SLIndexPath indexPath, Object userData) {
         int section = indexPath.getSection();
         int row = indexPath.getRow();
@@ -117,5 +137,20 @@ public abstract class DemoBaseFragment extends BaseFragment implements SLTableVi
         }else {
             Toast.makeText(context, String.format("点击,%02d组,%02d行.", (section + 1), (row + 1)), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public int layoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initView(ViewGroup view) {
+
+    }
+
+    @Override
+    public void initData() {
+
     }
 }

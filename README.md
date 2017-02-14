@@ -17,19 +17,19 @@ maven
 <dependency>
   <groupId>com.shanlin.library.sltableview</groupId>
   <artifactId>library</artifactId>
-  <version>1.0.5</version>
+  <version>1.0.7</version>
   <type>pom</type>
 </dependency>
 ```
 
 gradle
 ```
-compile 'com.shanlin.library.sltableview:library:1.0.5'
+compile 'com.shanlin.library.sltableview:library:1.0.7'
 ```
 
 lvy
 ```
-<dependency org='com.shanlin.library.sltableview' name='library' rev='1.0.5'>
+<dependency org='com.shanlin.library.sltableview' name='library' rev='1.0.7'>
   <artifact name='library' ext='pom' ></artifact>
 </dependency>
 ```
