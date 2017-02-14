@@ -1,4 +1,4 @@
-package com.shanlin.library.sltableview;
+package com.shanlin.library.sltableview.adapter;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nineoldandroids.view.ViewHelper;
+import com.shanlin.library.sltableview.SLTableViewCell;
 
 import java.util.HashMap;
 

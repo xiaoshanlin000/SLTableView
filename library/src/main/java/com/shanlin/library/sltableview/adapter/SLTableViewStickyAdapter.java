@@ -1,9 +1,17 @@
-package com.shanlin.library.sltableview;
+package com.shanlin.library.sltableview.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import com.shanlin.library.sltableview.R;
+import com.shanlin.library.sltableview.SLIndexPath;
+import com.shanlin.library.sltableview.SLTableView;
+import com.shanlin.library.sltableview.SLTableViewDataSource;
+import com.shanlin.library.sltableview.SLTableViewDataSourcePlus;
+import com.shanlin.library.sltableview.SLTableViewLayoutManagerExpand;
+import com.shanlin.library.sltableview.SLTableViewCell;
 
 /**
  * Created by Shanlin on 2016/12/29.
@@ -97,8 +105,15 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
         SLIndexPath indexPath = typeIndexPath.getIndexPath().clone();
         DefaultTitleCell titleCell = (DefaultTitleCell) cell;
         if (dataSourcePlus != null){
-            String title = dataSourcePlus.titleForHeaderInSection(tableView, indexPath.getSection());
-            titleCell.title_floor_text.setText(title);
+            View view = dataSourcePlus.viewForHeaderInSection(tableView,indexPath.getSection());
+            if (view == null) {
+                String title = dataSourcePlus.titleForHeaderInSection(tableView, indexPath.getSection());
+                titleCell.title_floor_text.setText(title);
+            }else{
+                titleCell.title_floor_root_layout.removeAllViews();
+                titleCell.title_floor_root_layout.addView(view);
+                dataSourcePlus.onBindHeaderInSection(tableView,view,indexPath.getSection());
+            }
         }else{
             titleCell.title_floor_text.setText("");
         }

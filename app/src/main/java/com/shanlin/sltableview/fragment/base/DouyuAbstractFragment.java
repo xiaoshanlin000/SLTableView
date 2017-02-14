@@ -27,6 +27,8 @@ import com.shanlin.sltableview.fragment.cell.DouyuYanzhiCell;
 
 import java.util.ArrayList;
 
+import static com.shanlin.sltableview.fragment.bean.DouyuType.TYPE_HOT_AUTHOR;
+
 /**
  *
  * 根据数据显示UI.
@@ -104,42 +106,45 @@ public abstract  class DouyuAbstractFragment extends BaseFragment  implements SL
         int row = indexPath.getRow();
         DouyuBaseBean baseBean =  dataLists.get(section).get(row); 
         switch (baseBean.getType()){
-            case TYPE_HEAD:
+            case TYPE_HEAD: {
                 DouyuHeadCell douyuHeadCell = (DouyuHeadCell) cell;
                 DouyuHeadBean douyuHead = (DouyuHeadBean) baseBean;
                 douyuHeadCell.cell_head_title_text.setText(douyuHead.getTitle());
-                if (douyuHead.getType() == DouyuType.TYPE_HOT_AUTHOR){//热门作者 没有更多选项
+                if (douyuHead.getType() == TYPE_HOT_AUTHOR) {//热门作者 没有更多选项
                     douyuHeadCell.cell_head_more_layout.setVisibility(View.GONE);
-                }else{
+                } else {
                     douyuHeadCell.cell_head_more_layout.setVisibility(View.VISIBLE);
-                    douyuHeadCell.bindCellViewClick(douyuHeadCell.cell_head_more_layout,this);
+                    douyuHeadCell.bindCellViewClick(douyuHeadCell.cell_head_more_layout, this);
                 }
                 break;
-            case TYPE_ROOM:
+            }
+            case TYPE_ROOM: {
                 DouyuRoomCell roomCell = (DouyuRoomCell) cell;
                 DouyuRoomBean roomBean = (DouyuRoomBean) baseBean;
                 roomCell.room_number_text.setText(roomBean.getRoomNumber());
                 roomCell.room_owner_text.setText(roomBean.getRoomOwner());
                 roomCell.room_title_text.setText(roomBean.getRoomTitle());
-                roomCell.bindCellViewClick(roomCell.room_layout,this);
+                roomCell.bindCellViewClick(roomCell.room_layout, this);
                 break;
-            case TYPE_HOT_AUTHOR:
+            }
+            case TYPE_HOT_AUTHOR: {
                 DouyuHotAuthorCell authorCell = (DouyuHotAuthorCell) cell;
                 DouyuHotAuthorBean authorBean = (DouyuHotAuthorBean) baseBean;
                 authorCell.hot_author_name_text.setText(authorBean.getAuthorName());
-                authorCell.hot_author_subscribe_number_text.setText(String.format("订阅数:%s",authorBean.getSubscribeNumber()));
-                authorCell.hot_author_video_number_text.setText(String.format("视屏数:%s",authorBean.getVideoNumber()));
-
-                authorCell.bindCellViewClick(authorCell.room_layout,this);
+                authorCell.hot_author_subscribe_number_text.setText(String.format("订阅数:%s", authorBean.getSubscribeNumber()));
+                authorCell.hot_author_video_number_text.setText(String.format("视屏数:%s", authorBean.getVideoNumber()));
+                authorCell.bindCellViewClick(authorCell.room_layout, this);
                 break;
-            case TYPE_ROOM_YANZHI:
+            }
+            case TYPE_ROOM_YANZHI: {
                 DouyuYanzhiCell yanzhiCell = (DouyuYanzhiCell) cell;
                 DouyuYanzhiBean yanzhiBean = (DouyuYanzhiBean) baseBean;
-                yanzhiCell.bindCellViewClick(yanzhiCell.room_layout,this);
+                yanzhiCell.bindCellViewClick(yanzhiCell.room_layout, this);
                 yanzhiCell.room_owner_text.setText(yanzhiBean.getRoomOwner());
                 yanzhiCell.room_number_text.setText(yanzhiBean.getRoomNumber());
                 yanzhiCell.room_location.setText(yanzhiBean.getLocation());
                 break;
+            }
 
         }
     }
@@ -169,6 +174,26 @@ public abstract  class DouyuAbstractFragment extends BaseFragment  implements SL
 
     @Override
     public void getItemOffsets(Rect outRect, SLIndexPath indexPath) {
+
+    }
+
+    @Override
+    public View viewForHeaderInSection(SLTableView tableView, int section) {
+        return null;
+    }
+
+    @Override
+    public View viewForFooterInSection(SLTableView tableView, int section) {
+        return null;
+    }
+
+    @Override
+    public void onBindHeaderInSection(SLTableView tableView, View view, int section) {
+
+    }
+
+    @Override
+    public void onBindFooterInSection(SLTableView tableView, View view, int section) {
 
     }
 

@@ -1,22 +1,33 @@
-package com.shanlin.library.sltableview;
+package com.shanlin.library.sltableview.adapter;
 
 import android.content.Context;
 import android.graphics.Rect;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.shanlin.library.sltableview.R;
+import com.shanlin.library.sltableview.SLIndexPath;
+import com.shanlin.library.sltableview.SLTableView;
+import com.shanlin.library.sltableview.SLTableViewDataSource;
+import com.shanlin.library.sltableview.SLTableViewDataSourcePlus;
+import com.shanlin.library.sltableview.SLTableViewLayoutManagerExpand;
+import com.shanlin.library.sltableview.SLTableViewCell;
+
 import java.util.ArrayList;
 
 
-public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> implements SLTableViewExpandAdapter {
+public class SLTableViewAdapter extends RecyclerView.Adapter<SLTableViewCell> implements SLTableViewExpandAdapter {
 
     protected static final int HEAD = -1;
     protected static final int CONTENT = -2;
     protected static final int FLOOR = -3;
+    protected static final int REFRESH_HEAD = -4;
+    protected static final int REFRESH_FLOOR = -5;
 
     protected Context context;
     protected SLTableView tableView;
@@ -103,12 +114,20 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> imp
             rootView.setBackgroundColor(tableView.getBgColor());
             SLTableViewCell viewCell = new DefaultTitleCell(rootView,headerBgColor,headerTextColor,headerTextSize);
             cell = viewCell;
-        }else if (type == FLOOR){
+        }
+        else if (type == FLOOR){
             View rootView = inflater.inflate(R.layout.title_floor_cell,parent,false);
             rootView.setBackgroundColor(tableView.getBgColor());
             SLTableViewCell viewCell = new DefaultTitleCell(rootView,floorBgColor,floorTextColor,floorTextSize);
             cell = viewCell;
-        }else{
+        }
+        else if (type == REFRESH_HEAD){
+
+        }
+        else if (type == REFRESH_HEAD){
+
+        }
+        else{
             cell =  dataSource.cellForType(tableView,parent,type);
         }
         return cell;
@@ -122,16 +141,30 @@ public class SLTableViewAdapter extends SLTableView.Adapter<SLTableViewCell> imp
         if (type == HEAD) {
             DefaultTitleCell titleCell = (DefaultTitleCell) cell;
             if (dataSourcePlus != null){
-                String title = dataSourcePlus.titleForHeaderInSection(tableView, indexPath.getSection());
-                titleCell.title_floor_text.setText(title);
+                View view = dataSourcePlus.viewForHeaderInSection(tableView, indexPath.getSection());
+                if (view == null) {
+                    String title = dataSourcePlus.titleForHeaderInSection(tableView, indexPath.getSection());
+                    titleCell.title_floor_text.setText(title);
+                }else{
+                    titleCell.title_floor_root_layout.removeAllViews();
+                    titleCell.title_floor_root_layout.addView(view);
+                    dataSourcePlus.onBindHeaderInSection(tableView,view,indexPath.getSection());
+                }
             }else{
                 titleCell.title_floor_text.setText("");
             }
         }else if (type == FLOOR){
             DefaultTitleCell titleCell = (DefaultTitleCell) cell;
             if (dataSourcePlus != null) {
-                String floor = dataSourcePlus.titleForFooterInSection(tableView,indexPath.getSection());
-                titleCell.title_floor_text.setText(floor);
+                View view = dataSourcePlus.viewForFooterInSection(tableView, indexPath.getSection());
+                if (view == null) {
+                    String floor = dataSourcePlus.titleForFooterInSection(tableView, indexPath.getSection());
+                    titleCell.title_floor_text.setText(floor);
+                }else{
+                    titleCell.title_floor_root_layout.removeAllViews();
+                    titleCell.title_floor_root_layout.addView(view);
+                    dataSourcePlus.onBindFooterInSection(tableView,view,indexPath.getSection());
+                }
             }else{
                 titleCell.title_floor_text.setText("");
             }

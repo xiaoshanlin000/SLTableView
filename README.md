@@ -13,7 +13,7 @@ SLTableView是一个基于RecyclerView的分组显示库. SLTableView 旨在减�
 
 ###导入库
 maven
-```Java
+```
 <dependency>
   <groupId>com.shanlin.library.sltableview</groupId>
   <artifactId>library</artifactId>
@@ -23,12 +23,12 @@ maven
 ```
 
 gradle
-```Java
+```
 compile 'com.shanlin.library.sltableview:library:1.0.5'
 ```
 
 lvy
-```Java
+```
 <dependency org='com.shanlin.library.sltableview' name='library' rev='1.0.5'>
   <artifact name='library' ext='pom' ></artifact>
 </dependency>
@@ -37,18 +37,18 @@ lvy
 ###使用介绍
 
 必须实现的接口
-```Java
+```
 SLTableViewDataSource (配置数据信息)
 ```
 可选接口
-```Java
+```
 SLTableViewDataSourcePlus(配置header,floor信息)
 SLTableViewLayoutManagerExpand(LayoutManager的扩展接口,设置一列的跨度,设置间距等)
 SLTableViewCell.SLCellViewClickListener (cell内某view的点击监听接口)
 
 ```
 初始化SLTableView
-```Java
+```
     tableView = new SLTableView.Builder(context)
                 .setTableViewDataSource(this)
                 .setTableViewDataSourcePlus(this)
@@ -57,7 +57,7 @@ SLTableViewCell.SLCellViewClickListener (cell内某view的点击监听接口)
     view.addView(tableView);
 ```
 demo
-```Java
+```
    @Override
     public int numberOfSections(SLTableView tableView) {
         return dataLists.size();
@@ -117,7 +117,7 @@ demo
 
 
 ###License
-```Java
+```
 Copyright shanlin
 
 Licensed under the Apache License, Version 2.0 (the "License");

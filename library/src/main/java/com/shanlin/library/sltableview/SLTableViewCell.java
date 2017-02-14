@@ -1,11 +1,9 @@
 package com.shanlin.library.sltableview;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-/**
- * Created by Shanlin on 2016/12/27.
- */
-public class SLTableViewCell extends SLTableView.ViewHolder implements View.OnClickListener{
+public class SLTableViewCell extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     private SLIndexPath indexPath;
     private SLCellViewClickListener clickListener;
@@ -32,9 +30,9 @@ public class SLTableViewCell extends SLTableView.ViewHolder implements View.OnCl
      */
     public void bindCellViewClick(View view,SLCellViewClickListener clickListener,Object userData){
         view.setOnClickListener(this);
-            this.clickListener = clickListener;
-            this.userData = userData;
-        }
+        this.clickListener = clickListener;
+        this.userData = userData;
+    }
 
     public SLTableViewCell setIndexPath(SLIndexPath indexPath) {
         this.indexPath = indexPath;
@@ -48,7 +46,7 @@ public class SLTableViewCell extends SLTableView.ViewHolder implements View.OnCl
         }
     }
 
-    public interface SLCellViewClickListener{
+    public  interface SLCellViewClickListener{
         public void onCellViewClick(View view, SLIndexPath indexPath, Object userData);
     }
 

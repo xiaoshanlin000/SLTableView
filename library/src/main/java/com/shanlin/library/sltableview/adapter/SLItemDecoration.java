@@ -1,4 +1,4 @@
-package com.shanlin.library.sltableview;
+package com.shanlin.library.sltableview.adapter;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,7 @@ import android.view.View;
  * Created by Shanlin on 2016/12/31.
  */
 
-class SLItemDecoration extends RecyclerView.ItemDecoration {
+public class SLItemDecoration extends RecyclerView.ItemDecoration {
     private SLTableViewAdapter adapter;
 
     public SLItemDecoration(SLTableViewAdapter adapter) {

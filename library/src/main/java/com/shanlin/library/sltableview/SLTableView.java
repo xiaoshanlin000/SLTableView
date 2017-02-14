@@ -6,6 +6,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import com.shanlin.library.sltableview.adapter.SLItemDecoration;
+import com.shanlin.library.sltableview.adapter.SLStickyHeaderDecoration;
+import com.shanlin.library.sltableview.adapter.SLTableViewAdapter;
+import com.shanlin.library.sltableview.adapter.SLTableViewExpandAdapter;
+import com.shanlin.library.sltableview.adapter.SLTableViewStickyAdapter;
+
 
 /**
  * Created by Shanlin on 2016/12/27.

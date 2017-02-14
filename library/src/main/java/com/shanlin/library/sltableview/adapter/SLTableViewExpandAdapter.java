@@ -1,12 +1,8 @@
-package com.shanlin.library.sltableview;
+package com.shanlin.library.sltableview.adapter;
 
 import android.graphics.Rect;
 
-/**
- * Created by Shanlin on 2016/12/29.
- */
-
-interface SLTableViewExpandAdapter {
+public interface SLTableViewExpandAdapter {
 
     public boolean headerFloorOfPosition(int position);
 

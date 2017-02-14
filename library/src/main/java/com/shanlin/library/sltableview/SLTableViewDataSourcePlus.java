@@ -1,5 +1,7 @@
 package com.shanlin.library.sltableview;
 
+import android.view.View;
+
 /**
  * Created by Shanlin on 2016/12/27.
  */
@@ -38,6 +40,40 @@ public interface SLTableViewDataSourcePlus {
      */
     public boolean hiddenFooterInSection(SLTableView tableView, int section);
 
+
+    /**
+     * 自定义每组header
+     * @param tableView  {@link SLTableView}
+     * @param section 组数
+     * @return {@link View}
+     */
+    public View viewForHeaderInSection(SLTableView tableView, int section);
+
+    /**
+     * 自定义每组footer
+     * @param tableView  {@link SLTableView}
+     * @param section 组数
+     * @return {@link View}
+     */
+    public View viewForFooterInSection(SLTableView tableView,int section);
+
+
+
+    /**
+     * 绑定自定义每组header的数据
+     * @param tableView  {@link SLTableView}
+     * @param view {@link View}
+     * @param section 组数
+     */
+    public void onBindHeaderInSection(SLTableView tableView, View view, int section);
+
+    /**
+     * 自定义每组footer
+     * @param tableView  {@link SLTableView}
+     * @param view {@link View}
+     * @param section 组数
+     */
+    public void onBindFooterInSection(SLTableView tableView, View view,int section);
 
 
 //    public boolean canEditRowAtIndexPath(SLTableView tableView, SLIndexPath indexPath);

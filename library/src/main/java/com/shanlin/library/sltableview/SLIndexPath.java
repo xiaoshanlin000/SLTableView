@@ -45,7 +45,7 @@ public class SLIndexPath {
     }
 
     @Override
-    protected SLIndexPath clone() {
+    public SLIndexPath clone() {
         return new SLIndexPath(getSection(),getRow());
     }
 

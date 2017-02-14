@@ -1,13 +1,11 @@
-package com.shanlin.library.sltableview;
+package com.shanlin.library.sltableview.adapter;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 
-/**
- * Created by Shanlin on 2016/12/29.
- */
+import com.shanlin.library.sltableview.SLTableViewCell;
 
-interface SLTableViewStickyHeaderAdapter{
+public interface SLTableViewStickyHeaderAdapter{
     public int stickyHeaderType();
     public boolean stickyHeader(int position);
     public boolean showStickyHeader(int position);
