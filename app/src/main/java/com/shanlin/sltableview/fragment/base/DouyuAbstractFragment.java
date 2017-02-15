@@ -11,7 +11,7 @@ import com.shanlin.library.sltableview.SLIndexPath;
 import com.shanlin.library.sltableview.SLTableView;
 import com.shanlin.library.sltableview.SLTableViewCell;
 import com.shanlin.library.sltableview.SLTableViewDataSource;
-import com.shanlin.library.sltableview.SLTableViewDataSourcePlus;
+import com.shanlin.library.sltableview.SLTableViewDelegate;
 import com.shanlin.library.sltableview.SLTableViewLayoutManagerExpand;
 import com.shanlin.sltableview.R;
 import com.shanlin.sltableview.fragment.bean.DouyuBaseBean;
@@ -36,7 +36,7 @@ import static com.shanlin.sltableview.fragment.bean.DouyuType.TYPE_HOT_AUTHOR;
  */
 
 public abstract  class DouyuAbstractFragment extends BaseFragment  implements SLTableViewDataSource,
-        SLTableViewDataSourcePlus,
+        SLTableViewDelegate,
         SLTableViewLayoutManagerExpand,
         SLTableViewCell.SLCellViewClickListener
 {
@@ -151,7 +151,7 @@ public abstract  class DouyuAbstractFragment extends BaseFragment  implements SL
 
 
 
-    //SLTableViewDataSourcePlus
+    //SLTableViewDelegate
     @Override
     public String titleForHeaderInSection(SLTableView tableView, int section) {
         return null;

@@ -14,7 +14,7 @@ import com.shanlin.library.sltableview.R;
 import com.shanlin.library.sltableview.SLIndexPath;
 import com.shanlin.library.sltableview.SLTableView;
 import com.shanlin.library.sltableview.SLTableViewDataSource;
-import com.shanlin.library.sltableview.SLTableViewDataSourcePlus;
+import com.shanlin.library.sltableview.SLTableViewDelegate;
 import com.shanlin.library.sltableview.SLTableViewLayoutManagerExpand;
 import com.shanlin.library.sltableview.SLTableViewCell;
 
@@ -32,7 +32,7 @@ public class SLTableViewAdapter extends RecyclerView.Adapter<SLTableViewCell> im
     protected Context context;
     protected SLTableView tableView;
     protected SLTableViewDataSource dataSource;
-    protected SLTableViewDataSourcePlus dataSourcePlus;
+    protected SLTableViewDelegate dataSourcePlus;
     protected SLTableViewLayoutManagerExpand spanSizeLookup;
     protected LayoutInflater inflater;
 
@@ -50,7 +50,7 @@ public class SLTableViewAdapter extends RecyclerView.Adapter<SLTableViewCell> im
     public SLTableViewAdapter(Context context,
                               SLTableView tableView,
                               SLTableViewDataSource dataSource,
-                              SLTableViewDataSourcePlus dataSourcePlus,
+                              SLTableViewDelegate dataSourcePlus,
                               SLTableViewLayoutManagerExpand spanSizeLookup) {
         this.context = context;
         this.tableView = tableView;

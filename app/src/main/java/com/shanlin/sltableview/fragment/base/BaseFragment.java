@@ -64,11 +64,15 @@ public abstract class BaseFragment extends Fragment implements SuperSwipeRefresh
     public abstract void initData();
 
     public View refreshHeaderView(){
-        return new View(getContext());
+        View view = new View(getContext());
+        view.setBackgroundColor(context.getResources().getColor(R.color.color_background));
+        return view;
     }
 
     public View refreshFloorView(){
-        return new View(getContext());
+        View view = new View(getContext());
+        view.setBackgroundColor(context.getResources().getColor(R.color.color_background));
+        return view;
     }
 
     //OnPullRefreshListener

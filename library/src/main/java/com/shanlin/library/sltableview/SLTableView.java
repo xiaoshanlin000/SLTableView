@@ -20,7 +20,7 @@ import com.shanlin.library.sltableview.adapter.SLTableViewStickyAdapter;
 public class SLTableView extends RecyclerView {
 
     private SLTableViewDataSource tableViewDataSource;
-    private SLTableViewDataSourcePlus tableViewDataSourcePlus;
+    private SLTableViewDelegate tableViewDataSourcePlus;
     private SLTableViewAdapter tableViewAdapter;
 
     private int bgColor;
@@ -33,7 +33,7 @@ public class SLTableView extends RecyclerView {
         this.tableViewDataSource = tableViewDataSource;
     }
 
-    public void setTableViewDataSourcePlus(SLTableViewDataSourcePlus tableViewDataSourcePlus) {
+    public void setTableViewDataSourcePlus(SLTableViewDelegate tableViewDataSourcePlus) {
         this.tableViewDataSourcePlus = tableViewDataSourcePlus;
     }
 
@@ -70,7 +70,7 @@ public class SLTableView extends RecyclerView {
         private LayoutParams layoutParams;
 
         private SLTableViewDataSource tableViewDataSource;
-        private SLTableViewDataSourcePlus tableViewDataSourcePlus;
+        private SLTableViewDelegate tableViewDataSourcePlus;
         private SLTableViewLayoutManagerExpand tableViewLayoutManagerExpand;
         private LayoutManager layoutManager;
 
@@ -105,10 +105,10 @@ public class SLTableView extends RecyclerView {
         /**
          * 设置{@link SLTableView}的扩展项
          *
-         * @param tableViewDataSourcePlus {@link SLTableViewDataSourcePlus}
+         * @param tableViewDataSourcePlus {@link SLTableViewDelegate}
          * @return {@link Builder}
          */
-        public Builder setTableViewDataSourcePlus(SLTableViewDataSourcePlus tableViewDataSourcePlus) {
+        public Builder setTableViewDataSourcePlus(SLTableViewDelegate tableViewDataSourcePlus) {
             this.tableViewDataSourcePlus = tableViewDataSourcePlus;
             return this;
         }

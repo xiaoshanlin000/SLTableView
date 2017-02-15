@@ -9,7 +9,7 @@ import com.shanlin.library.sltableview.SLIndexPath;
 import com.shanlin.library.sltableview.SLTableView;
 import com.shanlin.library.sltableview.SLTableViewCell;
 import com.shanlin.library.sltableview.SLTableViewDataSource;
-import com.shanlin.library.sltableview.SLTableViewDataSourcePlus;
+import com.shanlin.library.sltableview.SLTableViewDelegate;
 import com.shanlin.sltableview.R;
 import com.shanlin.sltableview.fragment.cell.TypeOneCell;
 import com.shanlin.sltableview.fragment.cell.TypeThreeCell;
@@ -22,7 +22,7 @@ import java.util.List;
  * Created by Shanlin on 2016/12/30.
  */
 
-public abstract class DemoBaseFragment extends BaseFragment implements SLTableViewDataSource,SLTableViewDataSourcePlus ,SLTableViewCell.SLCellViewClickListener{
+public abstract class DemoBaseFragment extends BaseFragment implements SLTableViewDataSource,SLTableViewDelegate,SLTableViewCell.SLCellViewClickListener{
 
 
     protected ArrayList<List<String>> dataLists = new ArrayList<>();

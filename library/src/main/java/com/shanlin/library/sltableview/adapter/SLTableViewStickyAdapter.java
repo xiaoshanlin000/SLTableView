@@ -9,7 +9,7 @@ import com.shanlin.library.sltableview.R;
 import com.shanlin.library.sltableview.SLIndexPath;
 import com.shanlin.library.sltableview.SLTableView;
 import com.shanlin.library.sltableview.SLTableViewDataSource;
-import com.shanlin.library.sltableview.SLTableViewDataSourcePlus;
+import com.shanlin.library.sltableview.SLTableViewDelegate;
 import com.shanlin.library.sltableview.SLTableViewLayoutManagerExpand;
 import com.shanlin.library.sltableview.SLTableViewCell;
 
@@ -19,7 +19,7 @@ import com.shanlin.library.sltableview.SLTableViewCell;
 
 public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTableViewStickyHeaderAdapter {
 
-    public SLTableViewStickyAdapter(Context context, SLTableView tableView, SLTableViewDataSource dataSource, SLTableViewDataSourcePlus dataSourcePlus, SLTableViewLayoutManagerExpand spanSizeLookup) {
+    public SLTableViewStickyAdapter(Context context, SLTableView tableView, SLTableViewDataSource dataSource, SLTableViewDelegate dataSourcePlus, SLTableViewLayoutManagerExpand spanSizeLookup) {
         super(context, tableView, dataSource, dataSourcePlus, spanSizeLookup);
     }
 

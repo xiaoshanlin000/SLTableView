@@ -6,7 +6,7 @@ import android.view.View;
  * Created by Shanlin on 2016/12/27.
  */
 
-public interface SLTableViewDataSourcePlus {
+public interface SLTableViewDelegate {
 
     /**
      * section组的title 描述

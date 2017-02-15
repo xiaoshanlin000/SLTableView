@@ -17,19 +17,19 @@ maven
 <dependency>
   <groupId>com.shanlin.library.sltableview</groupId>
   <artifactId>library</artifactId>
-  <version>1.0.7</version>
+  <version>1.1.0</version>
   <type>pom</type>
 </dependency>
 ```
 
 gradle
 ```
-compile 'com.shanlin.library.sltableview:library:1.0.7'
+compile 'com.shanlin.library.sltableview:library:1.1.0'
 ```
 
 lvy
 ```
-<dependency org='com.shanlin.library.sltableview' name='library' rev='1.0.7'>
+<dependency org='com.shanlin.library.sltableview' name='library' rev='1.1.0'>
   <artifact name='library' ext='pom' ></artifact>
 </dependency>
 ```
@@ -42,7 +42,7 @@ SLTableViewDataSource (配置数据信息)
 ```
 可选接口
 ```
-SLTableViewDataSourcePlus(配置header,floor信息)
+SLTableViewDelegate(配置header,floor信息)
 SLTableViewLayoutManagerExpand(LayoutManager的扩展接口,设置一列的跨度,设置间距等)
 SLTableViewCell.SLCellViewClickListener (cell内某view的点击监听接口)
 
