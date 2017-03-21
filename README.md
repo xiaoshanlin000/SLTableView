@@ -2,8 +2,10 @@
 
 SLTableView是一个基于RecyclerView的分组显示库. SLTableView 旨在减少代码量, 增加UI的复用率, 通过简单的配置, 从而实现各种分组效果.
 
-<!--###操作效果-->
-<!--![Alt Text](https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/demo.gif)-->
+ 操作效果
+
+
+ ![Alt Text](https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/demo.gif)
 
 效果图
 
