@@ -5,12 +5,16 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 
 import com.shanlin.library.sltableview.adapter.SLItemDecoration;
 import com.shanlin.library.sltableview.adapter.SLStickyHeaderDecoration;
 import com.shanlin.library.sltableview.adapter.SLTableViewAdapter;
 import com.shanlin.library.sltableview.adapter.SLTableViewExpandAdapter;
 import com.shanlin.library.sltableview.adapter.SLTableViewStickyAdapter;
+
+import java.util.HashMap;
+import java.util.Set;
 
 
 /**
@@ -20,7 +24,7 @@ import com.shanlin.library.sltableview.adapter.SLTableViewStickyAdapter;
 public class SLTableView extends RecyclerView {
 
     private SLTableViewDataSource tableViewDataSource;
-    private SLTableViewDelegate tableViewDataSourcePlus;
+    private SLTableViewDelegate tableViewDelegate;
     private SLTableViewAdapter tableViewAdapter;
 
     private int bgColor;
@@ -33,8 +37,8 @@ public class SLTableView extends RecyclerView {
         this.tableViewDataSource = tableViewDataSource;
     }
 
-    public void setTableViewDataSourcePlus(SLTableViewDelegate tableViewDataSourcePlus) {
-        this.tableViewDataSourcePlus = tableViewDataSourcePlus;
+    public void setTableViewDelegate(SLTableViewDelegate tableViewDelegate) {
+        this.tableViewDelegate = tableViewDelegate;
     }
 
     public int getBgColor() {
@@ -46,9 +50,9 @@ public class SLTableView extends RecyclerView {
         setBackgroundColor(bgColor);
     }
 
-//    public void notifyDataSetChanged() {
-//        this.getAdapter().notifyDataSetChanged();
-//    }
+    public void notifyDataSetChanged() {
+        this.getTableViewAdapter().notifyDataSetChanged();
+    }
 
     public SLTableViewAdapter getTableViewAdapter() {
         return tableViewAdapter;
@@ -63,6 +67,65 @@ public class SLTableView extends RecyclerView {
         this.tableViewAdapter.scrollToRowAtIndexPath(indexPath);
     }
 
+
+    /**
+     * 获取cell中的值
+     * @param values 传入map对象
+     * @return true 获取完整,false 有值不完整
+     */
+    public boolean keyValues(HashMap<String,Object> values){
+        int count = getChildCount();
+        for (int i = 0; i < count; i++) {
+            ViewHolder holder = getChildViewHolder(getChildAt(i));
+            if (holder instanceof SLTableViewCell){
+                SLTableViewCell cell = (SLTableViewCell) holder;
+                boolean isRequired = cell.isRequiredValue();
+                HashMap<String, Object> cellValues = cell.keyValues();
+                if (null != cellValues && !cellValues.isEmpty()){
+                    if (isRequired && !checkValues(cell,cellValues)){
+                        animateAndScroll(cell);
+                        notifyValueError(cell,cellValues);
+                        return false;
+                    }
+                    values.putAll(cellValues);
+                }else{
+                    if (isRequired) {
+                        animateAndScroll(cell);
+                        notifyValueError(cell,cellValues);
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean checkValues(SLTableViewCell cell,HashMap<String,Object> values){
+        Set<String> keySet = values.keySet();
+        for (String s : keySet) {
+            Object object = values.get(s);
+            if (!cell.valueFilter(object)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void notifyValueError(SLTableViewCell cell,HashMap<String,Object> value){
+        if (null != this.tableViewDelegate) {
+            this.tableViewDelegate.onCellValueError(this,cell.getIndexPath(),value);
+        }
+    }
+
+    private void animateAndScroll(SLTableViewCell cell){
+        SLIndexPath indexPath = cell.getIndexPath();
+        this.scrollToRowAtIndexPath(indexPath);
+        Animation animation = cell.animationWithNoValue();
+        if (null != animation) {
+            cell.itemView.startAnimation(animation);
+        }
+    }
+
     public static class Builder{
 
         private Context context;
@@ -70,7 +133,7 @@ public class SLTableView extends RecyclerView {
         private LayoutParams layoutParams;
 
         private SLTableViewDataSource tableViewDataSource;
-        private SLTableViewDelegate tableViewDataSourcePlus;
+        private SLTableViewDelegate tableViewDelegate;
         private SLTableViewLayoutManagerExpand tableViewLayoutManagerExpand;
         private LayoutManager layoutManager;
 
@@ -105,11 +168,11 @@ public class SLTableView extends RecyclerView {
         /**
          * 设置{@link SLTableView}的扩展项
          *
-         * @param tableViewDataSourcePlus {@link SLTableViewDelegate}
+         * @param tableViewDelegate {@link SLTableViewDelegate}
          * @return {@link Builder}
          */
-        public Builder setTableViewDataSourcePlus(SLTableViewDelegate tableViewDataSourcePlus) {
-            this.tableViewDataSourcePlus = tableViewDataSourcePlus;
+        public Builder setTableViewDelegate(SLTableViewDelegate tableViewDelegate) {
+            this.tableViewDelegate = tableViewDelegate;
             return this;
         }
 
@@ -229,7 +292,7 @@ public class SLTableView extends RecyclerView {
                 tableView.setBgColor(context.getResources().getColor(R.color.color_title_floor_background));
             }
             tableView.setTableViewDataSource(tableViewDataSource);
-            tableView.setTableViewDataSourcePlus(tableViewDataSourcePlus);
+            tableView.setTableViewDelegate(tableViewDelegate);
             if (layoutManager != null){
                 tableView.setLayoutManager(layoutManager);
             }else {
@@ -237,12 +300,12 @@ public class SLTableView extends RecyclerView {
             }
             SLTableViewAdapter adapter = null;
             if (!stickyHeader){
-                adapter = new SLTableViewAdapter(context,tableView,tableViewDataSource,tableViewDataSourcePlus, tableViewLayoutManagerExpand);
+                adapter = new SLTableViewAdapter(context,tableView,tableViewDataSource, tableViewDelegate, tableViewLayoutManagerExpand);
                 SLItemDecoration decoration = new SLItemDecoration(adapter);
                 tableView.setTableViewAdapter(adapter);
                 tableView.addItemDecoration(decoration);
             }else{
-                adapter = new SLTableViewStickyAdapter(context,tableView,tableViewDataSource,tableViewDataSourcePlus, tableViewLayoutManagerExpand);
+                adapter = new SLTableViewStickyAdapter(context,tableView,tableViewDataSource, tableViewDelegate, tableViewLayoutManagerExpand);
                 SLStickyHeaderDecoration decoration = new SLStickyHeaderDecoration((SLTableViewStickyAdapter)adapter);
                 tableView.setTableViewAdapter(adapter);
                 tableView.addItemDecoration(decoration);

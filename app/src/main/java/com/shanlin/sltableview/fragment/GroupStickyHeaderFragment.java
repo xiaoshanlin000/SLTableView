@@ -39,7 +39,7 @@ public class GroupStickyHeaderFragment extends DemoBaseFragment {
     public void initView(ViewGroup view) {
         tableView = new SLTableView.Builder(context)
                 .setTableViewDataSource(this)
-                .setTableViewDataSourcePlus(this)
+                .setTableViewDelegate(this)
                 .showStickyHeader(true)
                 .setHeaderBgColor(context.getResources().getColor(R.color.color_red))
                 .setHeaderTextColor(context.getResources().getColor(R.color.color_white))

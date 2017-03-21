@@ -76,6 +76,14 @@ public interface SLTableViewDelegate {
     public void onBindFooterInSection(SLTableView tableView, View view,int section);
 
 
+    /**
+     * cell中某个值错误
+     * @param tableView {@link SLTableView}
+     * @param indexPath 位置
+     * @param value 某个值
+     */
+    public void onCellValueError(SLTableView tableView, SLIndexPath indexPath, Object value);
+
 //    public boolean canEditRowAtIndexPath(SLTableView tableView, SLIndexPath indexPath);
 //
 //    public boolean canMoveRowAtIndexPath(SLTableView tableView, SLIndexPath indexPath);

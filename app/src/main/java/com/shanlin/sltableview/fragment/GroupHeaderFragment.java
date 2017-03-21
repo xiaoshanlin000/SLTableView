@@ -43,7 +43,7 @@ public class GroupHeaderFragment extends DemoBaseFragment implements SLTableView
     public void initView(ViewGroup view) {
         tableView = new SLTableView.Builder(context)
                 .setTableViewDataSource(this)
-                .setTableViewDataSourcePlus(this)
+                .setTableViewDelegate(this)
                 .setTableViewLayoutManagerExpand(this)
                 .showStickyHeader(false)
                 .setHeaderBgColor(context.getResources().getColor(R.color.color_red))

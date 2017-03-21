@@ -7,12 +7,12 @@ import android.view.ViewGroup;
 import com.shanlin.library.sltableview.SLIndexPath;
 import com.shanlin.library.sltableview.SLTableView;
 import com.shanlin.sltableview.R;
-import com.shanlin.sltableview.fragment.base.DouyuBaseFragment;
-import com.shanlin.sltableview.fragment.bean.DouyuBaseBean;
+import com.shanlin.sltableview.fragment.base.CellBaseFragment;
+import com.shanlin.sltableview.fragment.bean.CellBaseBean;
 import com.shanlin.sltableview.fragment.bean.DouyuHeadBean;
 import com.shanlin.sltableview.fragment.bean.DouyuHotAuthorBean;
 import com.shanlin.sltableview.fragment.bean.DouyuRoomBean;
-import com.shanlin.sltableview.fragment.bean.DouyuType;
+import com.shanlin.sltableview.fragment.bean.CellType;
 import com.shanlin.sltableview.fragment.bean.DouyuYanzhiBean;
 
 import java.util.ArrayList;
@@ -20,18 +20,12 @@ import java.util.ArrayList;
 /**
  * 斗鱼demo
  */
-public class DouyuFragment extends DouyuBaseFragment {
-
-    @Override
-    public int layoutId() {
-        return R.layout.fragment_douyu;
-    }
-
+public class DouyuFragment extends CellBaseFragment {
     @Override
     public void initView(ViewGroup view) {
         tableView = new SLTableView.Builder(context)
                 .setTableViewDataSource(this)
-                .setTableViewDataSourcePlus(this)
+                .setTableViewDelegate(this)
                 .setTableViewLayoutManagerExpand(this)
                 .showStickyHeader(false)
                 .setBgColor(context.getResources().getColor(R.color.color_white))
@@ -43,7 +37,7 @@ public class DouyuFragment extends DouyuBaseFragment {
     @Override
     public void initData() {
         dataLists.clear();
-        ArrayList<DouyuBaseBean> list = new ArrayList<>();
+        ArrayList<CellBaseBean> list = new ArrayList<>();
         list.add(new DouyuHeadBean("最热"));
         list.add(new DouyuRoomBean("暴走漫画出品","暴走漫画 再看最后一集","6.6万"));
         list.add(new DouyuRoomBean("暴走漫画出品","暴走漫画 再看最后一集","6.6万"));
@@ -95,11 +89,11 @@ public class DouyuFragment extends DouyuBaseFragment {
     public void getItemOffsets(Rect outRect, SLIndexPath indexPath) {
         int section = indexPath.getSection();
         int row = indexPath.getRow();
-        DouyuBaseBean baseBean =  dataLists.get(section).get(row);
-        if (baseBean.getType() == DouyuType.TYPE_HOT_AUTHOR){
+        CellBaseBean baseBean =  dataLists.get(section).get(row);
+        if (baseBean.getType() == CellType.CELL_TYPE_DOUYU_HOT_AUTHOR){
             return;
         }
-        if (baseBean.getType() == DouyuType.TYPE_HEAD){
+        if (baseBean.getType() == CellType.CELL_TYPE_DOUYU_HEAD){
             return;
         }
         if (row >0 && row % 2 == 1){

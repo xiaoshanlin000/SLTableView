@@ -127,6 +127,11 @@ public abstract class DemoBaseFragment extends BaseFragment implements SLTableVi
     }
 
     @Override
+    public void onCellValueError(SLTableView tableView, SLIndexPath indexPath, Object value) {
+
+    }
+
+    @Override
     public void onCellViewClick(View view, SLIndexPath indexPath, Object userData) {
         int section = indexPath.getSection();
         int row = indexPath.getRow();

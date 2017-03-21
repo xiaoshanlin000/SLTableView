@@ -8,8 +8,12 @@
     <dimen name="dimen_cell_head_img">18dp</dimen>
     <dimen name="cell_padding_s2">4dp</dimen>
     <dimen name="cell_padding">8dp</dimen>
+    <dimen name="cell_padding_x2">16dp</dimen>
     <dimen name="text_cell_head_title">16sp</dimen>
     <dimen name="text_cell_head_more">14sp</dimen>
     <dimen name="text_cell_content">12sp</dimen>
-    <dimen name="cell_padding_x2">16dp</dimen>
+    <dimen name="dimen_cell_height">44dp</dimen>
+    <dimen name="dimen_cell_line_height">1px</dimen>
+    <dimen name="dimen_cell_button_height">104dp</dimen>
+    <dimen name="dp_30">30dp</dimen>
 </resources>

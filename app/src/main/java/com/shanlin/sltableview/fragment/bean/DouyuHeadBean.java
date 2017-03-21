@@ -6,18 +6,18 @@ import android.graphics.drawable.Drawable;
  * Created by Shanlin on 2016/12/31.
  */
 
-public class DouyuHeadBean extends DouyuBaseBean{
+public class DouyuHeadBean extends CellBaseBean {
 
     private Drawable headIcon;
     private String title;
     private String more;
 
     public DouyuHeadBean() {
-        super(DouyuType.TYPE_HEAD,2);
+        super(CellType.CELL_TYPE_DOUYU_HEAD,2);
     }
 
     public DouyuHeadBean(String title) {
-        super(DouyuType.TYPE_HEAD,2);
+        super(CellType.CELL_TYPE_DOUYU_HEAD,2);
         this.title = title;
     }
 

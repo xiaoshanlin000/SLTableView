@@ -13,10 +13,10 @@ import android.widget.TextView;
 import com.shanlin.library.sltableview.R;
 import com.shanlin.library.sltableview.SLIndexPath;
 import com.shanlin.library.sltableview.SLTableView;
+import com.shanlin.library.sltableview.SLTableViewCell;
 import com.shanlin.library.sltableview.SLTableViewDataSource;
 import com.shanlin.library.sltableview.SLTableViewDelegate;
 import com.shanlin.library.sltableview.SLTableViewLayoutManagerExpand;
-import com.shanlin.library.sltableview.SLTableViewCell;
 
 import java.util.ArrayList;
 
@@ -26,13 +26,11 @@ public class SLTableViewAdapter extends RecyclerView.Adapter<SLTableViewCell> im
     protected static final int HEAD = -1;
     protected static final int CONTENT = -2;
     protected static final int FLOOR = -3;
-    protected static final int REFRESH_HEAD = -4;
-    protected static final int REFRESH_FLOOR = -5;
 
     protected Context context;
     protected SLTableView tableView;
     protected SLTableViewDataSource dataSource;
-    protected SLTableViewDelegate dataSourcePlus;
+    protected SLTableViewDelegate tableViewDelegate;
     protected SLTableViewLayoutManagerExpand spanSizeLookup;
     protected LayoutInflater inflater;
 
@@ -50,12 +48,12 @@ public class SLTableViewAdapter extends RecyclerView.Adapter<SLTableViewCell> im
     public SLTableViewAdapter(Context context,
                               SLTableView tableView,
                               SLTableViewDataSource dataSource,
-                              SLTableViewDelegate dataSourcePlus,
+                              SLTableViewDelegate tableViewDelegate,
                               SLTableViewLayoutManagerExpand spanSizeLookup) {
         this.context = context;
         this.tableView = tableView;
         this.dataSource = dataSource;
-        this.dataSourcePlus = dataSourcePlus;
+        this.tableViewDelegate = tableViewDelegate;
         this.spanSizeLookup = spanSizeLookup;
         inflater = LayoutInflater.from(context);
     }
@@ -121,12 +119,6 @@ public class SLTableViewAdapter extends RecyclerView.Adapter<SLTableViewCell> im
             SLTableViewCell viewCell = new DefaultTitleCell(rootView,floorBgColor,floorTextColor,floorTextSize);
             cell = viewCell;
         }
-        else if (type == REFRESH_HEAD){
-
-        }
-        else if (type == REFRESH_HEAD){
-
-        }
         else{
             cell =  dataSource.cellForType(tableView,parent,type);
         }
@@ -140,30 +132,30 @@ public class SLTableViewAdapter extends RecyclerView.Adapter<SLTableViewCell> im
         SLIndexPath indexPath = typeIndexPath.getIndexPath().clone();
         if (type == HEAD) {
             DefaultTitleCell titleCell = (DefaultTitleCell) cell;
-            if (dataSourcePlus != null){
-                View view = dataSourcePlus.viewForHeaderInSection(tableView, indexPath.getSection());
+            if (tableViewDelegate != null){
+                View view = tableViewDelegate.viewForHeaderInSection(tableView, indexPath.getSection());
                 if (view == null) {
-                    String title = dataSourcePlus.titleForHeaderInSection(tableView, indexPath.getSection());
+                    String title = tableViewDelegate.titleForHeaderInSection(tableView, indexPath.getSection());
                     titleCell.title_floor_text.setText(title);
                 }else{
                     titleCell.title_floor_root_layout.removeAllViews();
                     titleCell.title_floor_root_layout.addView(view);
-                    dataSourcePlus.onBindHeaderInSection(tableView,view,indexPath.getSection());
+                    tableViewDelegate.onBindHeaderInSection(tableView,view,indexPath.getSection());
                 }
             }else{
                 titleCell.title_floor_text.setText("");
             }
         }else if (type == FLOOR){
             DefaultTitleCell titleCell = (DefaultTitleCell) cell;
-            if (dataSourcePlus != null) {
-                View view = dataSourcePlus.viewForFooterInSection(tableView, indexPath.getSection());
+            if (tableViewDelegate != null) {
+                View view = tableViewDelegate.viewForFooterInSection(tableView, indexPath.getSection());
                 if (view == null) {
-                    String floor = dataSourcePlus.titleForFooterInSection(tableView, indexPath.getSection());
+                    String floor = tableViewDelegate.titleForFooterInSection(tableView, indexPath.getSection());
                     titleCell.title_floor_text.setText(floor);
                 }else{
                     titleCell.title_floor_root_layout.removeAllViews();
                     titleCell.title_floor_root_layout.addView(view);
-                    dataSourcePlus.onBindFooterInSection(tableView,view,indexPath.getSection());
+                    tableViewDelegate.onBindFooterInSection(tableView,view,indexPath.getSection());
                 }
             }else{
                 titleCell.title_floor_text.setText("");
@@ -188,7 +180,7 @@ public class SLTableViewAdapter extends RecyclerView.Adapter<SLTableViewCell> im
         int count = 0;
         int row=0;
         for (int i = 0; i < section; i++) {
-            boolean hidden = dataSourcePlus == null ? false : dataSourcePlus.hiddenHeaderInSection(tableView,i);
+            boolean hidden = tableViewDelegate == null ? false : tableViewDelegate.hiddenHeaderInSection(tableView,i);
             SLSectionInfo sectionInfo = new SLSectionInfo(i);
             sectionInfo.setStartPosition(count+headerCount+floorCount);
             if (!hidden){
@@ -201,7 +193,7 @@ public class SLTableViewAdapter extends RecyclerView.Adapter<SLTableViewCell> im
                 typeIndexPaths.add(new SLTypeIndexPath(CONTENT,new SLIndexPath(i,j)));
                 sectionInfo.addRow();
             }
-            hidden = dataSourcePlus == null ? true : dataSourcePlus.hiddenFooterInSection(tableView,i);
+            hidden = tableViewDelegate == null ? true : tableViewDelegate.hiddenFooterInSection(tableView,i);
             if (!hidden) {
                 typeIndexPaths.add(new SLTypeIndexPath(FLOOR,new SLIndexPath(i,0)));
                 floorCount++;
@@ -218,6 +210,7 @@ public class SLTableViewAdapter extends RecyclerView.Adapter<SLTableViewCell> im
         int position = indexPathToPosition(indexPath);
         LinearLayoutManager manager = (LinearLayoutManager) tableView.getLayoutManager();
         manager.scrollToPositionWithOffset(position,0);
+
     }
 
 

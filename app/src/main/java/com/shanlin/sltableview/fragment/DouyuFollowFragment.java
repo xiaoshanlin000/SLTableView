@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import com.shanlin.library.sltableview.SLIndexPath;
 import com.shanlin.library.sltableview.SLTableView;
 import com.shanlin.sltableview.R;
-import com.shanlin.sltableview.fragment.base.DouyuBaseFragment;
-import com.shanlin.sltableview.fragment.bean.DouyuBaseBean;
+import com.shanlin.sltableview.fragment.base.CellBaseFragment;
+import com.shanlin.sltableview.fragment.bean.CellBaseBean;
 import com.shanlin.sltableview.fragment.bean.DouyuRoomBean;
 
 import java.util.ArrayList;
@@ -18,18 +18,14 @@ import java.util.ArrayList;
  * Created by Shanlin on 2017/1/1.
  */
 
-public class DouyuFollowFragment extends DouyuBaseFragment {
+public class DouyuFollowFragment extends CellBaseFragment {
 
-    @Override
-    public int layoutId() {
-        return R.layout.fragment_douyu;
-    }
 
     @Override
     public void initView(ViewGroup view) {
         tableView = new SLTableView.Builder(context)
                 .setTableViewDataSource(this)
-                .setTableViewDataSourcePlus(this)
+                .setTableViewDelegate(this)
                 .setTableViewLayoutManagerExpand(this)
                 .showStickyHeader(false)
                 .setBgColor(context.getResources().getColor(R.color.color_white))
@@ -40,7 +36,7 @@ public class DouyuFollowFragment extends DouyuBaseFragment {
     @Override
     public void initData() {
         dataLists.clear();
-        ArrayList<DouyuBaseBean> list = new ArrayList<>();
+        ArrayList<CellBaseBean> list = new ArrayList<>();
         list.add(new DouyuRoomBean("暴走漫画出品","暴走漫画 再看最后一集","6.6万"));
         list.add(new DouyuRoomBean("暴走漫画出品","暴走漫画 再看最后一集","6.6万"));
         list.add(new DouyuRoomBean("暴走漫画出品","暴走漫画 再看最后一集","6.6万"));

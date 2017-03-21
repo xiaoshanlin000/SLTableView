@@ -43,7 +43,7 @@ public class DefaultFragment extends DemoBaseFragment {
     public void initView(ViewGroup view) {
         tableView = new SLTableView.Builder(context)
                 .setTableViewDataSource(this)
-                .setTableViewDataSourcePlus(this)
+                .setTableViewDelegate(this)
                 .showStickyHeader(false)
                 .build();
         view.addView(tableView);

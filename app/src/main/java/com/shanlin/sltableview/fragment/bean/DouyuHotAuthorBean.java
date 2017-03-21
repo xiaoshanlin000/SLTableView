@@ -6,18 +6,18 @@ import android.graphics.drawable.Drawable;
  * Created by Shanlin on 2016/12/31.
  */
 
-public class DouyuHotAuthorBean extends DouyuBaseBean {
+public class DouyuHotAuthorBean extends CellBaseBean {
     private Drawable headIcon;
     private String authorName;
     private String videoNumber;
     private String subscribeNumber;
 
     public DouyuHotAuthorBean() {
-        super(DouyuType.TYPE_HOT_AUTHOR,2);
+        super(CellType.CELL_TYPE_DOUYU_HOT_AUTHOR,2);
     }
 
     public DouyuHotAuthorBean(String authorName, String videoNumber, String subscribeNumber) {
-        super(DouyuType.TYPE_HOT_AUTHOR,2);
+        super(CellType.CELL_TYPE_DOUYU_HOT_AUTHOR,2);
         this.authorName = authorName;
         this.videoNumber = videoNumber;
         this.subscribeNumber = subscribeNumber;

@@ -43,7 +43,7 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
                 typeIndexPaths.add(typeIndexPath);
                 sectionInfo.addRow();
             }
-           boolean hidden = dataSourcePlus == null ? true : dataSourcePlus.hiddenFooterInSection(tableView,i);
+           boolean hidden = tableViewDelegate == null ? true : tableViewDelegate.hiddenFooterInSection(tableView,i);
             if (!hidden) {
                 SLTypeIndexPath typeIndexPath = new SLTypeIndexPath(FLOOR,new SLIndexPath(i,0));
                 typeIndexPath.setStickyIndex(j);
@@ -67,7 +67,7 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
     @Override
     public boolean stickyHeader(int position) {
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
-        boolean hidden = dataSourcePlus == null ? false : dataSourcePlus.hiddenHeaderInSection(tableView,typeIndexPath.getIndexPath().getSection());
+        boolean hidden = tableViewDelegate == null ? false : tableViewDelegate.hiddenHeaderInSection(tableView,typeIndexPath.getIndexPath().getSection());
         if (hidden)return false;
         RecyclerView.LayoutManager manager = tableView.getLayoutManager();
         if (manager instanceof GridLayoutManager){
@@ -80,7 +80,7 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
     public boolean showStickyHeader(int position) {
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
         int section = typeIndexPath.getIndexPath().getSection();
-        boolean hidden = dataSourcePlus == null ? false : dataSourcePlus.hiddenHeaderInSection(tableView,section);
+        boolean hidden = tableViewDelegate == null ? false : tableViewDelegate.hiddenHeaderInSection(tableView,section);
         if (hidden)return false;
         return  typeIndexPath.getStickyIndex() <= dataSource.numberOfRowsInSection(tableView,section);
     }
@@ -104,15 +104,15 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
         SLIndexPath indexPath = typeIndexPath.getIndexPath().clone();
         DefaultTitleCell titleCell = (DefaultTitleCell) cell;
-        if (dataSourcePlus != null){
-            View view = dataSourcePlus.viewForHeaderInSection(tableView,indexPath.getSection());
+        if (tableViewDelegate != null){
+            View view = tableViewDelegate.viewForHeaderInSection(tableView,indexPath.getSection());
             if (view == null) {
-                String title = dataSourcePlus.titleForHeaderInSection(tableView, indexPath.getSection());
+                String title = tableViewDelegate.titleForHeaderInSection(tableView, indexPath.getSection());
                 titleCell.title_floor_text.setText(title);
             }else{
                 titleCell.title_floor_root_layout.removeAllViews();
                 titleCell.title_floor_root_layout.addView(view);
-                dataSourcePlus.onBindHeaderInSection(tableView,view,indexPath.getSection());
+                tableViewDelegate.onBindHeaderInSection(tableView,view,indexPath.getSection());
             }
         }else{
             titleCell.title_floor_text.setText("");

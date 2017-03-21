@@ -5,36 +5,38 @@ SLTableView是一个基于RecyclerView的分组显示库. SLTableView 旨在减�
 <!--###操作效果-->
 <!--![Alt Text](https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/demo.gif)-->
 
-###效果图
+效果图
+
+
 <img width="384" height="640" src="https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/1.png"/> <img width="384" height="640" src="https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/2.png"/>
 <img width="384" height="640" src="https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/3.png"/> <img width="384" height="640" src="https://github.com/xiaoshanlin000/SLTableView/raw/master/screen/4.png"/>
 
-#快速开始
+快速开始
 
-###导入库
+导入库
 maven
 ```
 <dependency>
   <groupId>com.shanlin.library.sltableview</groupId>
   <artifactId>library</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1</version>
   <type>pom</type>
 </dependency>
 ```
 
 gradle
 ```
-compile 'com.shanlin.library.sltableview:library:1.1.0'
+compile 'com.shanlin.library.sltableview:library:1.1.1'
 ```
 
 lvy
 ```
-<dependency org='com.shanlin.library.sltableview' name='library' rev='1.1.0'>
+<dependency org='com.shanlin.library.sltableview' name='library' rev='1.1.1'>
   <artifact name='library' ext='pom' ></artifact>
 </dependency>
 ```
 
-###使用介绍
+使用介绍
 
 必须实现的接口
 ```
@@ -116,7 +118,7 @@ demo
 ```
 
 
-###License
+License
 ```
 Copyright shanlin
 
