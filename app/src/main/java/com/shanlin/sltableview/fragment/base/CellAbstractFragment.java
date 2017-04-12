@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.shanlin.library.sltableview.SLIndexPath;
@@ -151,10 +152,10 @@ public abstract  class CellAbstractFragment extends BaseFragment  implements SLT
     }
 
     @Override
-    public void onBindCell(SLTableView tableView, SLTableViewCell cell, SLIndexPath indexPath, int type) {
-        int section = indexPath.getSection();
-        int row = indexPath.getRow();
-        CellBaseBean baseBean =  dataLists.get(section).get(row);
+    public void onBindCell(SLTableView tableView, final SLTableViewCell cell, SLIndexPath indexPath, int type) {
+        final int section = indexPath.getSection();
+        final int row = indexPath.getRow();
+        final CellBaseBean baseBean =  dataLists.get(section).get(row);
         cell.setKey(baseBean.getKey());// 设置当前cell需要获取数据的key
         cell.setRequiredValue(baseBean.isRequiredValue());// 设置cell值是否是必须的
         cell.setValueFilter(baseBean.getValueFilter());
@@ -201,12 +202,22 @@ public abstract  class CellAbstractFragment extends BaseFragment  implements SLT
             case CELL_TYPE_CHECK_BOX:
             {
                 CheckBoxCell checkBoxCell = (CheckBoxCell) cell;
-                CheckBoxBean checkBoxBean = (CheckBoxBean) baseBean;
+                final CheckBoxBean checkBoxBean = (CheckBoxBean) baseBean;
                 checkBoxCell.iv_icon.setBackgroundDrawable(context.getResources()
                         .getDrawable(checkBoxBean.getIcon()));
                 checkBoxCell.cb_check.setSelected(!TextUtils.isEmpty(checkBoxBean.getSelect()) ||
                         !"0".equals(checkBoxBean.getSelect()));
                 checkBoxCell.tv_content.setText(checkBoxBean.getContent());
+                checkBoxCell.cb_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            checkBoxBean.setSelect("1");
+                        }else{
+                            checkBoxBean.setSelect("0");
+                        }
+                    }
+                });
                 break;
             }
             case CELL_TYPE_DATE_SELECTOR:
@@ -222,7 +233,7 @@ public abstract  class CellAbstractFragment extends BaseFragment  implements SLT
             }
             case CELL_TYPE_EDIT_TEXT:
             {
-                EditTextCell editTextCell = (EditTextCell) cell;
+                final EditTextCell editTextCell = (EditTextCell) cell;
                 final  EditTextBean editTextBean = (EditTextBean) baseBean;
                 editTextCell.iv_icon.setBackgroundDrawable(context.getResources()
                         .getDrawable(editTextBean.getIcon()));
@@ -231,6 +242,8 @@ public abstract  class CellAbstractFragment extends BaseFragment  implements SLT
                 editTextCell.et_content.setInputType(editTextBean.getInputType());
                 Selection.setSelection(editTextCell.et_content.getText(),
                         getLength(editTextBean.getContent()));
+
+                editTextCell.et_content.setTag(section*10+row);
                 editTextCell.et_content.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -244,14 +257,16 @@ public abstract  class CellAbstractFragment extends BaseFragment  implements SLT
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                        editTextBean.setContent(s.toString());
+                        if ((int)editTextCell.et_content.getTag() == section *10 + row && editTextCell.et_content.hasFocus()) {
+                            editTextBean.setContent(s.toString());
+                        }
                     }
                 });
                 break;
             }
             case CELL_TYPE_EDIT_TEXT_UNIT:
             {
-                EditTextUnitCell editTextUnitCell = (EditTextUnitCell) cell;
+                final EditTextUnitCell editTextUnitCell = (EditTextUnitCell) cell;
                 final EditTextUnitBean editTextUnitBean = (EditTextUnitBean) baseBean;
                 editTextUnitCell.iv_icon.setBackgroundDrawable(context.getResources()
                         .getDrawable(editTextUnitBean.getIcon()));
@@ -261,6 +276,7 @@ public abstract  class CellAbstractFragment extends BaseFragment  implements SLT
                 editTextUnitCell.et_content.setInputType(editTextUnitBean.getInputType());
                 Selection.setSelection(editTextUnitCell.et_content.getText(),
                         getLength(editTextUnitBean.getContent()));
+                editTextUnitCell.et_content.setTag(section*10+row);
                 editTextUnitCell.et_content.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -274,7 +290,9 @@ public abstract  class CellAbstractFragment extends BaseFragment  implements SLT
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                        editTextUnitBean.setContent(s.toString());
+                        if ((int)editTextUnitCell.et_content.getTag() == section *10 + row && editTextUnitCell.et_content.hasFocus()) {
+                            editTextUnitBean.setContent(s.toString());
+                        }
                     }
                 });
                 break;
@@ -282,7 +300,7 @@ public abstract  class CellAbstractFragment extends BaseFragment  implements SLT
             case CELL_TYPE_GENDER_SELECTOR:
             {
                 GenderSelectorCell genderSelectorCell = (GenderSelectorCell) cell;
-                GenderSelectorBean genderSelectorBean = (GenderSelectorBean) baseBean;
+                final GenderSelectorBean genderSelectorBean = (GenderSelectorBean) baseBean;
                 genderSelectorCell.iv_icon.setBackgroundDrawable(context.getResources()
                         .getDrawable(genderSelectorBean.getIcon()));
                 genderSelectorCell.rb_female.setText(genderSelectorBean.getFemaleStr());
@@ -297,6 +315,16 @@ public abstract  class CellAbstractFragment extends BaseFragment  implements SLT
                 }else{
                     genderSelectorCell.rb_male.setChecked(true);
                 }
+                genderSelectorCell.rb_female.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            genderSelectorBean.setGender("0");
+                        }else{
+                            genderSelectorBean.setGender("1");
+                        }
+                    }
+                });
                 break;
             }
             case CELL_TYPE_TEXT:
@@ -326,6 +354,65 @@ public abstract  class CellAbstractFragment extends BaseFragment  implements SLT
         }
     }
 
+    private class EditTextTextWatcher implements TextWatcher{
+
+        private SLIndexPath indexPath;
+
+        public EditTextTextWatcher(SLIndexPath indexPath) {
+            this.indexPath = indexPath;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            int section = indexPath.getSection();
+            int row = indexPath.getRow();
+            CellBaseBean baseBean =  dataLists.get(section).get(row);
+            EditTextBean textBean = (EditTextBean) baseBean;
+            textBean.setContent(s.toString());
+        }
+    }
+
+    private class EditTextUnitTextWatcher implements TextWatcher{
+
+        private SLIndexPath indexPath;
+
+        public EditTextUnitTextWatcher(SLIndexPath indexPath) {
+            this.indexPath = indexPath;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            int section = indexPath.getSection();
+            int row = indexPath.getRow();
+            CellBaseBean baseBean =  dataLists.get(section).get(row);
+            EditTextUnitBean unitBean = (EditTextUnitBean) baseBean;
+            unitBean.setContent(s.toString());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+//            int section = indexPath.getSection();
+//            int row = indexPath.getRow();
+//            CellBaseBean baseBean =  dataLists.get(section).get(row);
+//            EditTextUnitBean unitBean = (EditTextUnitBean) baseBean;
+//            unitBean.setContent(s.toString());
+        }
+    }
 
 
     //SLTableViewDelegate

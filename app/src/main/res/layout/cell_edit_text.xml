@@ -36,7 +36,6 @@
             android:gravity="center_vertical"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="内容"
             android:textColor="@color/color_text" />
     </LinearLayout>
 
