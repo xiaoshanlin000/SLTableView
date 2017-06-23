@@ -4,8 +4,8 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 
 import com.shanlin.library.sltableview.adapter.SLItemDecoration;
 import com.shanlin.library.sltableview.adapter.SLStickyHeaderDecoration;
@@ -14,7 +14,6 @@ import com.shanlin.library.sltableview.adapter.SLTableViewExpandAdapter;
 import com.shanlin.library.sltableview.adapter.SLTableViewStickyAdapter;
 
 import java.util.HashMap;
-import java.util.Set;
 
 
 /**
@@ -67,64 +66,97 @@ public class SLTableView extends RecyclerView {
         this.tableViewAdapter.scrollToRowAtIndexPath(indexPath);
     }
 
+    private HashMap<String, Object> mKeyValues = new HashMap<>();
 
-    /**
-     * 获取cell中的值
-     * @param values 传入map对象
-     * @return true 获取完整,false 有值不完整
-     */
-    public boolean keyValues(HashMap<String,Object> values){
-        int count = getChildCount();
+    public HashMap<String, Object> keyValues() {
+        mKeyValues.putAll(mKeyValues());
+        return mKeyValues;
+    }
+
+
+    private HashMap<String, Object> mKeyValues() {
+        HashMap<String, Object> resMaps = new HashMap<>();
+        int count = this.getChildCount();
         for (int i = 0; i < count; i++) {
-            ViewHolder holder = getChildViewHolder(getChildAt(i));
-            if (holder instanceof SLTableViewCell){
+            View view = this.getChildAt(i);
+            ViewHolder holder = this.getChildViewHolder(view);
+            if (null != holder) {
                 SLTableViewCell cell = (SLTableViewCell) holder;
-                boolean isRequired = cell.isRequiredValue();
-                HashMap<String, Object> cellValues = cell.keyValues();
-                if (null != cellValues && !cellValues.isEmpty()){
-                    if (isRequired && !checkValues(cell,cellValues)){
-                        animateAndScroll(cell);
-                        notifyValueError(cell,cellValues);
-                        return false;
-                    }
-                    values.putAll(cellValues);
-                }else{
-                    if (isRequired) {
-                        animateAndScroll(cell);
-                        notifyValueError(cell,cellValues);
-                        return false;
-                    }
+                HashMap<String, Object> cellKeyValues = cell.keyValues();
+                if (null != cellKeyValues) {
+                    resMaps.putAll(cellKeyValues);
                 }
+
             }
+
         }
-        return true;
+        return resMaps;
     }
 
-    private boolean checkValues(SLTableViewCell cell,HashMap<String,Object> values){
-        Set<String> keySet = values.keySet();
-        for (String s : keySet) {
-            Object object = values.get(s);
-            if (!cell.valueFilter(object)) {
-                return false;
-            }
-        }
-        return true;
-    }
 
-    private void notifyValueError(SLTableViewCell cell,HashMap<String,Object> value){
-        if (null != this.tableViewDelegate) {
-            this.tableViewDelegate.onCellValueError(this,cell.getIndexPath(),value);
-        }
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        mKeyValues.putAll(mKeyValues());
     }
-
-    private void animateAndScroll(SLTableViewCell cell){
-        SLIndexPath indexPath = cell.getIndexPath();
-        this.scrollToRowAtIndexPath(indexPath);
-        Animation animation = cell.animationWithNoValue();
-        if (null != animation) {
-            cell.itemView.startAnimation(animation);
-        }
-    }
+//
+//    /**
+//     * 获取cell中的值
+//     * @param values 传入map对象
+//     * @return true 获取完整,false 有值不完整
+//     */
+//    public boolean keyValues(HashMap<String,Object> values){
+//        int count = getChildCount();
+//        for (int i = 0; i < count; i++) {
+//            ViewHolder holder = getChildViewHolder(getChildAt(i));
+//            if (holder instanceof SLTableViewCell){
+//                SLTableViewCell cell = (SLTableViewCell) holder;
+//                boolean isRequired = cell.isRequiredValue();
+//                HashMap<String, Object> cellValues = cell.keyValues();
+//                if (null != cellValues && !cellValues.isEmpty()){
+//                    if (isRequired && !checkValues(cell,cellValues)){
+//                        animateAndScroll(cell);
+//                        notifyValueError(cell,cellValues);
+//                        return false;
+//                    }
+//                    values.putAll(cellValues);
+//                }else{
+//                    if (isRequired) {
+//                        animateAndScroll(cell);
+//                        notifyValueError(cell,cellValues);
+//                        return false;
+//                    }
+//                }
+//            }
+//        }
+//        return true;
+//    }
+//
+//    private boolean checkValues(SLTableViewCell cell,HashMap<String,Object> values){
+//        Set<String> keySet = values.keySet();
+//        for (String s : keySet) {
+//            Object object = values.get(s);
+//            if (!cell.valueFilter(object)) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+//
+//    private void notifyValueError(SLTableViewCell cell,HashMap<String,Object> value){
+//        if (null != this.tableViewDelegate) {
+//            this.tableViewDelegate.onCellValueError(this,cell.getIndexPath(),value);
+//        }
+//    }
+//
+//    private void animateAndScroll(SLTableViewCell cell){
+//        SLIndexPath indexPath = cell.getIndexPath();
+//        this.scrollToRowAtIndexPath(indexPath);
+//        Animation animation = cell.animationWithNullValue();
+//        if (null != animation) {
+//            cell.itemView.startAnimation(animation);
+//        }
+//    }
 
     public static class Builder{
 

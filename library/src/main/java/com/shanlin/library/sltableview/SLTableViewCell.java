@@ -3,13 +3,10 @@ package com.shanlin.library.sltableview;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 
 import java.util.HashMap;
 
-public class SLTableViewCell extends RecyclerView.ViewHolder implements ValueFilter, View.OnClickListener{
+public class SLTableViewCell extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     private SLIndexPath indexPath;
     private SLCellViewClickListener clickListener;
@@ -88,26 +85,26 @@ public class SLTableViewCell extends RecyclerView.ViewHolder implements ValueFil
         return result;
     }
 
-    public ValueFilter getValueFilter() {
-        return valueFilter;
-    }
+//    public ValueFilter getValueFilter() {
+//        return valueFilter;
+//    }
+//
+//    public SLTableViewCell setValueFilter(ValueFilter valueFilter) {
+//        this.valueFilter = valueFilter;
+//        return this;
+//    }
 
-    public SLTableViewCell setValueFilter(ValueFilter valueFilter) {
-        this.valueFilter = valueFilter;
-        return this;
-    }
-
-    @Override
-    public boolean valueFilter(Object value){
-        if (null != getValueFilter()) {
-            return getValueFilter().valueFilter(value);
-        } else if (null == value) {
-            return false;
-        } else if (value instanceof String) {
-            return ((String)value).length() > 0;
-        }
-        return false;
-    }
+//    @Override
+//    public boolean valueFilter(Object value){
+//        if (null != getValueFilter()) {
+//            return getValueFilter().valueFilter(value);
+//        } else if (null == value) {
+//            return false;
+//        } else if (value instanceof String) {
+//            return ((String)value).length() > 0;
+//        }
+//        return false;
+//    }
 
     /**
      *
@@ -117,18 +114,18 @@ public class SLTableViewCell extends RecyclerView.ViewHolder implements ValueFil
         return null;
     }
 
-    /**
-     * 当 requiredValue = true 和 value() 是空或者长度为0时, 显示的动画
-     * @return
-     */
-    public Animation animationWithNoValue(){
-        TranslateAnimation animation = new TranslateAnimation(-20, 20, 0, 0);
-        animation.setInterpolator(new AccelerateInterpolator());
-        animation.setDuration(100);
-        animation.setRepeatCount(3);
-        animation.setRepeatMode(Animation.REVERSE);
-        return animation;
-    }
+//    /**
+//     * 当 requiredValue = true 和 value() 是空或者长度为0时, 显示的动画
+//     * @return
+//     */
+//    public Animation animationWithNullValue(){
+//        TranslateAnimation animation = new TranslateAnimation(-20, 20, 0, 0);
+//        animation.setInterpolator(new AccelerateInterpolator());
+//        animation.setDuration(100);
+//        animation.setRepeatCount(3);
+//        animation.setRepeatMode(Animation.REVERSE);
+//        return animation;
+//    }
 
     public  interface SLCellViewClickListener{
         public void onCellViewClick(View view, SLIndexPath indexPath, Object userData);

@@ -49,6 +49,10 @@ public class SLIndexPath {
         return new SLIndexPath(getSection(),getRow());
     }
 
+    protected String key(){
+        return section+":"+row;
+    }
+
     @Override
     public String toString() {
         return "SLIndexPath[section:"+section+" row:"+row+"]";

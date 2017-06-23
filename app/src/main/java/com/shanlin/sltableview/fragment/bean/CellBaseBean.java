@@ -1,7 +1,5 @@
 package com.shanlin.sltableview.fragment.bean;
 
-import com.shanlin.library.sltableview.ValueFilter;
-
 /**
  * Created by Shanlin on 2017/1/1.
  */
@@ -11,7 +9,6 @@ public class CellBaseBean {
     private int spanSize;
     private String key;
     private boolean requiredValue;
-    private ValueFilter valueFilter;
 
     public CellBaseBean(CellType type) {
         this(type, 1);
@@ -57,12 +54,4 @@ public class CellBaseBean {
         return this;
     }
 
-    public ValueFilter getValueFilter() {
-        return valueFilter;
-    }
-
-    public CellBaseBean setValueFilter(ValueFilter valueFilter) {
-        this.valueFilter = valueFilter;
-        return this;
-    }
 }

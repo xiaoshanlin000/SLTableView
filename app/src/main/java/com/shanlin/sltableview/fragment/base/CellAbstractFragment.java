@@ -158,7 +158,6 @@ public abstract  class CellAbstractFragment extends BaseFragment  implements SLT
         final CellBaseBean baseBean =  dataLists.get(section).get(row);
         cell.setKey(baseBean.getKey());// 设置当前cell需要获取数据的key
         cell.setRequiredValue(baseBean.isRequiredValue());// 设置cell值是否是必须的
-        cell.setValueFilter(baseBean.getValueFilter());
         switch (baseBean.getType()){
             case CELL_TYPE_DOUYU_HEAD: {
                 DouyuHeadCell douyuHeadCell = (DouyuHeadCell) cell;

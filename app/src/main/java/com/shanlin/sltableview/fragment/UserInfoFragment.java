@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.TimePopupWindow;
 import com.shanlin.library.sltableview.SLIndexPath;
 import com.shanlin.library.sltableview.SLTableView;
-import com.shanlin.library.sltableview.ValueFilter;
 import com.shanlin.sltableview.R;
 import com.shanlin.sltableview.fragment.base.CellBaseFragment;
 import com.shanlin.sltableview.fragment.bean.ButtonBean;
@@ -35,9 +34,6 @@ import java.util.Locale;
 
 public class UserInfoFragment extends CellBaseFragment implements TimePopupWindow.OnTimeSelectListener {
 
-
-    private static final int NICK_NAME_LENGTH = 3;
-
     @Override
     public void initView(ViewGroup view) {
         tableView = new SLTableView.Builder(context)
@@ -46,7 +42,7 @@ public class UserInfoFragment extends CellBaseFragment implements TimePopupWindo
                 .setTableViewLayoutManagerExpand(this)
                 .showStickyHeader(false)
                 .setBgColor(context.getResources().getColor(R.color.color_background))
-                .setLayoutManager(new GridLayoutManager(context,1))
+                .setLayoutManager(new GridLayoutManager(context, 1))
                 .build();
         view.addView(tableView);
     }
@@ -57,15 +53,7 @@ public class UserInfoFragment extends CellBaseFragment implements TimePopupWindo
         ArrayList<CellBaseBean> arrayList = new ArrayList<>();
         arrayList.add(new EditTextBean().setIcon(R.drawable.img_person_black)
                 .setHint("请输入昵称").setKey("nickname").setRequiredValue(true)
-                .setValueFilter(new ValueFilter() {
-                    @Override
-                    public boolean valueFilter(Object value) {
-                        if (null != value && value instanceof String){
-                            return ((String)value).length() >= NICK_NAME_LENGTH;
-                        }
-                        return false;
-                    }
-                }));
+                );
         arrayList.add(new LineBean());
         arrayList.add(new DateSelectorBean().setIcon(R.drawable.img_person_black)
                 .setContent("生日").setKey("birthday").setRequiredValue(true));
@@ -103,7 +91,7 @@ public class UserInfoFragment extends CellBaseFragment implements TimePopupWindo
 
     @Override
     public boolean hiddenHeaderInSection(SLTableView tableView, int section) {
-        if (section == dataLists.size() - 1){
+        if (section == dataLists.size() - 1) {
             return true;
         }
         return false;
@@ -122,31 +110,21 @@ public class UserInfoFragment extends CellBaseFragment implements TimePopupWindo
         int section = indexPath.getSection();
         int row = indexPath.getRow();
         CellBaseBean bean = dataLists.get(section).get(row);
-        switch (bean.getType()){
-            case CELL_TYPE_BUTTON:
-            {
-                HashMap<String,Object> values = new HashMap<>();
-                if (tableView.keyValues(values)) {//获取每个cell 的key value
-                    Toast.makeText(context,values.toString(),Toast.LENGTH_SHORT).show();
-                }
+        switch (bean.getType()) {
+            case CELL_TYPE_BUTTON: {
+                HashMap<String, Object> values = new HashMap<>();
+                values.putAll(tableView.keyValues());
+                //获取每个cell 的key value
+                Toast.makeText(context, values.toString(), Toast.LENGTH_SHORT).show();
                 break;
             }
-            case CELL_TYPE_DATE_SELECTOR:
-            {
+            case CELL_TYPE_DATE_SELECTOR: {
                 showDataPicker();
                 break;
             }
         }
     }
 
-    @Override
-    public void onCellValueError(SLTableView tableView, SLIndexPath indexPath, Object value) {
-        int section = indexPath.getSection();
-        int row = indexPath.getRow();
-        if (section == 0 && row == 0){ //nickname 长度大于3
-            Toast.makeText(context,"昵称长度大于"+NICK_NAME_LENGTH,Toast.LENGTH_SHORT).show();
-        }
-    }
 
     public void showDataPicker() {
         Calendar d = Calendar.getInstance(Locale.CHINA);
