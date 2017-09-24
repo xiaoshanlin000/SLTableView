@@ -12,6 +12,7 @@ import com.shanlin.library.sltableview.adapter.SLStickyHeaderDecoration;
 import com.shanlin.library.sltableview.adapter.SLTableViewAdapter;
 import com.shanlin.library.sltableview.adapter.SLTableViewExpandAdapter;
 import com.shanlin.library.sltableview.adapter.SLTableViewStickyAdapter;
+import com.shanlin.library.sltableview.adapter.StickyRecyclerHeadersTouchListener;
 
 import java.util.HashMap;
 
@@ -341,7 +342,8 @@ public class SLTableView extends RecyclerView {
                 SLStickyHeaderDecoration decoration = new SLStickyHeaderDecoration((SLTableViewStickyAdapter)adapter);
                 tableView.setTableViewAdapter(adapter);
                 tableView.addItemDecoration(decoration);
-
+                StickyRecyclerHeadersTouchListener listener = new StickyRecyclerHeadersTouchListener(tableView,decoration);
+                tableView.addOnItemTouchListener(listener);
             }
             if (layoutManager instanceof GridLayoutManager
                     && ((GridLayoutManager) layoutManager).getSpanSizeLookup() instanceof GridLayoutManager.DefaultSpanSizeLookup){

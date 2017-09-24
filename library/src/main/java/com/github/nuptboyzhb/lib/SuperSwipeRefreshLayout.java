@@ -1,5 +1,6 @@
 package com.github.nuptboyzhb.lib;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -947,32 +948,32 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
      * @param end
      */
     private void animatorFooterToBottom(int start, final int end) {
-//        ValueAnimator valueAnimator = ValueAnimator.ofInt(start, end);
-        com.nineoldandroids.animation.ValueAnimator valueAnimator = com.nineoldandroids.animation.ValueAnimator.ofInt(start,end);
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(start, end);
+//        com.nineoldandroids.animation.ValueAnimator valueAnimator = com.nineoldandroids.animation.ValueAnimator.ofInt(start,end);
         valueAnimator.setDuration(150);
-        valueAnimator.addUpdateListener(new com.nineoldandroids.animation.ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(com.nineoldandroids.animation.ValueAnimator animation) {
-
-                // update
-                pushDistance = (Integer) animation.getAnimatedValue();
-                updateFooterViewPosition();
-            }
-        });
-        valueAnimator.addListener(new com.nineoldandroids.animation.AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(com.nineoldandroids.animation.Animator animation) {
-                super.onAnimationEnd(animation);
-                if (end > 0 && mOnPushLoadMoreListener != null) {
-                    // start loading more
-                    mLoadMore = true;
-                    mOnPushLoadMoreListener.onLoadMore();
-                } else {
-                    resetTargetLayout();
-                    mLoadMore = false;
-                }
-            }
-        });
+//        valueAnimator.addUpdateListener(new com.nineoldandroids.animation.ValueAnimator.AnimatorUpdateListener() {
+//            @Override
+//            public void onAnimationUpdate(com.nineoldandroids.animation.ValueAnimator animation) {
+//
+//                // update
+//                pushDistance = (Integer) animation.getAnimatedValue();
+//                updateFooterViewPosition();
+//            }
+//        });
+//        valueAnimator.addListener(new com.nineoldandroids.animation.AnimatorListenerAdapter() {
+//            @Override
+//            public void onAnimationEnd(com.nineoldandroids.animation.Animator animation) {
+//                super.onAnimationEnd(animation);
+//                if (end > 0 && mOnPushLoadMoreListener != null) {
+//                    // start loading more
+//                    mLoadMore = true;
+//                    mOnPushLoadMoreListener.onLoadMore();
+//                } else {
+//                    resetTargetLayout();
+//                    mLoadMore = false;
+//                }
+//            }
+//        });
 //        valueAnimator.addUpdateListener(new AnimatorUpdateListener() {
 //
 //            @Override

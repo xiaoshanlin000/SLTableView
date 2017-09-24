@@ -86,7 +86,7 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
     }
 
     @Override
-    public int getHeaderPosition(int position) {
+    public int getHeaderSectionByPosition(int position) {
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
         return typeIndexPath.getIndexPath().getSection();
     }

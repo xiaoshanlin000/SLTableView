@@ -13,6 +13,7 @@ import com.shanlin.sltableview.fragment.DouyuFollowFragment;
 import com.shanlin.sltableview.fragment.DouyuFragment;
 import com.shanlin.sltableview.fragment.GroupHeaderFragment;
 import com.shanlin.sltableview.fragment.GroupStickyHeaderFragment;
+import com.shanlin.sltableview.fragment.StickyHeaderClickFragment;
 import com.shanlin.sltableview.fragment.StickyHeaderFragment;
 import com.shanlin.sltableview.fragment.UserInfoFragment;
 
@@ -50,8 +51,10 @@ public class MainActivity extends AppCompatActivity {
                 case 4:
                     return new StickyHeaderFragment();
                 case 5:
-                    return new GroupHeaderFragment();
+                    return new StickyHeaderClickFragment();
                 case 6:
+                    return new GroupHeaderFragment();
+                case 7:
                     return new GroupStickyHeaderFragment();
                 default:
                     return null;
@@ -74,12 +77,13 @@ public class MainActivity extends AppCompatActivity {
                     return "UserInfo";
                 case 3:
                     return "DefaultHeader";
-
                 case 4:
                     return "StickyHeader";
                 case 5:
-                    return "GroupHeader";
+                    return "StickyHeaderClick";
                 case 6:
+                    return "GroupHeader";
+                case 7:
                     return "GroupStickyHeader";
 
                 default:

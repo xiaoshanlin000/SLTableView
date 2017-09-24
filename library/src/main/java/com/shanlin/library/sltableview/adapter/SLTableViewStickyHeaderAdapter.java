@@ -9,7 +9,7 @@ public interface SLTableViewStickyHeaderAdapter{
     public int stickyHeaderType();
     public boolean stickyHeader(int position);
     public boolean showStickyHeader(int position);
-    public int getHeaderPosition(int position);
+    public int getHeaderSectionByPosition(int position);
     public SLTableViewCell onCreateHeaderCell(RecyclerView parent, int position);
     public void onBindHeaderCell(SLTableViewCell cell,int position);
     public void getItemOffsets(Rect outRect, int position);
