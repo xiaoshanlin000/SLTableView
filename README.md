@@ -16,14 +16,14 @@ maven
 <dependency>
   <groupId>com.shanlin.library.sltableview</groupId>
   <artifactId>library</artifactId>
-  <version>1.1.2</version>
+  <version>1.1.3</version>
   <type>pom</type>
 </dependency>
 ```
 
 gradle
 ```
-compile 'com.shanlin.library.sltableview:library:1.1.2'
+compile 'com.shanlin.library.sltableview:library:1.1.3'
 ```
 
 使用介绍
