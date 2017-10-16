@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.shanlin.library.sltableview.R;
 import com.shanlin.library.sltableview.SLIndexPath;
@@ -26,26 +27,42 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
     @Override
     public int getItemCount() {
         typeIndexPaths.clear();
-        if (dataSource == null) return  0;
+        if (dataSource == null) return 0;
         int section = dataSource.numberOfSections(tableView);
-        int headerCount=0;
-        int floorCount=0;
+        int headerCount = 0;
+        int floorCount = 0;
         int count = 0;
-        int row=0;
+        int row = 0;
         for (int i = 0; i < section; i++) {
             SLSectionInfo sectionInfo = new SLSectionInfo(i);
-            sectionInfo.setStartPosition(count+headerCount+floorCount);
-            row = dataSource.numberOfRowsInSection(tableView,i);
+            sectionInfo.setStartPosition(count + headerCount + floorCount);
+            row = dataSource.numberOfRowsInSection(tableView, i);
             int j;
             for (j = 0; j < row; j++) {
-                SLTypeIndexPath typeIndexPath = new SLTypeIndexPath(CONTENT, new SLIndexPath(i,j));
+                SLTypeIndexPath typeIndexPath = new SLTypeIndexPath(CONTENT, new SLIndexPath(i, j));
                 typeIndexPath.setStickyIndex(j);
                 typeIndexPaths.add(typeIndexPath);
                 sectionInfo.addRow();
             }
-           boolean hidden = tableViewDelegate == null ? true : tableViewDelegate.hiddenFooterInSection(tableView,i);
+            if (autoAddEmptyGridItem){
+                RecyclerView.LayoutManager manager = tableView.getLayoutManager();
+                if (manager instanceof GridLayoutManager) {
+                    int span = ((GridLayoutManager) manager).getSpanCount();
+                    if (row % span != 0) {
+                        for (int k = 0; k < span - row % span; k++) {
+                            SLTypeIndexPath typeIndexPath = new SLTypeIndexPath(EMPTY, new SLIndexPath(i, row + k));
+                            typeIndexPaths.add(typeIndexPath);
+                            typeIndexPath.setStickyIndex(j);
+                            j++;
+                            sectionInfo.addRow();
+                        }
+                    }
+                }
+            }
+
+            boolean hidden = tableViewDelegate == null ? true : tableViewDelegate.hiddenFooterInSection(tableView, i);
             if (!hidden) {
-                SLTypeIndexPath typeIndexPath = new SLTypeIndexPath(FLOOR,new SLIndexPath(i,0));
+                SLTypeIndexPath typeIndexPath = new SLTypeIndexPath(FLOOR, new SLIndexPath(i, 0));
                 typeIndexPath.setStickyIndex(j);
                 typeIndexPaths.add(typeIndexPath);
                 floorCount++;
@@ -54,7 +71,7 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
             count = count + row;
             sectionInfos.add(sectionInfo);
         }
-        if (count == 0) return  0;
+        if (count == 0) return 0;
         return count + headerCount + floorCount;// 内容个数 + cell头尾个数
     }
 
@@ -66,23 +83,29 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
 
     @Override
     public boolean stickyHeader(int position) {
+        if (position >= typeIndexPaths.size()) {
+            return false;
+        }
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
-        boolean hidden = tableViewDelegate == null ? false : tableViewDelegate.hiddenHeaderInSection(tableView,typeIndexPath.getIndexPath().getSection());
-        if (hidden)return false;
+        boolean hidden = tableViewDelegate == null ? false : tableViewDelegate.hiddenHeaderInSection(tableView, typeIndexPath.getIndexPath().getSection());
+        if (hidden) return false;
         RecyclerView.LayoutManager manager = tableView.getLayoutManager();
-        if (manager instanceof GridLayoutManager){
+        if (manager instanceof GridLayoutManager) {
             return typeIndexPath.getStickyIndex() < ((GridLayoutManager) manager).getSpanCount();
         }
-        return typeIndexPath.getStickyIndex()==0;
+        return typeIndexPath.getStickyIndex() == 0;
     }
 
     @Override
     public boolean showStickyHeader(int position) {
+        if (position >= typeIndexPaths.size()) {
+            return false;
+        }
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
         int section = typeIndexPath.getIndexPath().getSection();
-        boolean hidden = tableViewDelegate == null ? false : tableViewDelegate.hiddenHeaderInSection(tableView,section);
-        if (hidden)return false;
-        return  typeIndexPath.getStickyIndex() <= dataSource.numberOfRowsInSection(tableView,section);
+        boolean hidden = tableViewDelegate == null ? false : tableViewDelegate.hiddenHeaderInSection(tableView, section);
+        if (hidden) return false;
+        return typeIndexPath.getStickyIndex() <= dataSource.numberOfRowsInSection(tableView, section);
     }
 
     @Override
@@ -93,9 +116,9 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
 
     @Override
     public SLTableViewCell onCreateHeaderCell(RecyclerView parent, int position) {
-        View rootView = inflater.inflate(R.layout.title_floor_cell,parent,false);
+        View rootView = inflater.inflate(R.layout.title_floor_cell, parent, false);
         rootView.setBackgroundColor(tableView.getBgColor());
-        SLTableViewCell viewCell = new DefaultTitleCell(rootView,headerBgColor,headerTextColor,headerTextSize);
+        SLTableViewCell viewCell = new DefaultTitleCell(rootView, headerBgColor, headerTextColor, headerTextSize);
         return viewCell;
     }
 
@@ -104,19 +127,24 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
         SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);
         SLIndexPath indexPath = typeIndexPath.getIndexPath().clone();
         DefaultTitleCell titleCell = (DefaultTitleCell) cell;
-        if (tableViewDelegate != null){
-            View view = tableViewDelegate.viewForHeaderInSection(tableView,indexPath.getSection());
+        if (tableViewDelegate != null) {
+            View view = tableViewDelegate.viewForHeaderInSection(tableView, indexPath.getSection());
             if (view == null) {
                 String title = tableViewDelegate.titleForHeaderInSection(tableView, indexPath.getSection());
                 titleCell.title_floor_text.setText(title);
-            }else{
+            } else {
                 titleCell.title_floor_root_layout.removeAllViews();
                 titleCell.title_floor_root_layout.addView(view);
-                tableViewDelegate.onBindHeaderInSection(tableView,view,indexPath.getSection());
+                tableViewDelegate.onBindHeaderInSection(tableView, view, indexPath.getSection());
             }
-        }else{
+        } else {
             titleCell.title_floor_text.setText("");
         }
+    }
+
+    @Override
+    public boolean isHeader(int position) {
+        return headerOfPosition(position);
     }
 
 

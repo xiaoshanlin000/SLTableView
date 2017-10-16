@@ -13,6 +13,8 @@ import com.shanlin.library.sltableview.adapter.SLTableViewAdapter;
 import com.shanlin.library.sltableview.adapter.SLTableViewExpandAdapter;
 import com.shanlin.library.sltableview.adapter.SLTableViewStickyAdapter;
 import com.shanlin.library.sltableview.adapter.StickyRecyclerHeadersTouchListener;
+import com.shanlin.library.sltableview.layoutmanager.SLGridLayoutManager;
+import com.shanlin.library.sltableview.layoutmanager.SLLinearLayoutManager;
 
 import java.util.HashMap;
 
@@ -51,7 +53,12 @@ public class SLTableView extends RecyclerView {
     }
 
     public void notifyDataSetChanged() {
+        this.getRecycledViewPool().clear();
         this.getTableViewAdapter().notifyDataSetChanged();
+    }
+
+    public void notifyDataSetChanged(int section, int row) {
+        this.getTableViewAdapter().notifyDataSetChanged(section, row);
     }
 
     public SLTableViewAdapter getTableViewAdapter() {
@@ -63,7 +70,7 @@ public class SLTableView extends RecyclerView {
         this.setAdapter(tableViewAdapter);
     }
 
-    public void scrollToRowAtIndexPath(SLIndexPath indexPath){
+    public void scrollToRowAtIndexPath(SLIndexPath indexPath) {
         this.tableViewAdapter.scrollToRowAtIndexPath(indexPath);
     }
 
@@ -159,7 +166,7 @@ public class SLTableView extends RecyclerView {
 //        }
 //    }
 
-    public static class Builder{
+    public static class Builder {
 
         private Context context;
         private SLTableView tableView;
@@ -169,6 +176,8 @@ public class SLTableView extends RecyclerView {
         private SLTableViewDelegate tableViewDelegate;
         private SLTableViewLayoutManagerExpand tableViewLayoutManagerExpand;
         private LayoutManager layoutManager;
+//        private LinearLayoutManager linearLayoutManager;
+//        private GridLayoutManager gridLayoutManager;
 
         private boolean stickyHeader;
 
@@ -182,14 +191,17 @@ public class SLTableView extends RecyclerView {
         private int floorTextColor;
         private float floorTextSize;
 
+        private boolean autoAddEmptyGridItem = false;
+
         public Builder(Context context) {
             this.context = context;
         }
 
         /**
          * 设置{@link SLTableView}的数据源
-         *
+         * <p>
          * 必须设置,不然不会显示列表.
+         *
          * @param tableViewDataSource {@link SLTableViewDataSource}
          * @return {@link Builder}
          */
@@ -215,7 +227,8 @@ public class SLTableView extends RecyclerView {
         }
 
         /**
-         *设置{@link SLTableView}背景色
+         * 设置{@link SLTableView}背景色
+         *
          * @param bgColor
          * @return {@link Builder}
          */
@@ -226,6 +239,7 @@ public class SLTableView extends RecyclerView {
 
         /**
          * 设置每组的header是否浮动.
+         *
          * @param stickyHeader true 浮动, false 不浮动
          * @return {@link Builder}
          */
@@ -235,7 +249,8 @@ public class SLTableView extends RecyclerView {
         }
 
         /**
-         *设置header背景色
+         * 设置header背景色
+         *
          * @param headerBgColor 颜色值
          * @return {@link Builder}
          */
@@ -245,7 +260,8 @@ public class SLTableView extends RecyclerView {
         }
 
         /**
-         *设置header文字颜色
+         * 设置header文字颜色
+         *
          * @param headerTextColor 颜色值
          * @return {@link Builder}
          */
@@ -255,7 +271,8 @@ public class SLTableView extends RecyclerView {
         }
 
         /**
-         *设置header文字大小
+         * 设置header文字大小
+         *
          * @param headerTextSize 颜色值
          * @return {@link Builder}
          */
@@ -265,7 +282,8 @@ public class SLTableView extends RecyclerView {
         }
 
         /**
-         *设置floor背景色
+         * 设置floor背景色
+         *
          * @param floorBgColor 颜色值
          * @return {@link Builder}
          */
@@ -275,7 +293,8 @@ public class SLTableView extends RecyclerView {
         }
 
         /**
-         *设置floor文字色
+         * 设置floor文字色
+         *
          * @param floorTextColor 颜色值
          * @return {@link Builder}
          */
@@ -285,7 +304,8 @@ public class SLTableView extends RecyclerView {
         }
 
         /**
-         *设置floor文字大小
+         * 设置floor文字大小
+         *
          * @param floorTextSize 颜色值
          * @return {@link Builder}
          */
@@ -294,14 +314,29 @@ public class SLTableView extends RecyclerView {
             return this;
         }
 
+        @Deprecated
         public Builder setLayoutManager(LayoutManager layoutManager) {
-            this.layoutManager = layoutManager;
+            if (layoutManager instanceof GridLayoutManager) {
+                useGridLayoutManager(((GridLayoutManager) layoutManager).getSpanCount());
+            } else {
+                useLinearLayoutManager();
+            }
+            return this;
+        }
+
+        public Builder useLinearLayoutManager() {
+            layoutManager = new SLLinearLayoutManager(context);
+            return this;
+        }
+
+        public Builder useGridLayoutManager(int spanCount) {
+            layoutManager = new SLGridLayoutManager(context, spanCount);
             return this;
         }
 
         /**
-         *
          * 和 Builder#setLayoutManager(LayoutManager)  GridLayoutManager一起使用
+         *
          * @param tableViewLayoutManagerExpand {@link SLTableViewLayoutManagerExpand}
          * @return {@link Builder}
          */
@@ -310,43 +345,49 @@ public class SLTableView extends RecyclerView {
             return this;
         }
 
-        public SLTableView build(){
-            if (tableView == null){
+        public Builder setAutoAddEmptyGridItem(boolean autoAddEmptyGridItem) {
+            this.autoAddEmptyGridItem = autoAddEmptyGridItem;
+            return this;
+        }
+
+        public SLTableView build() {
+            if (tableView == null) {
                 tableView = new SLTableView(context);
             }
-            if (layoutParams != null){
+            if (layoutParams != null) {
                 tableView.setLayoutParams(layoutParams);
-            }else{
-                tableView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
+            } else {
+                tableView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             }
-            if (bgColor != 0){
+            if (bgColor != 0) {
                 tableView.setBgColor(bgColor);
-            }else{
+            } else {
                 tableView.setBgColor(context.getResources().getColor(R.color.color_title_floor_background));
             }
             tableView.setTableViewDataSource(tableViewDataSource);
             tableView.setTableViewDelegate(tableViewDelegate);
-            if (layoutManager != null){
+            if (layoutManager != null) {
                 tableView.setLayoutManager(layoutManager);
-            }else {
-                tableView.setLayoutManager(new LinearLayoutManager(context));
+            } else {
+                tableView.setLayoutManager(new SLLinearLayoutManager(context));
             }
             SLTableViewAdapter adapter = null;
-            if (!stickyHeader){
-                adapter = new SLTableViewAdapter(context,tableView,tableViewDataSource, tableViewDelegate, tableViewLayoutManagerExpand);
+            if (!stickyHeader) {
+                adapter = new SLTableViewAdapter(context, tableView, tableViewDataSource, tableViewDelegate, tableViewLayoutManagerExpand);
                 SLItemDecoration decoration = new SLItemDecoration(adapter);
                 tableView.setTableViewAdapter(adapter);
                 tableView.addItemDecoration(decoration);
-            }else{
-                adapter = new SLTableViewStickyAdapter(context,tableView,tableViewDataSource, tableViewDelegate, tableViewLayoutManagerExpand);
-                SLStickyHeaderDecoration decoration = new SLStickyHeaderDecoration((SLTableViewStickyAdapter)adapter);
+            } else {
+                adapter = new SLTableViewStickyAdapter(context, tableView, tableViewDataSource, tableViewDelegate, tableViewLayoutManagerExpand);
+                SLStickyHeaderDecoration decoration = new SLStickyHeaderDecoration((SLTableViewStickyAdapter) adapter);
                 tableView.setTableViewAdapter(adapter);
                 tableView.addItemDecoration(decoration);
-                StickyRecyclerHeadersTouchListener listener = new StickyRecyclerHeadersTouchListener(tableView,decoration);
+                StickyRecyclerHeadersTouchListener listener = new StickyRecyclerHeadersTouchListener(tableView, decoration);
                 tableView.addOnItemTouchListener(listener);
             }
+            adapter.setAutoAddEmptyGridItem(this.autoAddEmptyGridItem);
             if (layoutManager instanceof GridLayoutManager
-                    && ((GridLayoutManager) layoutManager).getSpanSizeLookup() instanceof GridLayoutManager.DefaultSpanSizeLookup){
+                    && ((GridLayoutManager) layoutManager).getSpanSizeLookup() instanceof GridLayoutManager.DefaultSpanSizeLookup) {
                 ((GridLayoutManager) layoutManager).setSpanSizeLookup(new SLDefaultSpanSizeLookup(adapter, (GridLayoutManager) layoutManager));
             }
             int bgcolor = context.getResources().getColor(R.color.color_background);
@@ -375,9 +416,9 @@ public class SLTableView extends RecyclerView {
 
         @Override
         public int getSpanSize(int position) {
-            if (spanSizeLookup.headerFloorOfPosition(position)){
+            if (spanSizeLookup.headerFloorOfPosition(position)) {
                 return layoutManager.getSpanCount();
-            }else {
+            } else {
                 int size = spanSizeLookup.getSpanSize(position);
                 return size > 0 ? size : 1;
             }

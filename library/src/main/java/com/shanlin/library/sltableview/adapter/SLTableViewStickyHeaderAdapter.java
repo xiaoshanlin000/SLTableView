@@ -13,4 +13,5 @@ public interface SLTableViewStickyHeaderAdapter{
     public SLTableViewCell onCreateHeaderCell(RecyclerView parent, int position);
     public void onBindHeaderCell(SLTableViewCell cell,int position);
     public void getItemOffsets(Rect outRect, int position);
+    boolean isHeader(int position);
 }

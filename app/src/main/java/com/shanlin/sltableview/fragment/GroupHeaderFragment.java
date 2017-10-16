@@ -55,7 +55,7 @@ public class GroupHeaderFragment extends DemoBaseFragment implements SLTableView
     @Override
     public void initData() {
         dataLists.clear();
-        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1","类型1"));
+        dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1","类型1","类型1"));
         dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2","类型2"));
         dataLists.add(Arrays.asList("类型1","类型1","类型1","类型1","类型1"));
         dataLists.add(Arrays.asList("类型2","类型2","类型2","类型2","类型2"));

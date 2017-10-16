@@ -35,10 +35,13 @@ public class SLStickyHeaderDecoration extends RecyclerView.ItemDecoration {
                 && headerAdapter.stickyHeader(position)
                 ) {
             View header = getHeaderCell(parent, position).itemView;
-            headerHeight = header.getHeight();
+            headerHeight =  header.getHeight();
         }
         outRect.set(0, headerHeight, 0, 0);
-        headerAdapter.getItemOffsets(outRect, position);
+        if (!headerAdapter.isHeader(position)){
+            headerAdapter.getItemOffsets(outRect, position);
+        }
+
     }
 
     @Override
@@ -75,7 +78,7 @@ public class SLStickyHeaderDecoration extends RecyclerView.ItemDecoration {
                     headerOffset.set(left, top, left + child.getWidth(), top + child.getHeight());
                     if (top < 0 && Math.abs(top) >= header.getHeight()) {
                         header.setVisibility(View.GONE);
-                    }else{
+                    } else {
                         header.setVisibility(View.VISIBLE);
                     }
                 }
@@ -89,9 +92,9 @@ public class SLStickyHeaderDecoration extends RecyclerView.ItemDecoration {
             return headerCache.get(key);
         } else {
             final SLTableViewCell cell = headerAdapter.onCreateHeaderCell(parent, headerAdapter.stickyHeaderType());
+            headerAdapter.onBindHeaderCell(cell, position);
             final View header = cell.itemView;
 
-            headerAdapter.onBindHeaderCell(cell, position);
 
             int widthSpec = View.MeasureSpec.makeMeasureSpec(parent.getMeasuredWidth(), View.MeasureSpec.EXACTLY);
             int heightSpec = View.MeasureSpec.makeMeasureSpec(parent.getMeasuredHeight(), View.MeasureSpec.UNSPECIFIED);

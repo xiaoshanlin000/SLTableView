@@ -16,4 +16,7 @@
     <dimen name="dimen_cell_line_height">1px</dimen>
     <dimen name="dimen_cell_button_height">104dp</dimen>
     <dimen name="dp_30">30dp</dimen>
+    <dimen name="dimen_80dp">80dp</dimen>
+    <dimen name="dimen_40dp">40dp</dimen>
+    <dimen name="dimen_text_content_desc">14sp</dimen>
 </resources>
