@@ -20,7 +20,6 @@ import com.shanlin.library.sltableview.SLTableViewDelegate;
 import com.shanlin.library.sltableview.SLTableViewLayoutManagerExpand;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -216,6 +215,7 @@ public class SLTableViewAdapter extends RecyclerView.Adapter<SLTableViewCell> im
         int floorCount = 0;
         int count = 0;
         int row = 0;
+        int emptyCount = 0;
         for (int i = 0; i < section; i++) {
             boolean hidden = tableViewDelegate == null ? false : tableViewDelegate.hiddenHeaderInSection(tableView, i);
             SLSectionInfo sectionInfo = new SLSectionInfo(i);
@@ -238,6 +238,7 @@ public class SLTableViewAdapter extends RecyclerView.Adapter<SLTableViewCell> im
                         for (int j = 0; j < span - row % span; j++) {
                             typeIndexPaths.add(new SLTypeIndexPath(EMPTY, new SLIndexPath(i, row + j)));
                             sectionInfo.addRow();
+                            emptyCount++;
                         }
                     }
                 }
@@ -252,7 +253,7 @@ public class SLTableViewAdapter extends RecyclerView.Adapter<SLTableViewCell> im
             sectionInfos.add(sectionInfo);
         }
         if (count == 0) return 0;
-        return count + headerCount + floorCount;// 内容个数 + cell头尾个数
+        return count + headerCount + floorCount + emptyCount;// 内容个数 + cell头尾个数
     }
 
     public void scrollToRowAtIndexPath(SLIndexPath indexPath) {
@@ -314,7 +315,7 @@ public class SLTableViewAdapter extends RecyclerView.Adapter<SLTableViewCell> im
     @Override
     public void getItemOffsets(Rect outRect, int position) {
         if (spanSizeLookup != null) {
-            if (position >= typeIndexPaths.size()){
+            if (position >= typeIndexPaths.size()) {
                 return;
             }
             SLTypeIndexPath typeIndexPath = typeIndexPaths.get(position);

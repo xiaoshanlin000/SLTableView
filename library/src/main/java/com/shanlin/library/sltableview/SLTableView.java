@@ -2,7 +2,6 @@ package com.shanlin.library.sltableview;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -191,7 +190,7 @@ public class SLTableView extends RecyclerView {
         private int floorTextColor;
         private float floorTextSize;
 
-        private boolean autoAddEmptyGridItem = false;
+        private boolean autoAddEmptyGridItem = true;
 
         public Builder(Context context) {
             this.context = context;

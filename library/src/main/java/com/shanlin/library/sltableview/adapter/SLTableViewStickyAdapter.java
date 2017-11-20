@@ -33,6 +33,7 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
         int floorCount = 0;
         int count = 0;
         int row = 0;
+        int emptyCount = 0;
         for (int i = 0; i < section; i++) {
             SLSectionInfo sectionInfo = new SLSectionInfo(i);
             sectionInfo.setStartPosition(count + headerCount + floorCount);
@@ -54,6 +55,7 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
                             typeIndexPaths.add(typeIndexPath);
                             typeIndexPath.setStickyIndex(j);
                             j++;
+                            emptyCount++;
                             sectionInfo.addRow();
                         }
                     }
@@ -72,7 +74,7 @@ public class SLTableViewStickyAdapter extends SLTableViewAdapter implements SLTa
             sectionInfos.add(sectionInfo);
         }
         if (count == 0) return 0;
-        return count + headerCount + floorCount;// 内容个数 + cell头尾个数
+        return count  + headerCount + floorCount + emptyCount;// 内容个数 + cell头尾个数 + 空cell个数
     }
 
     //SLTableViewStickyHeaderAdapter

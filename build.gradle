@@ -6,7 +6,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-beta7'
+        classpath 'com.android.tools.build:gradle:3.0.0'
         //自动化maven打包插件
 //        classpath 'com.github.dcendents:android-maven-plugin:1.2'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
